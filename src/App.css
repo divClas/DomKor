@@ -1,0 +1,9 @@
+.ant-table-cell::before {
+  width: 4px !important;
+  height: 100% !important;
+  background-color: rgba(207, 207, 207, 1) !important;
+}
+
+.ant-table-thead > tr > th {
+  background-color: white !important;
+}
