@@ -1,0 +1,21 @@
+.notification-widget {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.notification-widget__items {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.notification-widget__item-wrap {
+    max-height: 1px;
+    transition: 1s;
+    z-index: 1;
+}
+.notification-widget:hover .notification-widget__item-wrap{
+    max-height: 150px;
+}

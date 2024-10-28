@@ -1,0 +1,31 @@
+
+@font-face {
+  font-family: Inter;
+  src: local(Inter), url(./assets/fonts/Inter.ttf) format('truetype');
+}
+
+* {
+  font-family: Inter, Arial, sans-serif;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.pd {
+  &-sm {
+    padding: 10px 17px;
+  }
+
+  &-md {
+    padding: 25px 30px;
+  }
+
+  &-lg {
+    padding: 35px 40px;
+  }
+}
