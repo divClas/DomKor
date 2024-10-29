@@ -2,6 +2,7 @@ import {T_Date} from "@/types/app.ts";
 
 export interface I_Graphic {
     "ID": string,
+    
     "NAME": string,
     "WORK_TYPE": string,
     "OBJECTS": string,

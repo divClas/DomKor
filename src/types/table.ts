@@ -3,7 +3,7 @@ import {ReactNode} from "react";
 export interface I_ColumnCommons<I_Entity> {
     common: {
         dataIndex: (keyof I_Entity),
-        title: string
+        title: React.ReactNode | ((props: any) => React.ReactNode);
     }
     disabled?: boolean
     width?: number | 'auto'
