@@ -1,26 +1,32 @@
 import {Tabs, TabsProps} from "antd";
-import {useNavigate} from "react-router-dom";
+import {GraphicsTableWidget} from "@/components/widgets/GraphicsTable";
+import {GraphicsKpTableWidget} from "@/components/widgets/GraphicsKpTable";
+import {Button} from "@/components/ui/Button";
+import {ReactComponent as ReportIcon} from '@/assets/report.svg'
 
 export const TableTabsWidget = () => {
-    const navigate = useNavigate()
-    const onChange = (key: string) => {
-        console.log(key);
-        navigate(key)
-    };
     const items: TabsProps['items'] = [
         {
-            key: '/graphics',
+            key: 'graphics',
             label: 'График проведения тендеров и выполнения СМР по ж. д.',
+            children: <GraphicsTableWidget />
         },
         {
-            key: '/graphics-kp',
+            key: 'graphics-kp',
             label: 'Список сбора КП по ж. д.',
+            children: <GraphicsKpTableWidget />
         },
     ];
     return (
-        <Tabs defaultActiveKey="1"
+        <Tabs defaultActiveKey="graphics"
               items={items}
-              onChange={onChange}
+              tabBarExtraContent={<Button label={'Подписаться на уведомления о новых тендерах'}
+                                          background={'accent'}
+                                          icon={<ReportIcon />}
+                                          onClick={() => {
+                                          }}
+              />}
+              className={'w-100'}
         />
     )
 }

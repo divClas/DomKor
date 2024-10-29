@@ -13,7 +13,10 @@ export const themeConfig: ThemeConfig = {
         Menu: {},
         Select: {},
         Table: {},
-        Typography: {},
+        Typography: {
+            titleMarginBottom: 0,
+            titleMarginTop: 0,
+        },
         Switch: {},
         DatePicker: {},
         Checkbox: {},

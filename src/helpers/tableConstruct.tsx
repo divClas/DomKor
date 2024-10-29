@@ -18,7 +18,7 @@ export function tableConstruct<I_ROW = object>(columns: I_TableColumn<I_ROW>[]):
 
         switch (col.type) {
             case "date": {
-                res.sorter = (a, b) => dayjs(String(a[col.common.dataIndex]), 'DD.MM.YYYY').unix() - dayjs(String(b[col.common.dataIndex]), 'DD.MM.YYYY').unix()
+                res.sorter = (a, b) => dayjs(String(a[col.common.dataIndex]), 'YYYY-MM-DD').unix() - dayjs(String(b[col.common.dataIndex]), 'YYYY-MM-DD').unix()
                 res.render = (val) => <Typography.Text children={val} />
                 break
             }

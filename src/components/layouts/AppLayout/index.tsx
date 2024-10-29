@@ -6,7 +6,6 @@ import locale from 'antd/locale/ru_RU';
 import 'dayjs/locale/ru';
 import {NotificationWidget} from "@/components/widgets/Notification";
 import {themeConfig} from "@/contexts/theme.ts";
-import {FooterWidget} from "@/components/widgets/Footer";
 import {HeaderWidget} from "@/components/widgets/Header";
 
 export const AppLayout = () => {
@@ -22,7 +21,6 @@ export const AppLayout = () => {
                 <Layout>
                     <Outlet />
                 </Layout>
-                <FooterWidget />
             </Flex>
         </ConfigProvider>
     )
