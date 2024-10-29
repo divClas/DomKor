@@ -6,5 +6,9 @@ export const Dictionary = {
     GRAPHIC_KP: {
         ru: 'График КП',
         en: 'graphic KP'
+    },
+    NO_SELECT: {
+        ru: 'Не выбрано',
+        en: 'not selected'
     }
 }

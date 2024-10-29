@@ -75,6 +75,7 @@ export const GraphicsKpTableWidget = () => {
             dataSource={entity}
             rowKey={"ID"}
             columns={dataColumns}
+            pagination={false}
         />
     )
 }

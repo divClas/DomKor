@@ -10,3 +10,12 @@ export interface I_Graphic {
     "WINNER_APPROVAL": T_Date,
     "CONTRACT_SIGNING": T_Date
 }
+
+export interface I_GraphicEventForm {
+    graphic_id: I_Graphic['ID']
+    phone: string
+    email: string
+    inn: string
+    org_name: string
+    form_type: "SUBSCRIBE_NOTIFICATIONS" | "REPLY"
+}
