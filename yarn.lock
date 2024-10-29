@@ -820,7 +820,14 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^5.21.5:
+antd-mask-input@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.npmjs.org/antd-mask-input/-/antd-mask-input-2.0.7.tgz"
+  integrity sha512-EFv/Hjar5nzYuzvgCcIeEcbVzw5+4RynUQTl2S8bLMaR9iajiWoeV/VYvENaP6X+ytnM0OqemE2pHY9ZRR6hEw==
+  dependencies:
+    imask "6.4.2"
+
+antd@^5.21.5, antd@>=4.19.0:
   version "5.21.5"
   resolved "https://registry.npmjs.org/antd/-/antd-5.21.5.tgz"
   integrity sha512-g/c8VkdruKDCVA6di9Ow1fG6dLtYJ1IOraPo7vXaY7DoQ56A3HExaFaH0fBEwTYKC0ICeftC4iA5eAjrF6/b9w==
@@ -1400,6 +1407,11 @@ ignore@^5.2.0, ignore@^5.3.1:
   version "5.3.2"
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.3.2.tgz"
   integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
+
+imask@6.4.2:
+  version "6.4.2"
+  resolved "https://registry.npmjs.org/imask/-/imask-6.4.2.tgz"
+  integrity sha512-xvEgbTdk6y2dW2UAysq0NRPmO6PuaXM5NHIt4TXEJEwXUHj26M0p/fXqyrSJdNXFaGVOtqYjPRnNdrjQQhDuuA==
 
 immer@^10.0.3:
   version "10.1.1"

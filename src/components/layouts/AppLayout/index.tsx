@@ -17,7 +17,6 @@ export const AppLayout = () => {
         >
             <NotificationWidget />
             <Flex vertical={true} gap={20}>
-                <HeaderWidget />
                 <Layout>
                     <Outlet />
                 </Layout>
