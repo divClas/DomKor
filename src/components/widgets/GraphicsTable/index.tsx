@@ -1,94 +1,252 @@
-import { Flex, Popover, Table, Typography } from "antd";
-import { I_Graphic } from "@/types/graphic.ts";
-import { tableConstruct } from "@/helpers/tableConstruct.tsx";
-import { useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
+import { useTable, useSortBy } from "react-table";
 import { useAppDispatch, useAppSelector } from "@/hooks/storeHooks.ts";
 import { graphicThank } from "@/store/graphic";
+import { Flex, Popover } from "antd";
 import { ReactComponent as CalendarIcon } from "@/assets/calendar.svg";
+import { ReactComponent as SearchIcon } from "@/assets/search.svg";
+import { ReactComponent as SortIcon } from "@/assets/sortIcon.svg";
+import { ReactComponent as CloseIcon } from "@/assets/closeIcon.svg";
 import { DataPickerContent } from "../DataPickerContent";
+import { I_Graphic } from "@/types/graphic";
+import { InputAsync } from "@/components/ui/InputAsync";
+import { AllFieldsIs } from "@/types/app";
 
 export const GraphicsTableWidget = () => {
-  const { Search } = Input;
-
-  const dataColumns = tableConstruct<I_Graphic>([
-    {
-      type: "string",
-      noSort: true,
-      common: {
-        dataIndex: "WORK_TYPE",
-        title: () => (
-            <Search
-                placeholder="Вид работ"
-                onSearch={(value) => console.log("Поиск:", value)}
-            />
-        ),
-      },
-    },
-    {
-      type: "string",
-      noSort: true,
-      common: {
-        dataIndex: "OBJECTS",
-        title: () => (
-            <Search
-                placeholder="Объекты"
-                onSearch={(value) => console.log("Поиск:", value)} // Здесь можно добавить обработку поиска
-            />
-        ),
-      },
-    },
-    {
-      type: "date",
-      common: {
-        dataIndex: "SMR_START",
-        title: () => (
-            <Flex justify="space-between" align="center">
-              <Typography.Text>Старт СМР по оперативному плану</Typography.Text>
-              <Popover content={<DataPickerContent />} trigger="click">
-                <CalendarIcon />
-              </Popover>
-            </Flex>
-        ),
-      },
-    },
-    {
-      type: "date",
-      common: {
-        dataIndex: "WINNER_APPROVAL",
-        title: "Плановая дата проведения тендера",
-      },
-    },
-    {
-      type: "date",
-      common: {
-        dataIndex: "TENDER_PLANNED",
-        title: "Плановая дата утверждения победителя тендера",
-      },
-    },
-    {
-      type: "date",
-      common: {
-        dataIndex: "CONTRACT_SIGNING",
-        title: "Плановая дата подписания контракта",
-      },
-    },
-    {
-      type: "button",
-      common: {
-        dataIndex: "ID",
-        title: "Действие",
-      },
-      onClick: (value) => {
-        console.log(value);
-      },
-    },
-  ]);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(graphicThank.getList({}));
-  }, []);
   const { entity } = useAppSelector((s) => s.graphic);
+  const [search, setSearch] = useState<Partial<I_Graphic>>({
+    WORK_TYPE: "",
+    OBJECTS: "",
+  });
+  const [filter, setFilter] = useState<
+    Partial<
+      AllFieldsIs<
+        I_Graphic,
+        {
+          FROM: "";
+          TO: "";
+        }
+      >
+    >
+  >({
+    CONTRACT_SIGNING: {
+      FROM: "",
+      TO: "",
+    },
+    SMR_START: {
+      FROM: "",
+      TO: "",
+    },
+    TENDER_PLANNED: {
+      FROM: "",
+      TO: "",
+    },
+    WINNER_APPROVAL: {
+      FROM: "",
+      TO: "",
+    },
+  });
+  useEffect(() => {
+    dispatch(
+      graphicThank.getList({
+        search,
+        filter,
+      })
+    );
+  }, [search, filter]);
+
+  const columns = useMemo(
+    () => [
+      {
+        Header: () => (
+          <Flex justify="space-between" align="center" className="input-group">
+            <div className="input-wrapper">
+              <InputAsync
+                ID={"work-type"}
+                onChange={(val) => {
+                  setSearch({
+                    ...search,
+                    WORK_TYPE: val,
+                  });
+                }}
+                value={search.WORK_TYPE}
+                type="string"
+              />
+              <label color="#757778" htmlFor="work-type">
+                Вид работ
+              </label>
+            </div>
+            <SearchIcon className="icon" />
+            {search.WORK_TYPE && <CloseIcon className="icon" />}
+          </Flex>
+        ),
+        accessor: "WORK_TYPE",
+      },
+      {
+        Header: () => (
+          <Flex justify="space-between" align="center" className="input-group">
+            <div className="input-wrapper">
+              <InputAsync
+                ID={"objects"}
+                onChange={(val) => {
+                  setSearch({
+                    ...search,
+                    OBJECTS: val,
+                  });
+                }}
+                value={search.OBJECTS}
+                type="string"
+              />
+              <label htmlFor="objects">Объекты</label>
+            </div>
+            <SearchIcon className="icon" />
+            {search.OBJECTS && <CloseIcon className="icon" />}
+          </Flex>
+        ),
+        accessor: "OBJECTS",
+      },
+      {
+        Header: ({
+          column,
+        }: {
+          column: {
+            toggleSortBy: (desc: boolean) => void;
+            isSortedDesc: boolean;
+          };
+        }) => (
+          <Flex justify="space-between" align="center">
+            <p className="table-header-text">Старт СМР по оперативному плану</p>
+            <Popover content={<DataPickerContent />} trigger="click">
+              <CalendarIcon className="icon" />
+            </Popover>
+            <SortIcon
+              className="icon"
+              onClick={() => column.toggleSortBy(!column.isSortedDesc)}
+              style={{ cursor: "pointer" }}
+            />
+          </Flex>
+        ),
+        accessor: "SMR_START",
+      },
+      {
+        Header: ({
+          column,
+        }: {
+          column: {
+            toggleSortBy: (desc: boolean) => void;
+            isSortedDesc: boolean;
+          };
+        }) => (
+          <Flex justify="space-between" align="center">
+            <p className="table-header-text">Плановая дата проведения тендер</p>
+            <Popover content={<DataPickerContent />} trigger="click">
+              <CalendarIcon className="icon" />
+            </Popover>
+            <SortIcon
+              className="icon"
+              onClick={() => column.toggleSortBy(!column.isSortedDesc)}
+              style={{ cursor: "pointer" }}
+            />
+          </Flex>
+        ),
+        accessor: "WINNER_APPROVAL",
+      },
+      {
+        Header: ({
+          column,
+        }: {
+          column: {
+            toggleSortBy: (desc: boolean) => void;
+            isSortedDesc: boolean;
+          };
+        }) => (
+          <Flex justify="space-between" align="center">
+            <p className="table-header-text">
+              Плановая дата утверждения победителя тендера
+            </p>
+            <Popover content={<DataPickerContent />} trigger="click">
+              <CalendarIcon className="icon" />
+            </Popover>
+            <SortIcon
+              className="icon"
+              onClick={() => column.toggleSortBy(!column.isSortedDesc)}
+              style={{ cursor: "pointer" }}
+            />
+          </Flex>
+        ),
+        accessor: "TENDER_PLANNED",
+      },
+      {
+        Header: ({
+          column,
+        }: {
+          column: {
+            toggleSortBy: (desc: boolean) => void;
+            isSortedDesc: boolean;
+          };
+        }) => (
+          <Flex justify="space-between" align="center">
+            <p className="table-header-text">
+              Плановая дата подписания контракта
+            </p>
+            <Popover content={<DataPickerContent />} trigger="click">
+              <CalendarIcon className="icon" />
+            </Popover>
+            <SortIcon
+              className="icon"
+              onClick={() => column.toggleSortBy(!column.isSortedDesc)}
+              style={{ cursor: "pointer" }}
+            />
+          </Flex>
+        ),
+        accessor: "CONTRACT_SIGNING",
+      },
+      {
+        Header: "Действие",
+        accessor: "ID",
+        Cell: ({ cell }: { cell: { value: any } }) => (
+          <button className="actionBtn" onClick={() => console.log(cell.value)}>
+            Откликнуться
+          </button>
+        ),
+      },
+    ],
+    []
+  );
+
+  const data = useMemo(() => entity || [], [entity]);
+
+  const tableInstance = useTable({ columns, data }, useSortBy);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    tableInstance;
+
   return (
-    <Table<I_Graphic> dataSource={entity} rowKey={"ID"} columns={dataColumns} />
+    <table {...getTableProps()} style={{ width: "100%" }}>
+      <thead
+        className="table-head"
+        style={{ background: "rgba(255, 255, 255, 0)" }}
+      >
+        {headerGroups.map((headerGroup) => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row) => {
+          prepareRow(row);
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell) => (
+                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+              ))}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };

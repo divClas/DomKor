@@ -122,7 +122,8 @@
   }
 }
 
-h1, h2 {
+h1,
+h2 {
   margin: 0;
 }
 
@@ -141,7 +142,9 @@ h1, h2 {
   padding: 8.5px 12px 2px 12px;
 }
 
-.ant-input, .ant-input:hover, .ant-input:focus {
+.ant-input,
+.ant-input:hover,
+.ant-input:focus {
   background: unset;
   border: unset;
   padding: 0;
@@ -150,4 +153,118 @@ h1, h2 {
 
 .ant-form-item-control-input {
   min-height: auto !important;
+}
+
+.ant-tabs-ink-bar {
+  height: 6px !important;
+}
+
+.ant-table-cell {
+  background: rgba(255, 255, 255, 1) !important;
+
+}
+
+.ant-layout {
+  background-color: white;
+}
+
+:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+  height: 100% !important;
+  width: 4px;
+  background-color: rgba(207, 207, 207, 1);
+}
+
+
+
+.ant-input-search-button {
+  background-color: white !important;
+  border-color: transparent;
+}
+
+.table-head {
+  border-bottom: 1px solid rgba(207, 207, 207, 1);
+  position: relative;
+
+  th {
+    padding: 24px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.245;
+    text-align: left;
+    color: #757778 !important;
+    border-bottom: 1px solid rgba(207, 207, 207, 1);
+    /* нижняя граница */
+    border-right: 4px solid rgba(207, 207, 207, 1);
+    /* правая граница */
+  }
+
+  th:last-child {
+    border-right: none;
+    /* убираем правую границу у последней ячейки */
+  }
+
+  .icon {
+    min-width: 36px;
+    cursor: pointer;
+  }
+}
+
+tr td {
+  padding: 32.5px 20px;
+}
+
+
+.input-group {
+  position: relative;
+  width: 100%;
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      padding: 8px 0;
+      font-size: 14px;
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+
+    label {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #757778;
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    input:focus~label,
+    input:not(:placeholder-shown)~label {
+      top: 0;
+      font-size: 12px !important;
+      color: rgba(0, 148, 222, 1);
+    }
+  }
+}
+
+.actionBtn {
+  padding: 12.5px 24px;
+  color: white;
+  background: rgba(0, 148, 222, 1);
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.table-header-text {
+  color: #757778;
+}
+
+table {
+  &.is-loading {
+    opacity: 0.3;
+  }
 }
