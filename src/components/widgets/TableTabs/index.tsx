@@ -1,35 +1,38 @@
-import { Tabs, TabsProps } from "antd";
-import { GraphicsTableWidget } from "@/components/widgets/GraphicsTable";
-import { GraphicsKpTableWidget } from "@/components/widgets/GraphicsKpTable";
-import { Button } from "@/components/ui/Button";
-import { ReactComponent as ReportIcon } from "@/assets/report.svg";
+import {Tabs, TabsProps} from "antd";
+import {GraphicsTableWidget} from "@/components/widgets/GraphicsTable";
+import {GraphicsKpTableWidget} from "@/components/widgets/GraphicsKpTable";
+import {ReactComponent as ReportIcon} from "@/assets/report.svg";
+import {Dictionary} from "@/contexts/Dictionary.ts";
+import {PopoverWidget} from "@/components/ui/Popover";
+import {SubscribeNotificationForm} from "@/components/widgets/Forms/SubscribeNotificationForm.tsx";
 
 export const TableTabsWidget = () => {
-  const items: TabsProps["items"] = [
-    {
-      key: "graphics",
-      label: "График проведения тендеров и выполнения СМР по ж. д.",
-      children: <GraphicsTableWidget />,
-    },
-    {
-      key: "graphics-kp",
-      label: "Список сбора КП по ж. д.",
-      children: <GraphicsKpTableWidget />,
-    },
-  ];
-  return (
-    <Tabs
-      defaultActiveKey="graphics"
-      items={items}
-      tabBarExtraContent={
-        <Button
-          label={"Подписаться на уведомления о новых тендерах"}
-          background={"accent"}
-          icon={<ReportIcon />}
-          onClick={() => {}}
+    const items: TabsProps["items"] = [
+        {
+            key: Dictionary.GRAPHIC.en,
+            label: Dictionary.GRAPHIC_TAB.ru,
+            children: <GraphicsTableWidget />,
+        },
+        {
+            key: Dictionary.GRAPHIC_KP.en,
+            label: Dictionary.GRAPHIC_KP_TAB.ru,
+            children: <GraphicsKpTableWidget />,
+        },
+    ];
+    return (
+        <Tabs
+            defaultActiveKey={Dictionary.GRAPHIC.en}
+            items={items}
+            tabBarExtraContent={
+                <PopoverWidget
+                    label={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
+                    background={"accent"}
+                    icon={<ReportIcon />}
+                    title={Dictionary.SEND_EVENT_GRAPHIC.ru}
+                    children={<SubscribeNotificationForm />}
+                />
+            }
+            className={"w-100"}
         />
-      }
-      className={"w-100"}
-    />
-  );
+    );
 };

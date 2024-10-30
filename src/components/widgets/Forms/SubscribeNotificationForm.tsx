@@ -1,29 +1,18 @@
 import {Flex, Form, FormProps, Input, Typography} from "antd";
-import {I_Graphic, I_GraphicEventForm} from "@/types/graphic.ts";
-import {FC, ReactNode} from "react";
+import { I_GraphicEventForm} from "@/types/graphic.ts";
+import {ReactNode} from "react";
 import {OrgSelectUi} from "@/components/ui/OrgSelect";
 import {MaskedInput} from "antd-mask-input";
 import {Button} from "@/components/ui/Button";
 import {useAppDispatch} from "@/hooks/storeHooks.ts";
 import {Dictionary} from "@/contexts/Dictionary.ts";
 import {graphicThank} from "@/store/graphic";
-import {fetchData} from "@/store/mainThank.ts";
-import {A_SEND_EVENT, R_GRAPHIC} from "@/store/constants.ts";
 
-export const SubscribeNewTenderForm: FC<{
-    graphic_id: I_Graphic['ID']
-}> = ({
-          graphic_id
-      }) => {
+export const SubscribeNotificationForm = () => {
     const dispatch = useAppDispatch()
 
     const onFinish: FormProps<I_GraphicEventForm>['onFinish'] = (values) => {
-        const formData = new FormData(values)
-        fetchData(R_GRAPHIC + A_SEND_EVENT, {
-            method: "POST",
-        }).then(res=>{
-            console.log(res)
-        })
+        dispatch(graphicThank.sendEvent(values))
     };
     return (
         <Form
@@ -38,18 +27,10 @@ export const SubscribeNewTenderForm: FC<{
                 </Flex>
             )}
         >
-            {/*   graphic_id   */}
-            <Form.Item<I_GraphicEventForm> required={true}
-                                           hidden={true}
-                                           initialValue={graphic_id}
-                                           name={"graphic_id"}
-            >
-                <Input />
-            </Form.Item>
             {/*   Тип формы   */}
             <Form.Item<I_GraphicEventForm> required={true}
                                            hidden={true}
-                                           initialValue={"REPLY"}
+                                           initialValue={"SUBSCRIBE_NOTIFICATIONS"}
                                            name={"form_type"}
             >
                 <Input />

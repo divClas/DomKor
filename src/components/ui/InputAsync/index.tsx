@@ -33,7 +33,7 @@ export const InputAsync: FC<{
           placeholder = ''
       }) => {
     const [text, setText] = useState<number | string>(value)
-    const debounced = useDebouncedCallback(onChange, 200);
+    const debounced = useDebouncedCallback(onChange, 500);
     useEffect(() => {
         setText(value)
     }, [value])
@@ -50,7 +50,6 @@ export const InputAsync: FC<{
             id={key}
             placeholder={placeholder}
             size={"small"}
-            status={debounced.isPending() ? 'warning' : ''}
             value={text}
             onChange={(v) => {
                 setText(v.target.value)
@@ -65,7 +64,6 @@ export const InputAsync: FC<{
             id={key}
             disabled={disabled}
             placeholder={placeholder}
-            status={debounced.isPending() ? 'warning' : ''}
             value={text}
             size={"small"}
             onChange={(v) => {

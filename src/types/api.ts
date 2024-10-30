@@ -12,13 +12,14 @@ export type I_Response<T> = {
     errors: I_Error[]
 }
 
-export interface I_Payload<Entity> {
+export interface I_PayloadList<FilterFilter extends object, SearchFilter extends object> {
     sortby?: "SORT"
     sort_type?: "DESC" | "ASC"
-    filter?: Partial<AllFieldsIs<Entity, {
+    filter?: Partial<AllFieldsIs<FilterFilter, {
         "FROM": T_Date,
         "TO": T_Date
     }>>
-    search?: Partial<Entity>
+    search?: Partial<AllFieldsIs<SearchFilter, string>>
 }
+
 export type T_PayloadFile = File | string | Blob | RcFile
