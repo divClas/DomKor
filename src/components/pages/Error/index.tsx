@@ -1,4 +1,6 @@
 import {Flex} from "antd";
+import {Dictionary} from "@/contexts/Dictionary.ts";
+
 export const ErrorPage = (() => {
     return (
         <div>
@@ -12,7 +14,7 @@ export const ErrorPage = (() => {
                     fontWeight: 800
                 }}
                 >404</h1>
-                <h3>Страница не найдена</h3>
+                <h3>{Dictionary.PAGE_NOT_FOUND.ru}</h3>
             </Flex>
         </div>
     )

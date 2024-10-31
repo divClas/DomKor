@@ -19,36 +19,42 @@ export const OrgSelectUi = () => {
             <Form.Item<I_GraphicEventForm> label={'ИНН Организации'}
                                            required={true}
                                            name={"inn"}
-                                           style={{
-                                               position: 'relative'
-                                           }}
             >
-                <Input
-                    value={orgInn}
-                    onChange={(e) => {
-                        setOgrInn(e.target.value)
-                        daDataFetch(e.target.value).then(res => {
-                            setOrgsSearchDaData(res.data.suggestions.map(s => ({
-                                inn: s.data.inn,
-                                name: s.value
-                            })))
-                        })
+                <Flex
+
+                    style={{
+                        position: 'relative'
                     }}
-                />
-                <Flex className={'pd-sm org-select bg--white'}
-                      vertical={true}
-                      gap={4}
                 >
-                    {orgsSearchDaData.map(e => (
-                        <Button label={e.name + e.inn}
-                                background={'accent'}
-                                onClick={() => {
-                                    setOgrName(e.name)
-                                    setOgrInn(e.inn)
-                                    setOrgsSearchDaData([])
-                                }}
-                        />
-                    ))}
+                    <Input
+                        value={orgInn}
+                        onChange={(e) => {
+                            setOgrInn(e.target.value)
+                            daDataFetch(e.target.value).then(res => {
+                                setOrgsSearchDaData(res.data.suggestions.map(s => ({
+                                    inn: s.data.inn,
+                                    name: s.value
+                                })))
+                            })
+                        }}
+                    />
+
+                    <Flex className={'pd-sm org-select bg--white'}
+                          vertical={true}
+                          gap={4}
+                    >
+                        {orgsSearchDaData.map(e => (
+                            <Button label={e.name + e.inn}
+                                    background={'accent'}
+                                    key={e.inn}
+                                    onClick={() => {
+                                        setOgrName(e.name)
+                                        setOgrInn(e.inn)
+                                        setOrgsSearchDaData([])
+                                    }}
+                            />
+                        ))}
+                    </Flex>
                 </Flex>
             </Form.Item>
 
