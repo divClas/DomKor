@@ -5,9 +5,11 @@ import {ReactComponent as CloseIcon} from "@/assets/closeIcon.svg";
 import {ReactComponent as SearchIcon} from "@/assets/search.svg";
 
 export const SearchInputString: FC<{
+    label: string
     val: string
     onChange: (val: string) => void
 }> = ({
+    label,
           val,
           onChange
       }) => {
@@ -26,7 +28,7 @@ export const SearchInputString: FC<{
                 <label color="#757778"
                        htmlFor="work-type"
                 >
-                    Вид работ
+                    {label}
                 </label>
             </div>
             <SearchIcon className="icon" />

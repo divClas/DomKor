@@ -3,7 +3,11 @@ import {RcFile} from "antd/es/upload"
 
 export type T_PromiseStatus = 'pending' | 'fulfilled' | 'rejected'
 
-export type I_Error = string
+export type I_Error = {
+    code: number
+    customData: string | number
+    message: string
+}
 
 
 export type I_Response<T> = {
@@ -12,13 +16,18 @@ export type I_Response<T> = {
     errors: I_Error[]
 }
 
-export interface I_PayloadList<FilterFilter extends object, SearchFilter extends object> {
-    sortby?: "SORT"
+export interface I_DateFilter {
+    "FROM": T_Date,
+    "TO": T_Date
+}
+
+export interface I_Sort {
+    sortby?: string
     sort_type?: "DESC" | "ASC"
-    filter?: Partial<AllFieldsIs<FilterFilter, {
-        "FROM": T_Date,
-        "TO": T_Date
-    }>>
+}
+
+export interface I_PayloadList<FilterFilter extends object, SearchFilter extends object> extends I_Sort {
+    filter?: Partial<AllFieldsIs<FilterFilter, I_DateFilter>>
     search?: Partial<AllFieldsIs<SearchFilter, string>>
 }
 

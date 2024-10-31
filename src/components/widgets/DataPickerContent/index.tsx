@@ -1,143 +1,86 @@
-import React, { useState } from "react";
-import { Button, Calendar, Flex, Tabs, theme, Typography } from "antd";
-import { MaskedInput } from "antd-mask-input";
-import dayjs, { Dayjs } from "dayjs";
+import {Button, Flex, Tabs} from "antd";
+import {DatePickerWidget} from "@/components/ui/DatePicker";
+import {FC, useState} from "react";
+import {I_DateFilter} from "@/types/api.ts";
+import dayjs from "dayjs";
 
-const { TabPane } = Tabs;
-
-export const DataPickerContent: React.FC = () => {
-  const { token } = theme.useToken();
-
-  const [startDate, setStartDate] = useState<string>("");
-  const [endDate, setEndDate] = useState<string>("");
-  const [singleDate, setSingleDate] = useState<string>("");
-
-  const [startCalendarDate, setStartCalendarDate] = useState<Dayjs | undefined>(
-    undefined
-  );
-  const [endCalendarDate, setEndCalendarDate] = useState<Dayjs | undefined>(
-    undefined
-  );
-  const [singleCalendarDate, setSingleCalendarDate] = useState<
-    Dayjs | undefined
-  >(undefined);
-
-  const wrapperStyle: React.CSSProperties = {
-    width: 307,
-    border: `1px solid ${token.colorBorderSecondary}`,
-    borderRadius: token.borderRadiusLG,
-  };
-
-  const handleCalendarChange = (
-    date: Dayjs | undefined,
-    setDate: React.Dispatch<React.SetStateAction<string>>,
-    setCalendarDate: React.Dispatch<React.SetStateAction<Dayjs | undefined>>
-  ) => {
-    if (date) {
-      const formattedDate = dayjs(date).format("DD.MM.YYYY");
-      setDate(formattedDate);
-      setCalendarDate(date);
+export const DataPickerContent: FC<{
+    value: I_DateFilter | undefined
+    onChange: (val: I_DateFilter) => void
+}> = ({
+          value,
+          onChange
+      }) => {
+    const initDate = {
+        FROM: '',
+        TO: ''
     }
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    setDate: React.Dispatch<React.SetStateAction<string>>,
-    setCalendarDate: React.Dispatch<React.SetStateAction<Dayjs | undefined>>
-  ) => {
-    const { value } = e.target;
-    setDate(value);
-
-    const parsedDate = dayjs(value, "DD.MM.YYYY", true);
-    if (parsedDate.isValid()) {
-      setCalendarDate(parsedDate);
-    } else {
-      setCalendarDate(undefined);
-    }
-  };
-
-  return (
-    <div style={{ width: "638px", padding: "16px 20px" }}>
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="Период" key="1">
-          <Flex justify="space-between" align="center" gap={24}>
-            <div className="column">
-              <Typography.Text strong>От</Typography.Text>
-              <MaskedInput
-                mask={Date}
-                placeholder="ДД.ММ.ГГГГ"
-                value={startDate}
-                onChange={(e) =>
-                  handleInputChange(e, setStartDate, setStartCalendarDate)
-                }
-                style={{ margin: "12px 0px", width: "100%" }}
-              />
-              <div style={wrapperStyle}>
-                <Calendar
-                  fullscreen={false}
-                  value={startCalendarDate || undefined}
-                  onSelect={(date) =>
-                    handleCalendarChange(
-                      date,
-                      setStartDate,
-                      setStartCalendarDate
-                    )
-                  }
-                  style={{ width: "307px" }}
-                />
-              </div>
-            </div>
-            <div className="column">
-              <Typography.Text strong>До</Typography.Text>
-              <MaskedInput
-                mask={Date}
-                placeholder="ДД.ММ.ГГГГ"
-                value={endDate}
-                onChange={(e) =>
-                  handleInputChange(e, setEndDate, setEndCalendarDate)
-                }
-                style={{ margin: "12px 0px", width: "100%" }}
-              />
-              <div style={wrapperStyle}>
-                <Calendar
-                  fullscreen={false}
-                  value={endCalendarDate || undefined}
-                  onSelect={(date) =>
-                    handleCalendarChange(date, setEndDate, setEndCalendarDate)
-                  }
-                  style={{ width: "307px" }}
-                />
-              </div>
-            </div>
-          </Flex>
-        </TabPane>
-        <TabPane tab="Конкретная дата" key="2">
-          <Typography.Text strong>Выберите дату</Typography.Text>
-          <MaskedInput
-            mask={Date}
-            placeholder="ДД.ММ.ГГГГ"
-            value={singleDate}
-            onChange={(e) =>
-              handleInputChange(e, setSingleDate, setSingleCalendarDate)
-            }
-            style={{ margin: "12px 0px", width: "100%" }}
-          />
-          <div style={wrapperStyle}>
-            <Calendar
-              fullscreen={false}
-              value={singleCalendarDate || undefined}
-              onSelect={(date) =>
-                handleCalendarChange(date, setSingleDate, setSingleCalendarDate)
-              }
-              style={{ width: "307px" }}
+    const [date, setDate] = useState<I_DateFilter>(value ?? initDate)
+    return (
+        <div style={{width: "638px", padding: "16px 20px"}}>
+            <Tabs defaultActiveKey="Период"
+                  items={[
+                      {
+                          label: "Период",
+                          key: 'Период',
+                          children: <Flex justify="space-between"
+                                          align="center"
+                                          gap={24}
+                          >
+                              <DatePickerWidget
+                                  label={'От'}
+                                  value={date?.FROM}
+                                  onChange={(e) => {
+                                      setDate({
+                                          TO: date?.TO ?? '',
+                                          FROM: dayjs(e).format('YYYY-MM-DD'),
+                                      })
+                                  }}
+                              />
+                              <DatePickerWidget
+                                  label={'До'}
+                                  value={date?.TO}
+                                  onChange={(e) => {
+                                      setDate({
+                                          FROM: date?.FROM ?? '',
+                                          TO: dayjs(e).format('YYYY-MM-DD'),
+                                      })
+                                  }}
+                              />
+                          </Flex>
+                      },
+                      {
+                          key: 'Конкретная дата',
+                          label: 'Конкретная дата',
+                          children: <DatePickerWidget
+                              label={'Выберите дату'}
+                              value={date?.TO}
+                              onChange={(e) => {
+                                  setDate({
+                                      FROM: dayjs(e).format('YYYY-MM-DD'),
+                                      TO: dayjs(e).format('YYYY-MM-DD'),
+                                  })
+                              }}
+                          />
+                      }
+                  ]}
             />
-          </div>
-        </TabPane>
-      </Tabs>
-      <Flex align="center" gap={12} style={{ paddingTop: "24px" }}>
-        <Button type="primary">Применить</Button>
-        <Button type="link">Отмена</Button>
-      </Flex>
-    </div>
-  );
+            <Flex align="center"
+                  gap={12}
+                  style={{paddingTop: "24px"}}
+            >
+                <Button type="primary"
+                        onClick={() => {
+                            onChange(date)
+                        }}
+                >Применить</Button>
+                <Button type="link"
+                        onClick={() => {
+                            onChange(initDate)
+                            setDate(initDate)
+                        }}
+                >Отмена</Button>
+            </Flex>
+        </div>
+    );
 };

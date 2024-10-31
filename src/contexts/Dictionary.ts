@@ -35,6 +35,10 @@ export const Dictionary = {
         ru: "Откликнуться на субподряд",
         en: 'send event graphic'
     },
+    SEND_EVENT_TENDER: {
+        ru: "Откликнуться на тендер",
+        en: 'send event tender'
+    },
     CITY: {
         ru: "Города",
         en: 'city'

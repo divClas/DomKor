@@ -66,7 +66,11 @@ export async function fetchData<T>(endpoint: string, options: AxiosRequestConfig
         return {
             status: "error",
             data: null as T,
-            errors: ["Ошибка сервера!"] as I_Error[]
+            errors: [{
+                message: "Ошибка сервера!",
+                code: 0,
+                customData: ''
+            }] as I_Error[]
         }
     }
 }

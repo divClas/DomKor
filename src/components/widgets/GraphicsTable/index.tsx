@@ -1,196 +1,234 @@
-import { useMemo, useEffect, useState } from "react";
-import { useTable, useSortBy } from "react-table";
-import { useAppDispatch, useAppSelector } from "@/hooks/storeHooks.ts";
-import {
-  graphicThank,
-  I_GRAPHIC_FILTER,
-  I_GRAPHIC_SEARCH,
-} from "@/store/graphic";
-import { Flex, Popover } from "antd";
-import { ReactComponent as CalendarIcon } from "@/assets/calendar.svg";
-import { ReactComponent as SortIcon } from "@/assets/sortIcon.svg";
-import { DataPickerContent } from "../DataPickerContent";
-import { I_PayloadList } from "@/types/api.ts";
-import { PopoverWidget } from "@/components/ui/Popover";
-import { SubscribeNewTenderForm } from "@/components/widgets/Forms/SubscribeNewTenderForm.tsx";
-import { Dictionary } from "@/contexts/Dictionary.ts";
-import { SearchInputString } from "@/components/ui/SearchInput/String.tsx";
-import { TableColumns } from "@/components/widgets/GraphicsTable/Columns.tsx";
-import { TableRows } from "@/components/widgets/GraphicsTable/Rows.tsx";
+import {useEffect, useState} from "react";
+import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
+import {graphicThank, I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH} from "@/store/graphic";
+import {I_PayloadList} from "@/types/api.ts";
+import {SearchInputString} from "@/components/ui/SearchInput/String.tsx";
+import {I_Graphic} from "@/types/graphic.ts";
+import {tableConstruct} from "@/helpers/tableConstruct.tsx";
+import {Table} from "antd";
+import {SearchInputDate} from "@/components/ui/SearchInput/Date.tsx";
+import {SubscribeNewTenderForm} from "@/components/widgets/Forms/SubscribeNewTenderForm.tsx";
+import {Dictionary} from "@/contexts/Dictionary.ts";
 
 export const GraphicsTableWidget = () => {
-  const dispatch = useAppDispatch();
-  const { entity } = useAppSelector((s) => s.graphic);
-  const [search, setSearch] = useState<
-    I_PayloadList<I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH>["search"]
-  >({});
-  const [filter, setFilter] = useState<
-    I_PayloadList<I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH>["filter"]
-  >({});
-  useEffect(() => {
-    dispatch(
-      graphicThank.getList({
-        search,
-        filter,
-      })
+    const dispatch = useAppDispatch();
+    const {entity} = useAppSelector((s) => s.graphic);
+    const [payload, setPayload] = useState<I_PayloadList<I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH>>({});
+    useEffect(() => {
+        dispatch(
+            graphicThank.getList(payload)
+        );
+    }, [payload]);
+    const cols = tableConstruct<I_Graphic>([
+        {
+            common: {
+                title: () => {
+                    return <SearchInputString
+                        label={'Вид работ'}
+                        val={payload.search?.WORK_TYPE ?? ''}
+                        onChange={(val) => {
+                            setPayload({
+                                ...payload,
+                                search: {
+                                    ...payload.search,
+                                    WORK_TYPE: val
+                                },
+                                filter: {
+                                    ...payload.filter,
+                                }
+                            });
+                        }}
+                    />
+                },
+                dataIndex: 'WORK_TYPE',
+            },
+            noSort: true,
+            className: 'fw--lg fs--md',
+            type: "string",
+        },
+        {
+            common: {
+                title: () => {
+                    return <SearchInputString
+                        label={'Объекты'}
+                        val={payload.search?.OBJECTS ?? ''}
+                        onChange={(val) => {
+                            setPayload({
+                                ...payload,
+                                search: {
+                                    ...payload.search,
+                                    OBJECTS: val
+                                },
+                                filter: {
+                                    ...payload.filter,
+                                }
+                            });
+                        }}
+                    />
+                },
+                dataIndex: 'OBJECTS'
+            },
+            noSort: true,
+            type: "string",
+        },
+        {
+            common: {
+                title: () => {
+                    return (
+                        <SearchInputDate
+                            label={'Старт СМР по оперативному плану'}
+                            value={payload.filter?.SMR_START}
+                            isDateFilter={!!(payload.filter?.SMR_START?.FROM || payload.filter?.SMR_START?.TO)}
+                            isSort={payload.sortby === 'SMR_START'}
+                            setSort={() => {
+                                setPayload({
+                                    ...payload,
+                                    sortby: "SMR_START",
+                                    sort_type: payload.sort_type === "ASC" ? "DESC" : "ASC",
+                                });
+                            }}
+                            onChange={(val) => {
+                                setPayload({
+                                    ...payload,
+                                    search: {
+                                        ...payload.search,
+                                    },
+                                    filter: {
+                                        ...payload.filter,
+                                        SMR_START: val
+                                    }
+                                });
+                            }}
+                        />
+                    )
+                },
+                dataIndex: 'SMR_START'
+            },
+            format: 'MMMM YYYY',
+            type: "date",
+        },
+        {
+            common: {
+                title: () => {
+                    return (
+                        <SearchInputDate
+                            label={'Плановая дата проведения тендера'}
+                            value={payload.filter?.TENDER_PLANNED}
+                            isDateFilter={!!(payload.filter?.TENDER_PLANNED?.FROM || payload.filter?.TENDER_PLANNED?.TO)}
+                            isSort={payload.sortby === 'TENDER_PLANNED'}
+                            setSort={() => {
+                                setPayload({
+                                    ...payload,
+                                    sortby: "TENDER_PLANNED",
+                                    sort_type: payload.sort_type === "ASC" ? "DESC" : "ASC",
+                                });
+                            }}
+                            onChange={(val) => {
+                                setPayload({
+                                    ...payload,
+                                    search: {
+                                        ...payload.search,
+                                    },
+                                    filter: {
+                                        ...payload.filter,
+                                        TENDER_PLANNED: val
+                                    }
+                                });
+                            }}
+                        />
+                    )
+                },
+                dataIndex: 'TENDER_PLANNED'
+            },
+            type: "date",
+        },
+        {
+            common: {
+                title: () => {
+                    return (
+                        <SearchInputDate
+                            label={'Плановая дата утверждения победителя тендера'}
+                            value={payload.filter?.WINNER_APPROVAL}
+                            isDateFilter={!!(payload.filter?.WINNER_APPROVAL?.FROM || payload.filter?.WINNER_APPROVAL?.TO)}
+                            isSort={payload.sortby === 'WINNER_APPROVAL'}
+                            setSort={() => {
+                                setPayload({
+                                    ...payload,
+                                    sortby: "WINNER_APPROVAL",
+                                    sort_type: payload.sort_type === "ASC" ? "DESC" : "ASC",
+                                });
+                            }}
+                            onChange={(val) => {
+                                setPayload({
+                                    ...payload,
+                                    search: {
+                                        ...payload.search,
+                                    },
+                                    filter: {
+                                        ...payload.filter,
+                                        WINNER_APPROVAL: val
+                                    }
+                                });
+                            }}
+                        />
+                    )
+                },
+                dataIndex: 'WINNER_APPROVAL'
+            },
+            type: "date",
+        },
+        {
+            common: {
+                title: () => {
+                    return (
+                        <SearchInputDate
+                            label={'Плановая дата подписания контракта'}
+                            value={payload.filter?.CONTRACT_SIGNING}
+                            isDateFilter={!!(payload.filter?.CONTRACT_SIGNING?.FROM || payload.filter?.CONTRACT_SIGNING?.TO)}
+                            isSort={payload.sortby === 'CONTRACT_SIGNING'}
+                            setSort={() => {
+                                setPayload({
+                                    ...payload,
+                                    sortby: "CONTRACT_SIGNING",
+                                    sort_type: payload.sort_type === "ASC" ? "DESC" : "ASC",
+                                });
+                            }}
+                            onChange={(val) => {
+                                setPayload({
+                                    ...payload,
+                                    search: {
+                                        ...payload.search,
+                                    },
+                                    filter: {
+                                        ...payload.filter,
+                                        CONTRACT_SIGNING: val
+                                    }
+                                });
+                            }}
+                        />
+                    )
+                },
+                dataIndex: 'CONTRACT_SIGNING'
+            },
+            type: "date",
+        },
+        {
+            common: {
+                title: 'Действие',
+                dataIndex: 'ID'
+            },
+            noSort: true,
+            type: "buttonWithModal",
+            modalChild: (val) => <SubscribeNewTenderForm graphic_id={val} />,
+            modalTitle: Dictionary.SEND_EVENT_GRAPHIC.ru,
+            label: Dictionary.SEND_EVENT.ru
+        }
+    ])
+    return (
+        <Table<I_Graphic>
+            columns={cols}
+            rowKey={"ID"}
+            dataSource={entity}
+        />
     );
-  }, [search, filter]);
-  const columns = useMemo(
-    () => [
-      {
-        Header: () => (
-          <SearchInputString
-            val={search?.WORK_TYPE ?? ""}
-            onChange={(val) => {
-              setSearch({
-                ...search,
-                WORK_TYPE: val,
-              });
-            }}
-          />
-        ),
-        accessor: "WORK_TYPE",
-      },
-      {
-        Header: () => (
-          <SearchInputString
-            val={search?.OBJECTS ?? ""}
-            onChange={(val) => {
-              setSearch({
-                ...search,
-                OBJECTS: val,
-              });
-            }}
-          />
-        ),
-        accessor: "OBJECTS",
-      },
-      {
-        Header: ({
-          column,
-        }: {
-          column: {
-            toggleSortBy: (desc: boolean) => void;
-            isSortedDesc: boolean;
-          };
-        }) => (
-          <Flex justify="space-between" align="center">
-            <p className="table-header-text">Старт СМР по оперативному плану</p>
-            <Popover content={<DataPickerContent />} trigger="click">
-              <CalendarIcon className="icon" />
-            </Popover>
-            <SortIcon
-              className="icon"
-              onClick={() => column.toggleSortBy(!column.isSortedDesc)}
-              style={{ cursor: "pointer" }}
-            />
-          </Flex>
-        ),
-        accessor: "SMR_START",
-      },
-      {
-        Header: ({
-          column,
-        }: {
-          column: {
-            toggleSortBy: (desc: boolean) => void;
-            isSortedDesc: boolean;
-          };
-        }) => (
-          <Flex justify="space-between" align="center">
-            <p className="table-header-text">Плановая дата проведения тендер</p>
-            <Popover content={<DataPickerContent />} trigger="click">
-              <CalendarIcon className="icon" />
-            </Popover>
-            <SortIcon
-              className="icon"
-              onClick={() => column.toggleSortBy(!column.isSortedDesc)}
-              style={{ cursor: "pointer" }}
-            />
-          </Flex>
-        ),
-        accessor: "WINNER_APPROVAL",
-      },
-      {
-        Header: ({
-          column,
-        }: {
-          column: {
-            toggleSortBy: (desc: boolean) => void;
-            isSortedDesc: boolean;
-          };
-        }) => (
-          <Flex justify="space-between" align="center">
-            <p className="table-header-text">
-              Плановая дата утверждения победителя тендера
-            </p>
-            <Popover content={<DataPickerContent />} trigger="click">
-              <CalendarIcon className="icon" />
-            </Popover>
-            <SortIcon
-              className="icon"
-              onClick={() => column.toggleSortBy(!column.isSortedDesc)}
-              style={{ cursor: "pointer" }}
-            />
-          </Flex>
-        ),
-        accessor: "TENDER_PLANNED",
-      },
-      {
-        Header: ({
-          column,
-        }: {
-          column: {
-            toggleSortBy: (desc: boolean) => void;
-            isSortedDesc: boolean;
-          };
-        }) => (
-          <Flex justify="space-between" align="center">
-            <p className="table-header-text">
-              Плановая дата подписания контракта
-            </p>
-            <Popover content={<DataPickerContent />} trigger="click">
-              <CalendarIcon className="icon" />
-            </Popover>
-            <SortIcon
-              className="icon"
-              onClick={() => column.toggleSortBy(!column.isSortedDesc)}
-              style={{ cursor: "pointer" }}
-            />
-          </Flex>
-        ),
-        accessor: "CONTRACT_SIGNING",
-      },
-      {
-        Header: "Действие",
-        accessor: "ID",
-        Cell: ({ cell }: { cell: { value: any } }) => (
-          <PopoverWidget
-            label={Dictionary.SEND_EVENT.ru}
-            title={Dictionary.SEND_EVENT_GRAPHIC.ru}
-            background={"accent"}
-            children={<SubscribeNewTenderForm graphic_id={cell.value} />}
-          />
-        ),
-      },
-    ],
-    []
-  );
-
-  const data = useMemo(() => entity || [], [entity]);
-
-  const tableInstance = useTable({ columns, data }, useSortBy);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
-
-  return (
-    <table {...getTableProps()} style={{ width: "100%" }}>
-      <TableColumns headerGroups={headerGroups} />
-      <TableRows
-        getTableBodyProps={getTableBodyProps}
-        rows={rows}
-        prepareRow={prepareRow}
-      />
-    </table>
-  );
 };

@@ -19,11 +19,14 @@ export const themeConfig: ThemeConfig = {
             borderRadius: 0,
             lineType: "unset",
             paddingSM: 0,
+            colorBgContainerDisabled: 'unset'
         },
         InputNumber: {},
         Layout: {},
         Menu: {},
-        Select: {},
+        Select: {
+            controlHeight: 36
+        },
         Table: {},
         Typography: {
             titleMarginBottom: 0,

@@ -7,12 +7,13 @@ import {FileBinary, T_Date} from "@/types/app.ts";
 
 const NAME = Dictionary.GRAPHIC_KP.ru
 
-export interface I_GraphicEventForm {
+export interface I_TenderEventForm {
     phone: string
     email: string
     inn: string
     org_name: string
     file: FileBinary
+    tender_id: string
 }
 
 export interface I_GRAPHIC_KP_FILTER {
@@ -21,10 +22,14 @@ export interface I_GRAPHIC_KP_FILTER {
     "TENDER_END_DATE": T_Date,
 }
 
+export interface I_GRAPHIC_KP_SEARCH {
+    CITY: string
+}
+
 export const {thank: graphicKPThank, slice} = createReducer<
     I_GraphicKP,
-    I_PayloadList<I_GRAPHIC_KP_FILTER, {}>,
-    I_GraphicEventForm>({
+    I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>,
+    I_TenderEventForm>({
     URL: R_GRAPHIC_KP,
     NAME
 })

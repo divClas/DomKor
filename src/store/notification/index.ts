@@ -3,11 +3,12 @@ import {I_MainThank} from "../mainThank";
 import {A_CREATE, A_DELETE, A_GET_LIST, A_GET_ONE, A_LOGIN, A_UPDATE} from "@/store/constants.ts";
 
 export type I_MessageType = 'success' | 'error' | 'info' | 'warning' | 'loading'
+export type I_StatusType = 'success' | 'error'
 
 export interface I_Message {
   id: string,
-  title: string,
-  message: string,
+  title: string | number,
+  message: string | number,
   type: I_MessageType
 }
 
@@ -107,8 +108,8 @@ export const index = createSlice({
         const errors: I_Message[] = (action.payload?.errors ?? []).map((e, index) => ({
           id: action.meta.requestId + index,
           type: 'error',
-          message: e ?? '',
-          title: 'Ошибка'
+          message: e.message ?? '',
+          title: e.customData ?? ''
         }))
         const messages: I_Message[] = [...state.messages, ...errors]
         messages[messageIndex] = {

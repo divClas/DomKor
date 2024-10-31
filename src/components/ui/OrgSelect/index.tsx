@@ -2,18 +2,25 @@ import {Flex, Form, Input, Typography} from "antd";
 import {I_GraphicEventForm} from "@/types/graphic.ts";
 import {daDataFetch} from "@/store/instance.ts";
 import {Button} from "@/components/ui/Button";
-import {useState} from "react";
-import {Dictionary} from "@/contexts/Dictionary.ts";
+import {FC, useState} from "react";
 import './style.scss'
 
-export const OrgSelectUi = () => {
-    const [orgName, setOgrName] = useState<string>(Dictionary.NO_SELECT.ru)
+export const OrgSelectUi: FC<{
+    orgName: string
+    setOrgName: (val: string) => void
+    disabled?: boolean
+}> = ({
+          setOrgName,
+          orgName,
+                                    disabled
+      }) => {
     const [orgInn, setOgrInn] = useState<string>('')
 
     const [orgsSearchDaData, setOrgsSearchDaData] = useState<{
         inn: string,
         name: string
     }[]>([])
+
     return (
         <>
             <Form.Item<I_GraphicEventForm> label={'ИНН Организации'}
@@ -28,6 +35,7 @@ export const OrgSelectUi = () => {
                 >
                     <Input
                         value={orgInn}
+                        disabled={disabled}
                         onChange={(e) => {
                             setOgrInn(e.target.value)
                             daDataFetch(e.target.value).then(res => {
@@ -48,7 +56,7 @@ export const OrgSelectUi = () => {
                                     background={'accent'}
                                     key={e.inn}
                                     onClick={() => {
-                                        setOgrName(e.name)
+                                        setOrgName(e.name)
                                         setOgrInn(e.inn)
                                         setOrgsSearchDaData([])
                                     }}
@@ -57,7 +65,6 @@ export const OrgSelectUi = () => {
                     </Flex>
                 </Flex>
             </Form.Item>
-
             <Flex vertical={true}
                   gap={4}
                   className={'ant-form-item'}
@@ -65,7 +72,7 @@ export const OrgSelectUi = () => {
                 <Typography.Text className={'fs--xsm fw--xsm'}>
                     Наименование ООО подставится автоматически:
                 </Typography.Text>
-                <Typography.Text className={'fs--md fw--sm'}>
+                <Typography.Text className={`fs--md fw--sm ${disabled ? 'disabled' : ''}`}>
                     {orgName}
                 </Typography.Text>
             </Flex>

@@ -1,8 +1,8 @@
 import {FC, ReactElement} from "react";
 import './style.css'
 
-import {ReactComponent as SuccessIcon} from '@/assets/success.svg'
-import {ReactComponent as ErrorIcon} from '@/assets/error.svg'
+import {ReactComponent as SuccessIcon} from '@/assets/success-empty.svg'
+import {ReactComponent as ErrorIcon} from '@/assets/error-empty.svg'
 import {ReactComponent as WarningIcon} from '@/assets/warning.svg'
 import {ReactComponent as InfoIcon} from '@/assets/info.svg'
 import {ReactComponent as LoadingIcon} from '@/assets/loading.svg'
