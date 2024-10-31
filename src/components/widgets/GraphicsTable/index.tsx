@@ -4,15 +4,15 @@ import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
 import {graphicThank, I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH} from "@/store/graphic";
 import {Flex, Popover} from "antd";
 import {ReactComponent as CalendarIcon} from "@/assets/calendar.svg";
-import {ReactComponent as SearchIcon} from "@/assets/search.svg";
 import {ReactComponent as SortIcon} from "@/assets/sortIcon.svg";
-import {ReactComponent as CloseIcon} from "@/assets/closeIcon.svg";
 import {DataPickerContent} from "../DataPickerContent";
-import {InputAsync} from "@/components/ui/InputAsync";
 import {I_PayloadList} from "@/types/api.ts";
 import {PopoverWidget} from "@/components/ui/Popover";
 import {SubscribeNewTenderForm} from "@/components/widgets/Forms/SubscribeNewTenderForm.tsx";
 import {Dictionary} from "@/contexts/Dictionary.ts";
+import {SearchInputString} from "@/components/ui/SearchInput/String.tsx";
+import {TableColumns} from "@/components/widgets/GraphicsTable/Columns.tsx";
+import {TableRows} from "@/components/widgets/GraphicsTable/Rows.tsx";
 
 export const GraphicsTableWidget = () => {
     const dispatch = useAppDispatch();
@@ -27,62 +27,33 @@ export const GraphicsTableWidget = () => {
             })
         );
     }, [search, filter]);
-
     const columns = useMemo(
         () => [
             {
                 Header: () => (
-                    <Flex justify="space-between"
-                          align="center"
-                          className="input-group"
-                    >
-                        <div className="input-wrapper">
-                            <InputAsync
-                                ID={"work-type"}
-                                onChange={(val) => {
-                                    setSearch({
-                                        ...search,
-                                        WORK_TYPE: val,
-                                    });
-                                }}
-                                value={search?.WORK_TYPE ?? ''}
-                                type="string"
-                            />
-                            <label color="#757778"
-                                   htmlFor="work-type"
-                            >
-                                Вид работ
-                            </label>
-                        </div>
-                        <SearchIcon className="icon" />
-                        {search?.WORK_TYPE && <CloseIcon className="icon" />}
-                    </Flex>
+                    <SearchInputString
+                        val={search?.WORK_TYPE ?? ''}
+                        onChange={(val) => {
+                            setSearch({
+                                ...search,
+                                WORK_TYPE: val,
+                            });
+                        }}
+                    />
                 ),
                 accessor: "WORK_TYPE",
             },
             {
                 Header: () => (
-                    <Flex justify="space-between"
-                          align="center"
-                          className="input-group"
-                    >
-                        <div className="input-wrapper">
-                            <InputAsync
-                                ID={"objects"}
-                                onChange={(val) => {
-                                    setSearch({
-                                        ...search,
-                                        OBJECTS: val,
-                                    });
-                                }}
-                                value={search?.OBJECTS ?? ''}
-                                type="string"
-                            />
-                            <label htmlFor="objects">Объекты</label>
-                        </div>
-                        <SearchIcon className="icon" />
-                        {search?.OBJECTS && <CloseIcon className="icon" />}
-                    </Flex>
+                    <SearchInputString
+                        val={search?.OBJECTS ?? ''}
+                        onChange={(val) => {
+                            setSearch({
+                                ...search,
+                                OBJECTS: val,
+                            });
+                        }}
+                    />
                 ),
                 accessor: "OBJECTS",
             },
@@ -222,32 +193,11 @@ export const GraphicsTableWidget = () => {
 
     return (
         <table {...getTableProps()} style={{width: "100%"}}>
-            <thead
-                className="table-head"
-                style={{background: "rgba(255, 255, 255, 0)"}}
-            >
-            {headerGroups.map((headerGroup, indexGr) => {
-                return (
-                    <tr {...headerGroup.getHeaderGroupProps()} key={indexGr}>
-                        {headerGroup.headers.map((column, indexC) => (
-                            <th {...column.getHeaderProps()} key={indexC}>{column.render("Header")}</th>
-                        ))}
-                    </tr>
-                )
-            })}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-                prepareRow(row);
-                return (
-                    <tr {...row.getRowProps()} key={row.values.ID}>
-                        {row.cells.map((cell, index) => (
-                            <td {...cell.getCellProps()} key={index} >{cell.render("Cell")}</td>
-                        ))}
-                    </tr>
-                );
-            })}
-            </tbody>
+            <TableColumns headerGroups={headerGroups} />
+            <TableRows getTableBodyProps={getTableBodyProps}
+                       rows={rows}
+                       prepareRow={prepareRow}
+            />
         </table>
     );
 };

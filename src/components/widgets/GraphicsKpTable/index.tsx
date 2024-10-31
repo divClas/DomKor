@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
 import {I_GraphicKP} from "@/types/graphicKP.ts";
 import {graphicKPThank} from "@/store/graphicKP";
+import {cityThank} from "@/store/city";
 
 
 export const GraphicsKpTableWidget = () => {
@@ -68,11 +69,14 @@ export const GraphicsKpTableWidget = () => {
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(graphicKPThank.getList({}))
+        dispatch(cityThank.getList({}))
     }, [])
-    const {entity} = useAppSelector(s => s.graphicKP)
+    const {entity: graphicKpList} = useAppSelector(s => s.graphicKP)
+    const {entity: cityList} = useAppSelector(s => s.city)
+    console.log(cityList)
     return (
         <Table<I_GraphicKP>
-            dataSource={entity}
+            dataSource={graphicKpList}
             rowKey={"ID"}
             columns={dataColumns}
             pagination={false}

@@ -2,6 +2,7 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import graphic from "@/store/graphic";
 import graphicKP from "@/store/graphicKP";
 import notification from "@/store/notification";
+import city from "@/store/city";
 
 
 export const store = configureStore({
@@ -9,7 +10,8 @@ export const store = configureStore({
         {
             graphic,
             graphicKP,
-            notification
+            notification,
+            city
         }
     ),
 })
