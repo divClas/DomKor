@@ -74,9 +74,11 @@
     font-weight: 700;
   }
 }
-.ant-btn{
+
+.ant-btn {
   height: auto;
 }
+
 .pd {
   &-sm {
     padding: 10px 17px;
@@ -381,6 +383,11 @@ table {
   min-height: 560px;
   height: 100%;
 }
+.active-container{ 
+  background: rgba(246, 246, 246, 1);
+
+}
+
 
 .first-column,
 .second-column,
@@ -548,5 +555,14 @@ td.ant-table-cell {
 
 .colorBlack {
   color: (51, 51, 51, 1) !important;
+
+}
+
+.ant-table-cell {
+  background: rgba(255, 255, 255, 1) !important;
+}
+
+.ant-table-row {
+  background: rgba(255, 255, 255, 1) !important;
 
 }
