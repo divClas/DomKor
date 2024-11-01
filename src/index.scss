@@ -3,21 +3,25 @@
   font-weight: 700;
   src: local(Inter), url(./assets/fonts/Berthold_Akzidenz_Grotesk-700.ttf) format('truetype');
 }
+
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-600;
   font-weight: 600;
   src: local(Inter), url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format('truetype');
 }
+
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-500;
   font-weight: 500;
   src: local(Inter), url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format('truetype');
 }
+
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-400;
   font-weight: 400;
   src: local(Inter), url(./assets/fonts/Berthold_Akzidenz_Grotesk-400.ttf) format('truetype');
 }
+
 * {
   font-family: Berthold_Akzidenz_Grotesk-400, Arial, sans-serif !important;
 }
@@ -134,7 +138,8 @@
 
   &--transparent {
     background: rgba(218, 218, 218, 0);
-    color: #ffffff;
+    color: rgba(51, 51, 51, 1);
+
     border: none;
 
     path {
@@ -162,7 +167,8 @@ h2 {
   padding: 8.5px 12px 2px 12px;
 }
 
-.ant-form-item:has([disabled]), .ant-form-item:has(.disabled) {
+.ant-form-item:has([disabled]),
+.ant-form-item:has(.disabled) {
   opacity: .6;
 }
 
@@ -192,7 +198,7 @@ h2 {
   background-color: white;
 }
 
-:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   height: 100% !important;
   width: 4px;
   background-color: rgba(207, 207, 207, 1);
@@ -265,8 +271,8 @@ tr td {
       pointer-events: none;
     }
 
-    input:focus ~ label,
-    input:not(:placeholder-shown) ~ label {
+    input:focus~label,
+    input:not(:placeholder-shown)~label {
       top: 0;
       font-size: 12px !important;
       color: rgba(0, 148, 222, 1);
@@ -485,6 +491,55 @@ p {
     }
   }
 }
-.ant-form-item .ant-input-disabled{
+
+.ant-form-item .ant-input-disabled {
   background: unset !important;
+}
+
+:where(.css-dev-only-do-not-override-1mcm4dg).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+  width: 4px;
+  height: 100%;
+}
+
+td.ant-table-cell {
+  border-bottom: transparent !important;
+}
+
+.ant-tabs .ant-tabs-nav::before {
+  display: none;
+}
+
+.ant-tabs-nav-list {
+  border-bottom: 2px solid rgba(207, 207, 207, 1)
+}
+
+.no-data-text {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18.83px;
+  text-align: center;
+  color: rgba(51, 51, 51, 1);
+}
+
+.clear-data {
+  padding: 14.5px 24px;
+  border-color: transparent;
+  background: rgba(246, 246, 241, 0.5);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.1px;
+  letter-spacing: -0.03em;
+  color: rgba(51, 51, 51, 1);
+  cursor: pointer;
+}
+
+.isLoading {
+  opacity: 0.3;
+}
+
+.colorBlack {
+  color: (51, 51, 51, 1) !important;
+
 }

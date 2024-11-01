@@ -14,7 +14,7 @@ export const AppLayout = () => {
             theme={themeConfig}
             locale={locale}
         >
-            <NotificationWidget />
+            {/* <NotificationWidget /> */}
             <Flex vertical={true} gap={20}>
                 <Layout>
                     <Outlet />
