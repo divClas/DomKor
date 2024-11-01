@@ -23,7 +23,6 @@ export const SubscribeKPForm: FC<{
         success: 'Вам придет уведомление о статусе субподряда',
         error: 'Данные получены не корректно'
     }
-    console.log({status})
     return (
         <Form
             onFinish={async (values) => {

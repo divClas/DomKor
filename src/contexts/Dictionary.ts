@@ -43,4 +43,12 @@ export const Dictionary = {
         ru: "Города",
         en: 'city'
     },
+    APPLY: {
+        ru: "Применить",
+        en: 'Apply'
+    },
+    CANCEL: {
+        ru: "отмена",
+        en: 'cancel'
+    },
 }

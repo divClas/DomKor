@@ -4,6 +4,7 @@ import { FC, useState } from "react";
 import { I_DateFilter } from "@/types/api.ts";
 import dayjs from "dayjs";
 import { Button } from "@/components/ui/Button";
+import {Dictionary} from "@/contexts/Dictionary.ts";
 export const DataPickerContent: FC<{
   value: I_DateFilter | undefined;
   onChange: (val: I_DateFilter) => void;
@@ -14,7 +15,7 @@ export const DataPickerContent: FC<{
   };
   const [date, setDate] = useState<I_DateFilter>(value ?? initDate);
   return (
-    <div style={{ width: "638px", padding: "16px 20px" }}>
+    <div style={{ padding: "16px 20px" }}>
       <Tabs
         defaultActiveKey="Период"
         items={[
@@ -67,11 +68,11 @@ export const DataPickerContent: FC<{
       <Flex align="center" gap={12} style={{ paddingTop: "24px" }}>
         <Flex>
           <Button
-            background="accent"
+            background={"accent"}
             onClick={() => {
               onChange(date);
             }}
-            label="Применить"
+            label={Dictionary.APPLY.ru}
           />
         </Flex>
         <Flex>
@@ -81,8 +82,8 @@ export const DataPickerContent: FC<{
               onChange(initDate);
               setDate(initDate);
             }}
-            label="отмена"
-            background="transparent"
+            label={Dictionary.CANCEL.ru}
+            background={"transparent"}
           />
         </Flex>
       </Flex>

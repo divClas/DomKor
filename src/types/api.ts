@@ -1,5 +1,4 @@
 import {AllFieldsIs, T_Date} from "@/types/app.ts";
-import {RcFile} from "antd/es/upload"
 
 export type T_PromiseStatus = 'pending' | 'fulfilled' | 'rejected'
 
@@ -31,4 +30,3 @@ export interface I_PayloadList<FilterFilter extends object, SearchFilter extends
     search?: Partial<AllFieldsIs<SearchFilter, string>>
 }
 
-export type T_PayloadFile = File | string | Blob | RcFile

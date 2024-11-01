@@ -5,11 +5,18 @@ import {useAppSelector} from "@/hooks/storeHooks.ts";
 import {PopoverWidget} from "@/components/ui/Popover";
 import {Dictionary} from "@/contexts/Dictionary.ts";
 import {SubscribeKPForm} from "@/components/widgets/Forms/SubscribeKPForm.tsx";
+import {NoData} from "@/components/ui/NoData";
+import {FC} from "react";
 
 
-export const GraphicKpListWidget = () => {
-    const {entity: graphicKpList} = useAppSelector((s) => s.graphicKP);
-
+export const GraphicKpListWidget: FC<{
+    onReset?: () => void
+}> = ({onReset}) => {
+    const {entity: graphicKpList, status} = useAppSelector((s) => s.graphicKP);
+    if (graphicKpList.length === 0 && status !== 'pending') {
+        return <NoData onReset={onReset}
+        />
+    }
     return (
         <>
             {graphicKpList.map((item) => (

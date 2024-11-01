@@ -74,14 +74,21 @@
     font-weight: 700;
   }
 }
-
+.ant-btn{
+  height: auto;
+}
 .pd {
   &-sm {
     padding: 10px 17px;
   }
 
+  &-xmd {
+    padding: 14px 24px;
+  }
+
   &-md {
     padding: 25px 30px;
+
   }
 
   &-lg {
