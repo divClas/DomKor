@@ -14,6 +14,7 @@ import { SearchInputDate } from "@/components/ui/SearchInput/Date.tsx";
 import { SubscribeNewTenderForm } from "@/components/widgets/Forms/SubscribeNewTenderForm.tsx";
 import { Dictionary } from "@/contexts/Dictionary.ts";
 import { NoData } from "@/components/ui/NoData";
+import Calendar from "@/components/ui/Calendar";
 
 export const GraphicsTableWidget = () => {
   const dispatch = useAppDispatch();
@@ -255,8 +256,11 @@ export const GraphicsTableWidget = () => {
       width: 180,
     },
   ]);
+  const handleDateChange = (date: Date) => {
+    console.log('Selected date:', date);
+  };
   return (
-    <Table<I_Graphic>
+    <>    <Table<I_Graphic>
       locale={{
         emptyText: status !== "pending" && (
           <NoData
@@ -273,5 +277,7 @@ export const GraphicsTableWidget = () => {
       scroll={{ y: 200 * 5 }}
       pagination={false}
     />
+    </>
+
   );
 };
