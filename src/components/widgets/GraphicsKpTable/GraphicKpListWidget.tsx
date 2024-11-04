@@ -9,9 +9,10 @@ import { NoData } from "@/components/ui/NoData";
 import { FC, useState } from "react";
 
 export const GraphicKpListWidget: FC<{
-  onReset?: () => void;
+  onReset: () => void;
 }> = ({ onReset }) => {
   const { entity: graphicKpList, status } = useAppSelector((s) => s.graphicKP);
+
   if (graphicKpList.length === 0 && status !== "pending") {
     return <NoData onReset={onReset} />;
   }

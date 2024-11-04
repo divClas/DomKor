@@ -6,6 +6,7 @@ import {graphicKPThank, I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH} from "@/store/
 import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
 import {DataPickerContent} from "@/components/widgets/DataPickerContent";
 import {I_PayloadList} from "@/types/api.ts";
+import {cityThank} from "@/store/city";
 
 
 export const GraphicKpFilters: FC<{
@@ -19,6 +20,7 @@ export const GraphicKpFilters: FC<{
     const {entity: cityList} = useAppSelector((s) => s.city);
     useEffect(() => {
         dispatch(graphicKPThank.getList(payload));
+        dispatch(cityThank.getList({}));
     }, [payload]);
 
     return (
