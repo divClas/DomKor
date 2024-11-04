@@ -2,6 +2,7 @@ import { Tabs, TabsProps } from "antd";
 import { GraphicsTableWidget } from "@/components/widgets/GraphicsTable";
 import { GraphicsKpTableWidget } from "@/components/widgets/GraphicsKpTable";
 import { ReactComponent as ReportIcon } from "@/assets/report.svg";
+import { ReactComponent as SearchIcon } from "@/assets/search.svg";
 import { Dictionary } from "@/contexts/Dictionary.ts";
 import { PopoverWidget } from "@/components/ui/Popover";
 import { SubscribeNotificationForm } from "@/components/widgets/Forms/SubscribeNotificationForm.tsx";
@@ -24,13 +25,18 @@ export const TableTabsWidget = () => {
       defaultActiveKey={Dictionary.GRAPHIC.en}
       items={items}
       tabBarExtraContent={
-        <PopoverWidget
-          label={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
-          background={"accent"}
-          icon={<ReportIcon />}
-          title={Dictionary.SEND_EVENT_GRAPHIC.ru}
-          children={<SubscribeNotificationForm />}
-        />
+        <>
+          <PopoverWidget
+            label={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
+            background={"accent"}
+            icon={<ReportIcon />}
+            title={Dictionary.SEND_EVENT_GRAPHIC.ru}
+            children={<SubscribeNotificationForm />}
+          />
+          <div className="btn-mobile" >
+            <SearchIcon />
+          </div>
+        </>
       }
     />
   );

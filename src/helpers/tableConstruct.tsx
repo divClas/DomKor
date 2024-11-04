@@ -1,11 +1,11 @@
-import {TableProps} from "antd";
-import {I_TableColumn} from "@/types/table.ts";
-import {ColumnGroupType} from "antd/es/table";
-import {ColumnType} from "antd/es/table";
-import {Typography} from "antd";
-import {Button} from "@/components/ui/Button";
+import { TableProps } from "antd";
+import { I_TableColumn } from "@/types/table.ts";
+import { ColumnGroupType } from "antd/es/table";
+import { ColumnType } from "antd/es/table";
+import { Typography } from "antd";
+import { Button } from "@/components/ui/Button";
 import dayjs from "dayjs";
-import {PopoverWidget} from "@/components/ui/Popover";
+import { PopoverWidget } from "@/components/ui/Popover";
 
 export function tableConstruct<I_ROW = object>(
     columns: I_TableColumn<I_ROW>[]
@@ -29,7 +29,7 @@ export function tableConstruct<I_ROW = object>(
             case "date": {
                 res.render = (val) => (
                     <Typography.Text children={dayjs(val).format(col.format ? col.format : "DD.MM.YYYY")}
-                                     className={col.className + ' fs--md'}
+                        className={col.className + ' fs--md'}
                     />
                 );
                 break;
@@ -42,7 +42,7 @@ export function tableConstruct<I_ROW = object>(
                         );
                 }
                 res.render = (val) => <Typography.Text children={val}
-                                                       className={col.className + ' fs--md'}
+                    className={col.className + ' fs--md'}
                 />;
                 break;
             }
@@ -61,10 +61,6 @@ export function tableConstruct<I_ROW = object>(
                 break;
             }
             case "buttonWithModal": {
-                res.sorter = (a, b) =>
-                    String(a[col.common.dataIndex] || "").localeCompare(
-                        String(b[col.common.dataIndex]) || ""
-                    );
                 res.render = (value, record) => (
                     <PopoverWidget
                         title={col.modalTitle}

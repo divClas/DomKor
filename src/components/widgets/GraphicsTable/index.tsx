@@ -14,12 +14,13 @@ import { SearchInputDate } from "@/components/ui/SearchInput/Date.tsx";
 import { SubscribeNewTenderForm } from "@/components/widgets/Forms/SubscribeNewTenderForm.tsx";
 import { Dictionary } from "@/contexts/Dictionary.ts";
 import { NoData } from "@/components/ui/NoData";
-import Calendar from "@/components/ui/Calendar";
+import MobileList from "@/components/ui/MobileList/Index";
+import { columns } from "@/const";
 
 export const GraphicsTableWidget = () => {
   const dispatch = useAppDispatch();
   const { entity, status } = useAppSelector((s) => s.graphic);
-
+  console.log(entity)
   const [payload, setPayload] = useState<
     I_PayloadList<I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH>
   >({});
@@ -256,28 +257,46 @@ export const GraphicsTableWidget = () => {
       width: 180,
     },
   ]);
-  const handleDateChange = (date: Date) => {
-    console.log('Selected date:', date);
-  };
-  return (
-    <>    <Table<I_Graphic>
-      locale={{
-        emptyText: status !== "pending" && (
-          <NoData
-            onReset={() => {
-              setPayload({});
-            }}
-          />
-        ),
-      }}
-      loading={status === "pending"}
-      columns={cols}
-      rowKey={"ID"}
-      dataSource={entity}
-      scroll={{ y: 200 * 5 }}
-      pagination={false}
-    />
-    </>
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Например, для мобильных экранов
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width:1000px)');
+
+    const handleMediaChange = (e: { matches: boolean | ((prevState: boolean) => boolean); }) => {
+      setIsMobile(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleMediaChange); // Для более современных браузеров
+    setIsMobile(mediaQuery.matches); // Установите начальное состояние
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaChange);
+    };
+  }, []);
+
+  return (
+    <>
+      {isMobile ? (
+        <MobileList data={entity} columns={columns} />
+      ) : (
+        <Table<I_Graphic>
+          locale={{
+            emptyText: status !== "pending" && (
+              <NoData
+                onReset={() => {
+                  setPayload({});
+                }}
+              />
+            ),
+          }}
+          loading={status === "pending"}
+          columns={cols}
+          rowKey={"ID"}
+          dataSource={entity}
+          scroll={{ y: 200 * 5 }}
+          pagination={false}
+        />
+      )}
+    </>
   );
 };

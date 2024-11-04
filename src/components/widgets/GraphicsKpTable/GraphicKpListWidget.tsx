@@ -13,9 +13,9 @@ export const GraphicKpListWidget: FC<{
 }> = ({ onReset }) => {
   const { entity: graphicKpList, status } = useAppSelector((s) => s.graphicKP);
 
-  if (graphicKpList.length === 0 && status !== "pending") {
-    return <NoData onReset={onReset} />;
-  }
+  // if (graphicKpList.length === 0 && status !== "pending") {
+  //   return <NoData onReset={onReset} />;
+  // }
   const [activeId, setActiveId] = useState<string | null>(null);
 
   return (
@@ -23,9 +23,8 @@ export const GraphicKpListWidget: FC<{
       {graphicKpList.map((item) => (
         <div
           key={item.ID}
-          className={`graphics-container ${
-            activeId === item.ID ? "active-container" : ""
-          }`}
+          className={`graphics-container ${activeId === item.ID ? "active-container" : ""
+            }`}
         >
           <div className="first-column">
             <div className="kp-name">{item.NAME}</div>
@@ -65,7 +64,12 @@ export const GraphicKpListWidget: FC<{
                 <div className="kp-item-description">{item.PERSON}</div>
               </div>
             </div>
-            <div className="organization">{item.LEGAL_ENTITY}</div>
+            <div className="item">
+              <div className="organization">{item.LEGAL_ENTITY}</div>
+              <div className="date-bottom mobile">
+                {dayjs(item.DATE_CREATE).locale("ru").format("D MMMM YYYY")}
+              </div>
+            </div>
           </div>
           <div className="third-column">
             <PopoverWidget
