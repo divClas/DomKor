@@ -23,10 +23,11 @@ export const DataPickerContent: FC<{
             label: "Период",
             key: "Период",
             children: (
-              <Flex justify="space-between" align="center" gap={24}>
+              <Flex justify="space-between" gap={24}>
                 <DatePickerWidget
                   label={"От"}
                   value={date?.FROM}
+                  navSide={'left'}
                   onChange={(e) => {
                     setDate({
                       TO: date?.TO ?? "",
@@ -37,6 +38,7 @@ export const DataPickerContent: FC<{
                 <DatePickerWidget
                   label={"До"}
                   value={date?.TO}
+                  navSide={'right'}
                   onChange={(e) => {
                     setDate({
                       FROM: date?.FROM ?? "",

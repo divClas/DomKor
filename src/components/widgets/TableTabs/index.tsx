@@ -5,7 +5,8 @@ import { ReactComponent as ReportIcon } from "@/assets/report.svg";
 import { ReactComponent as SearchIcon } from "@/assets/search.svg";
 import { Dictionary } from "@/contexts/Dictionary.ts";
 import { PopoverWidget } from "@/components/ui/Popover";
-import { SubscribeNotificationForm } from "@/components/widgets/Forms/SubscribeNotificationForm.tsx";
+import {FormWidget} from "@/components/widgets/Form";
+import {FormSubscribeNotification} from "@/contexts/forms.ts";
 
 export const TableTabsWidget = () => {
   const items: TabsProps["items"] = [
@@ -31,7 +32,7 @@ export const TableTabsWidget = () => {
             background={"accent"}
             icon={<ReportIcon />}
             title={Dictionary.SEND_EVENT_GRAPHIC.ru}
-            children={<SubscribeNotificationForm />}
+            children={<FormWidget {...FormSubscribeNotification} />}
           />
           <div className="btn-mobile" >
             <SearchIcon />

@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
+import {ChangeEvent, FC, useEffect, useState} from 'react';
 import { ReactComponent as NextDate } from "@/assets/nextDate.svg";
-
-const DAYS_OF_WEEK = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-const MONTHS = [
-    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-];
+import { ReactComponent as PrevDate } from "@/assets/prevDate.svg";
+import {DAYS_OF_WEEK, MONTHS} from "@/contexts/Calendar.ts";
 
 interface CalendarProps {
     onChange: (date: Date) => void;
     initialDate?: Date;
+    navSide?: 'left' | 'right'
 }
 
-const Calendar: React.FC<CalendarProps> = ({ onChange, initialDate }) => {
+const Calendar: FC<CalendarProps> = ({ onChange, initialDate, navSide }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDay, setSelectedDay] = useState<number | null>(
         initialDate ? initialDate.getDate() : null
@@ -37,13 +34,13 @@ const Calendar: React.FC<CalendarProps> = ({ onChange, initialDate }) => {
         onChange(newDate);
     };
 
-    const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleMonthChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const newDate = new Date(currentDate.setMonth(parseInt(event.target.value)));
         setCurrentDate(newDate);
         setSelectedDay(null);
     };
 
-    const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const newDate = new Date(currentDate.setFullYear(parseInt(event.target.value)));
         setCurrentDate(newDate);
         setSelectedDay(null);
@@ -115,12 +112,14 @@ const Calendar: React.FC<CalendarProps> = ({ onChange, initialDate }) => {
     return (
         <div className="calendar-wrapper">
             <div className="header">
-                <button
-                    className="nav-button"
-                    onClick={() => setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() - 1)))}
-                >
-                    <NextDate />
-                </button>
+                {navSide === 'left' && (
+                    <button
+                        className="nav-button"
+                        onClick={() => setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() - 1)))}
+                    >
+                        <PrevDate />
+                    </button>
+                )}
                 <select
                     className="select"
                     value={currentDate.getMonth()}
@@ -130,6 +129,14 @@ const Calendar: React.FC<CalendarProps> = ({ onChange, initialDate }) => {
                         <option key={month} value={index}>{month}</option>
                     ))}
                 </select>
+                {navSide === 'right' && (
+                    <button
+                        className="nav-button"
+                        onClick={() => setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + 1)))}
+                    >
+                        <NextDate />
+                    </button>
+                )}
                 <select
                     className="select"
                     value={currentDate.getFullYear()}

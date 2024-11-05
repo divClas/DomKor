@@ -11,11 +11,12 @@ import { I_Graphic } from "@/types/graphic.ts";
 import { tableConstruct } from "@/helpers/tableConstruct.tsx";
 import { Table } from "antd";
 import { SearchInputDate } from "@/components/ui/SearchInput/Date.tsx";
-import { SubscribeNewTenderForm } from "@/components/widgets/Forms/SubscribeNewTenderForm.tsx";
 import { Dictionary } from "@/contexts/Dictionary.ts";
 import { NoData } from "@/components/ui/NoData";
 import MobileList from "@/components/ui/MobileList/Index";
 import { columns } from "@/const";
+import {FormSubscribeNewTender} from "@/contexts/forms.ts";
+import {FormWidget} from "@/components/widgets/Form";
 
 export const GraphicsTableWidget = () => {
   const dispatch = useAppDispatch();
@@ -251,7 +252,7 @@ export const GraphicsTableWidget = () => {
       },
       noSort: true,
       type: "buttonWithModal",
-      modalChild: (val) => <SubscribeNewTenderForm graphic_id={val} />,
+      modalChild: (val) => <FormWidget {...FormSubscribeNewTender(val)} />,
       modalTitle: Dictionary.SEND_EVENT_GRAPHIC.ru,
       label: Dictionary.SEND_EVENT.ru,
       width: 180,

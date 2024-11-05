@@ -1,4 +1,4 @@
-import { Modal, Typography } from "antd";
+import { Modal } from "antd";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { Button } from "../Button";
@@ -56,7 +56,7 @@ const MobileList = <T,>({ data, columns }: MobileListProps<T>) => {
                             </p>
                         </div>
                     ))}
-                    <Button background="accent" label="Откликнуться" onClick={showModal} />
+                    <Button background={"accent"} label="Откликнуться" onClick={showModal} />
                     {/* марат нужно прокинуть сюда форму  */}
                     <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                         <p>Some contents...</p>
