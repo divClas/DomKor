@@ -31,8 +31,8 @@ export const SearchInputDate: FC<{
 
             <SearchInputString
                 label={label}
-                readonly={true}
-                val={`${value.FROM} ${value.TO ? '- ' + value.TO : ''}`}
+                editable={false}
+                val={value.FROM || value.TO ? `${value.FROM} ${value.TO ? '- ' + value.TO : ''}` : undefined}
             />
             <Popover
                 content={(

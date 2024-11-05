@@ -63,4 +63,8 @@ export const Dictionary = {
     ru: "отмена",
     en: "cancel",
   },
+  OK: {
+    ru: "Отлично!",
+    en: "ok",
+  },
 };

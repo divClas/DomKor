@@ -4,22 +4,21 @@ import {Button} from "@/components/ui/Button";
 import {ReactComponent as AddFileIcon} from "@/assets/add_file.svg";
 import {I_FormFiledProps} from "@/types/form.ts";
 
-export const FieldUploadUi:FC<I_FormFiledProps> = ({f, disabled}) => {
+export const FieldUploadUi: FC<I_FormFiledProps> = ({f, disabled}) => {
     const [files, setFiles] = useState<any[]>([])
     return (
         <Form.Item
             name={String(f.name)}
             className={'form-item-def mb-1'}
             required={f.required}
-            rules={[{required: true, message: 'Загрузите файл'}]}
             getValueFromEvent={(e) => {
-            if (Array.isArray(e)) {
-                return e;
+                if (Array.isArray(e)) {
+                    return e;
+                }
+                setFiles(e.fileList)
+                return e && e.fileList;
             }
-            setFiles(e.fileList)
-            return e && e.fileList;
             }
-        }
         >
             <Upload
                 disabled={disabled}

@@ -7,7 +7,7 @@ import {I_FormFiledProps} from "@/types/form.ts";
 import useFormInstance from "antd/es/form/hooks/useFormInstance";
 
 export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled}) => {
-    const [orgName, setOrgName] = useState<string>('')
+    const [orgName, setOrgName] = useState<string>('Не выбрано')
     const [orgInn, setOrgInn] = useState<string>('')
     const useFormI = useFormInstance()
     const [orgListSearchDaData, setOrgListSearchDaData] = useState<{
@@ -19,6 +19,7 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled}) => {
             <Form.Item label={f.label}
                        required={true}
                        name={String(f.name)}
+                       className={'bg--transparent'}
             >
                 <Flex
 
@@ -64,7 +65,7 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled}) => {
             </Form.Item>
             <Flex vertical={true}
                   gap={4}
-                  className={'ant-form-item'}
+                  className={'ant-form-item bg--transparent pd--0'}
             >
                 <Typography.Text className={'fs--xsm fw--xsm'}>
                     Наименование ООО подставится автоматически:

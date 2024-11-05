@@ -77,7 +77,7 @@ export const GraphicKpListWidget: FC<{
                             background={"accent"}
                             title={Dictionary.SEND_EVENT_TENDER.ru}
                             onOpenChange={(visible) => setActiveId(visible ? item.ID : null)}
-                            children={<FormWidget {...FormSubscribeKP(item.ID)} />}
+                            children={<FormWidget {...FormSubscribeKP(item.ID)}/>}
                         />
                         <div className="date-bottom">
                             {dayjs(item.DATE_CREATE).locale("ru").format("D MMMM YYYY")}

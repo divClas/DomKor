@@ -36,10 +36,7 @@ export const FormSubscribeKP = (tender_id: string): I_Form => ({
             required: true
         },
     ],
-    statusMessage: {
-        success: 'Вам придет уведомление о статусе субподряда',
-        error: 'Данные получены не корректно'
-    }
+    successMessage: 'Вам придет уведомление о статусе субподряда'
 })
 export const FormSubscribeNewTender = (graphic_id: string): I_Form => ({
     route: R_GRAPHIC + A_SEND_EVENT,
@@ -77,10 +74,7 @@ export const FormSubscribeNewTender = (graphic_id: string): I_Form => ({
             required: true
         }
     ],
-    statusMessage: {
-        success: 'Теперь вам будут приходить уведомления о новых тендерах',
-        error: 'Данные получены не корректно'
-    }
+    successMessage: 'Теперь вам будут приходить уведомления о новых тендерах'
 })
 export const FormSubscribeNotification: I_Form = {
     route: R_GRAPHIC + A_SEND_EVENT,
@@ -111,8 +105,5 @@ export const FormSubscribeNotification: I_Form = {
             required: true
         }
     ],
-    statusMessage: {
-        success: 'Вам придет уведомление о статусе субподряда',
-        error: 'Данные получены не корректно'
-    }
+    successMessage: 'Вам придет уведомление о статусе субподряда',
 }

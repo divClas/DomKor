@@ -13,6 +13,7 @@ export const themeConfig: ThemeConfig = {
             colorPrimary: 'red',
             colorPrimaryActive: 'lightgray',
             colorPrimaryTextHover: 'lightgray',
+            colorTextDisabled: '#fff'
         },
         Input: {
             colorBgContainer: "unset",
@@ -36,5 +37,8 @@ export const themeConfig: ThemeConfig = {
         DatePicker: {},
         Checkbox: {},
         Steps: {},
+        Form: {
+            itemMarginBottom: 12
+        }
     },
 };

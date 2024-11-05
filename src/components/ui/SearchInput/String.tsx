@@ -6,15 +6,15 @@ import {ReactComponent as SearchIcon} from "@/assets/search.svg";
 
 export const SearchInputString: FC<{
     label: string
-    val: string
+    val?: string
     onChange?: (val: string) => void
-    readonly?: boolean
+    editable?: boolean
 }> = ({
           label,
           val,
           onChange = () => {
           },
-          readonly = false
+                                          editable = true
       }) => {
     return (
         <Flex justify="space-between"
@@ -25,18 +25,19 @@ export const SearchInputString: FC<{
                 <InputAsync
                     ID={"work-type"}
                     onChange={onChange}
-                    value={val}
+                    value={val ?? ''}
                     type="string"
-                    readonly={!readonly}
+                    disabled={!editable}
                 />
                 <label color="#757778"
+                       className={'fs--sm'}
                        htmlFor="work-type"
                 >
                     {label}
                 </label>
             </div>
-            {!readonly && <SearchIcon className="icon" />}
-            {!readonly && !!val && (
+            {editable && <SearchIcon className="icon" />}
+            {editable && !!val && (
                 <CloseIcon className="icon"
                            onClick={() => {
                                onChange('');

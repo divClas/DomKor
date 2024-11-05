@@ -13,10 +13,7 @@ export interface I_FormFiledProps {
 }
 
 export interface I_Form {
-    statusMessage: {
-        success: string
-        error: string
-    }
+    successMessage: string
     route: string
     fields: I_FormFiled[]
 }
