@@ -616,6 +616,10 @@ td.ant-table-cell {
   border-bottom: 2px solid rgba(207, 207, 207, 1);
 }
 
+.ant-tabs-ink-bar {
+  bottom: -2px
+}
+
 .ant-tabs-nav {
   @media (max-width: 1000px) {
     // flex-direction: column;
