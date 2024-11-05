@@ -581,6 +581,10 @@ td.ant-table-cell {
   border-bottom: 2px solid rgba(207, 207, 207, 1);
 }
 
+.ant-tabs-ink-bar {
+  bottom: -2px
+}
+
 .ant-tabs-nav {
   @media (max-width: 1000px) {
     // flex-direction: column;
@@ -767,6 +771,7 @@ td.ant-table-cell {
   align-items: center;
   padding: 9.5px 32px;
   background: rgba(246, 246, 241, 0.5);
+
   svg {
     display: flex;
     align-items: center;
