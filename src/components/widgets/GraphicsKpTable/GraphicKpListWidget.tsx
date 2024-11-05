@@ -13,10 +13,10 @@ export const GraphicKpListWidget: FC<{
 }> = ({ onReset }) => {
   const { entity: graphicKpList, status } = useAppSelector((s) => s.graphicKP);
 
-  // if (graphicKpList.length === 0 && status !== "pending") {
-  //   return <NoData onReset={onReset} />;
-  // }
   const [activeId, setActiveId] = useState<string | null>(null);
+  if (graphicKpList.length === 0 && status !== "pending") {
+    return <NoData onReset={onReset} />;
+  }
 
   return (
     <>

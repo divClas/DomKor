@@ -1,4 +1,4 @@
-import {Flex, Form, Input, Typography, Upload} from "antd";
+import {Flex, Form, Input, Typography, Upload, UploadFile} from "antd";
 import {I_Graphic} from "@/types/graphic.ts";
 import {FC, ReactNode, useState} from "react";
 import {OrgSelectUi} from "@/components/ui/OrgSelect";
@@ -19,16 +19,18 @@ export const SubscribeKPForm: FC<{
       }) => {
     const [orgName, setOgrName] = useState<string>(Dictionary.NO_SELECT.ru)
     const [status, setStatus] = useState<I_StatusType>()
+    const [files, setFiles] = useState<UploadFile[]>()
     const message = {
         success: 'Вам придет уведомление о статусе субподряда',
         error: 'Данные получены не корректно'
     }
+
     return (
         <Form
             onFinish={async (values) => {
                 await uploadFormData(R_GRAPHIC_KP + A_SEND_EVENT, {
                     ...values,
-                    file: values.file.file.originFileObj,
+                    file: values.file[0]?.originFileObj ?? null,
                     org_name: orgName
                 }).then(res => {
                     setStatus(res.status)
@@ -94,11 +96,22 @@ export const SubscribeKPForm: FC<{
                 className={'form-item-def mb-1'}
                 required={true}
                 rules={[{required: true, message: 'Загрузите файл'}]}
+                getValueFromEvent={(e) => {
+                    if (Array.isArray(e)) {
+                        return e;
+                    }
+                    if (e) {
+                        setFiles(e.fileList)
+                        return e.fileList;
+                    }
+                    return []
+                }}
             >
                 <Upload
                     disabled={status === 'success'}
                     customRequest={() => {
                     }}
+                    fileList={files}
                     listType={'text'}
                     multiple={false}
                     itemRender={(_, file) => {
