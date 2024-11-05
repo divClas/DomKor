@@ -8,10 +8,12 @@ export const DatePickerWidget: FC<{
     label: string
     value: string | undefined
     onChange: (val: string) => void
+    navSide?: 'left' | 'right'
 }> = ({
     label,
     value,
-    onChange
+    onChange,
+    navSide = 'right'
 }) => {
         const { token } = theme.useToken();
         const [date, setDate] = useState<string>(!!value ? value : dayjs(new Date()).format('YYYY-MM-DD'))
@@ -48,8 +50,9 @@ export const DatePickerWidget: FC<{
                 
                 <div style={wrapperStyle}>
                     <Calendar
+                        navSide={navSide}
                         onChange={handleCalendarChange}
-                        initialDate={dayjs(date).toDate()} 
+                        initialDate={dayjs(date).toDate()}
                     />
                 </div>
             </Flex>

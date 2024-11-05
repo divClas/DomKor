@@ -11,13 +11,13 @@ import { I_Graphic } from "@/types/graphic.ts";
 import { tableConstruct } from "@/helpers/tableConstruct.tsx";
 import { Flex, Table } from "antd";
 import { SearchInputDate } from "@/components/ui/SearchInput/Date.tsx";
-import { SubscribeNewTenderForm } from "@/components/widgets/Forms/SubscribeNewTenderForm.tsx";
 import { Dictionary } from "@/contexts/Dictionary.ts";
 import { NoData } from "@/components/ui/NoData";
 import MobileList from "@/components/ui/MobileList/Index";
 import { columns } from "@/const";
+import {FormSubscribeNewTender, FormSubscribeNotification} from "@/contexts/forms.ts";
+import {FormWidget} from "@/components/widgets/Form";
 import { PopoverWidget } from "@/components/ui/Popover";
-import { SubscribeNotificationForm } from "../Forms/SubscribeNotificationForm";
 import { ReactComponent as ReportIcon } from "@/assets/report.svg";
 import { ReactComponent as SearhIcon } from "@/assets/mobileSearch.svg";
 
@@ -255,7 +255,7 @@ export const GraphicsTableWidget = () => {
       },
       noSort: true,
       type: "buttonWithModal",
-      modalChild: (val) => <SubscribeNewTenderForm graphic_id={val} />,
+      modalChild: (val) => <FormWidget {...FormSubscribeNewTender(val)} />,
       modalTitle: Dictionary.SEND_EVENT_GRAPHIC.ru,
       label: Dictionary.SEND_EVENT.ru,
       width: 180,
@@ -288,7 +288,7 @@ export const GraphicsTableWidget = () => {
           background={"accent"}
           icon={<ReportIcon />}
           title={Dictionary.SEND_EVENT_GRAPHIC.ru}
-          children={<SubscribeNotificationForm />}
+          children={<FormWidget {...FormSubscribeNotification} />}
           className="mobile-popover"
         />
         <div className="search-btn">
