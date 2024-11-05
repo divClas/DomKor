@@ -23,8 +23,9 @@ export const GraphicKpListWidget: FC<{
       {graphicKpList.map((item) => (
         <div
           key={item.ID}
-          className={`graphics-container ${activeId === item.ID ? "active-container" : ""
-            }`}
+          className={`graphics-container ${
+            activeId === item.ID ? "active-container" : ""
+          }`}
         >
           <div className="first-column">
             <div className="kp-name">{item.NAME}</div>

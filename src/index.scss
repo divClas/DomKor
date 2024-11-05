@@ -25,6 +25,7 @@
   src: local(Inter),
     url(./assets/fonts/Berthold_Akzidenz_Grotesk-400.ttf) format("truetype");
 }
+
 @font-face {
   font-family: Apercu;
   src: url(./assets/fonts/ApercuPro-Medium.ttf);
@@ -212,12 +213,7 @@ h2 {
   background-color: white;
 }
 
-:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper
-  .ant-table-thead
-  > tr
-  > th:not(:last-child):not(.ant-table-selection-column):not(
-    .ant-table-row-expand-icon-cell
-  ):not([colspan])::before {
+:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   height: 100% !important;
   width: 4px;
   background-color: rgba(207, 207, 207, 1);
@@ -288,8 +284,8 @@ tr td {
       pointer-events: none;
     }
 
-    input:focus ~ label,
-    input:not(:placeholder-shown) ~ label {
+    input:focus~label,
+    input:not(:placeholder-shown)~label {
       top: 0;
       font-size: 12px !important;
       color: rgba(0, 148, 222, 1);
@@ -389,17 +385,20 @@ table {
   padding: 56px;
   min-height: 560px;
   height: 100%;
+
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
     gap: 12px;
     padding: 12px;
   }
 }
+
 .select-item {
   @media (max-width: 1000px) {
     display: none !important;
   }
 }
+
 .active-container {
   background: rgba(246, 246, 246, 1);
 }
@@ -414,6 +413,7 @@ table {
 
 .third-column {
   align-items: flex-end;
+
   @media (max-width: 1000px) {
     align-items: normal;
   }
@@ -427,6 +427,7 @@ table {
   color: #333333;
   max-width: 743px;
   height: 100%;
+
   @media (max-width: 1000px) {
     font-size: 16px;
     line-height: 18.83px;
@@ -440,6 +441,7 @@ table {
   text-align: left;
   color: #757778;
 }
+
 .second-column {
   @media (max-width: 1000px) {
     flex-direction: column-reverse;
@@ -447,10 +449,12 @@ table {
     justify-content: flex-end;
   }
 }
+
 .kp-char {
   display: flex;
   flex-direction: column;
   gap: 32px;
+
   @media (max-width: 1000px) {
     gap: 12px;
   }
@@ -459,6 +463,7 @@ table {
     display: flex;
     flex-direction: column;
     gap: 4px;
+
     @media (max-width: 1000px) {
       border-left: 1px solid rgba(117, 119, 120, 1);
       padding-left: 8px;
@@ -486,6 +491,7 @@ table {
   align-items: center;
   gap: 8px;
   cursor: pointer;
+
   @media (max-width: 1000px) {
     display: none;
   }
@@ -506,11 +512,14 @@ table {
   line-height: 19.66px;
   text-align: right;
   color: #757778;
+
   @media (max-width: 1000px) {
     display: none;
   }
+
   &.mobile {
     display: none;
+
     @media (max-width: 1000px) {
       display: block;
       text-align: left;
@@ -555,12 +564,7 @@ p {
   background: unset !important;
 }
 
-:where(.css-dev-only-do-not-override-1mcm4dg).ant-table-wrapper
-  .ant-table-thead
-  > tr
-  > th:not(:last-child):not(.ant-table-selection-column):not(
-    .ant-table-row-expand-icon-cell
-  ):not([colspan])::before {
+:where(.css-dev-only-do-not-override-1mcm4dg).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   width: 4px;
   height: 100%;
 }
@@ -576,11 +580,12 @@ td.ant-table-cell {
 .ant-tabs-nav-list {
   border-bottom: 2px solid rgba(207, 207, 207, 1);
 }
+
 .ant-tabs-nav {
   @media (max-width: 1000px) {
-    flex-direction: column;
-    align-items: start !important;
-    gap: 16px;
+    // flex-direction: column;
+    // align-items: start !important;
+    // gap: 16px;
   }
 }
 
@@ -621,6 +626,7 @@ td.ant-table-cell {
 .ant-table-row {
   background: rgba(255, 255, 255, 1) !important;
 }
+
 .calendar-wrapper {
   max-width: 300px;
   background: rgba(246, 246, 246, 1);
@@ -680,10 +686,12 @@ td.ant-table-cell {
 .day-cell.weekend {
   color: rgba(186, 46, 43, 1);
 }
+
 .select {
   background-color: transparent;
   border-color: transparent;
 }
+
 .title {
   font-family: Apercu !important;
   font-size: 12px;
@@ -692,6 +700,7 @@ td.ant-table-cell {
   text-align: left;
   color: rgba(117, 119, 120, 1);
 }
+
 .sub-title {
   font-family: Berthold Akzidenz Grotesk;
   font-size: 14px;
@@ -700,17 +709,21 @@ td.ant-table-cell {
   text-align: left;
   color: rgba(51, 51, 51, 1);
 }
+
 .ant-modal-mask {
   background: rgba(0, 0, 0, 0.22) !important;
 }
+
 .btn-mobile {
   display: none;
   padding: 9.5px 32px;
   border-color: transparent;
   background-color: rgba(201, 201, 201, 1);
+
   @media (max-width: 1000px) {
     display: block;
   }
+
   svg {
     width: 16px;
     height: 16px;
@@ -718,7 +731,45 @@ td.ant-table-cell {
     align-items: center;
   }
 }
+
 .ant-tabs-extra-content {
   display: flex;
   gap: 12px;
+}
+
+.subscribe-notification-form {
+  @media (max-width:1000px) {
+    display: none;
+  }
+}
+
+.mobile-popover {
+  display: none;
+
+  @media (max-width: 1000px) {
+    display: flex;
+  }
+}
+
+.mobile-filter {
+  display: none;
+
+  @media (max-width:1000px) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+  }
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  padding: 9.5px 32px;
+  background: rgba(246, 246, 241, 0.5);
+  svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
