@@ -4,16 +4,16 @@ import {Button} from "@/components/ui/Button";
 import {FC, useState} from "react";
 import './style.scss'
 import {I_FormFiledProps} from "@/types/form.ts";
+import useFormInstance from "antd/es/form/hooks/useFormInstance";
 
 export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled}) => {
     const [orgName, setOrgName] = useState<string>('')
     const [orgInn, setOrgInn] = useState<string>('')
-
+    const useFormI = useFormInstance()
     const [orgListSearchDaData, setOrgListSearchDaData] = useState<{
         inn: string,
         name: string
     }[]>([])
-
     return (
         <>
             <Form.Item label={f.label}
@@ -50,6 +50,7 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled}) => {
                                     key={e.inn}
                                     onClick={() => {
                                         setOrgName(e.name)
+                                        useFormI.setFieldValue('org_name', e.name)
                                         setOrgInn(e.inn)
                                         setOrgListSearchDaData([])
                                     }}
@@ -57,6 +58,9 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled}) => {
                         ))}
                     </Flex>
                 </Flex>
+            </Form.Item>
+            <Form.Item name={'org_name'} hidden={true}>
+                <input value={orgName} />
             </Form.Item>
             <Flex vertical={true}
                   gap={4}

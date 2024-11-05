@@ -15,8 +15,16 @@ export const Dictionary = {
     ru: "График проведения тендеров и выполнения СМР по ж. д.",
     en: "graphics",
   },
+  GRAPHIC_TAB_MB: {
+    ru: "Тендеры и СМР по ж.д.",
+    en: "graphics",
+  },
   GRAPHIC_KP_TAB: {
     ru: "Список сбора КП по ж. д.",
+    en: "graphic KP",
+  },
+  GRAPHIC_KP_TAB_MB: {
+    ru: "Сбор КП по ж.д.",
     en: "graphic KP",
   },
   SUBSCRIBE_TO_NOTIFICATION: {

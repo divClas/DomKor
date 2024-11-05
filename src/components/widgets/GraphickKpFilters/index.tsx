@@ -14,9 +14,10 @@ import { cityThank } from "@/store/city";
 import { I_City } from "@/types/city.ts";
 import { PopoverWidget } from "@/components/ui/Popover";
 import { Dictionary } from "@/contexts/Dictionary";
-import { SubscribeNotificationForm } from "../Forms/SubscribeNotificationForm";
 import { ReactComponent as ReportIcon } from "@/assets/report.svg";
 import { ReactComponent as CalendarIcon } from "@/assets/mobileCalendar.svg";
+import { FormWidget } from "../Form";
+import { FormSubscribeNotification } from "@/contexts/forms";
 
 export const GraphicKpFilters: FC<{
   payload: I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>;
@@ -45,7 +46,7 @@ export const GraphicKpFilters: FC<{
           background={"accent"}
           icon={<ReportIcon />}
           title={Dictionary.SEND_EVENT_GRAPHIC.ru}
-          children={<SubscribeNotificationForm />}
+          children={<FormWidget {...FormSubscribeNotification} />}
           className="mobile-popover"
         />
         <div className="search-btn">

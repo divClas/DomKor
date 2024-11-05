@@ -11,7 +11,6 @@ export interface I_FormFiledProps {
     f: I_FormFiled
     disabled: boolean
 }
-export interface I_FormFiledProps { key: string | number }
 
 export interface I_Form {
     statusMessage: {

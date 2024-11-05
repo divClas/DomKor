@@ -6,17 +6,20 @@ import { Dictionary } from "@/contexts/Dictionary.ts";
 import { PopoverWidget } from "@/components/ui/Popover";
 import {FormWidget} from "@/components/widgets/Form";
 import {FormSubscribeNotification} from "@/contexts/forms.ts";
+import {ReactComponent as SearchIcon} from "@/assets/search.svg";
+import useSizeHook from "@/hooks/useSizeHook.ts";
 
 export const TableTabsWidget = () => {
+  const windowSize = useSizeHook()
   const items: TabsProps["items"] = [
     {
       key: Dictionary.GRAPHIC.en,
-      label: Dictionary.GRAPHIC_TAB.ru,
+      label: windowSize.width > 700 ? Dictionary.GRAPHIC_TAB.ru : Dictionary.GRAPHIC_TAB_MB.ru,
       children: <GraphicsTableWidget />,
     },
     {
       key: Dictionary.GRAPHIC_KP.en,
-      label: Dictionary.GRAPHIC_KP_TAB.ru,
+      label: windowSize.width > 700 ? Dictionary.GRAPHIC_KP_TAB.ru : Dictionary.GRAPHIC_KP_TAB_MB.ru,
       children: <GraphicsKpTableWidget />,
     },
   ];

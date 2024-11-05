@@ -11,8 +11,8 @@ export const InputAsync: FC<{
     disabled?: boolean,
     onChange: (newVal: number) => void
     config?: InputNumberProps,
-    editable?: boolean
     placeholder?: string
+    readonly: boolean
 } | {
     ID: number | string,
     value: string,
@@ -21,7 +21,7 @@ export const InputAsync: FC<{
     onChange: (newVal: string) => void
     config?: InputProps,
     disabled?: boolean
-    editable?: boolean
+    readonly: boolean
 }> = ({
           ID,
           value,
@@ -29,7 +29,7 @@ export const InputAsync: FC<{
           config,
           disabled,
           type = 'number',
-          editable = true,
+                                   readonly = false,
           placeholder = ''
       }) => {
     const [text, setText] = useState<number | string>(value)
@@ -37,9 +37,6 @@ export const InputAsync: FC<{
     useEffect(() => {
         setText(value)
     }, [value])
-    if (!editable) {
-        return value
-    }
     const key = ID + placeholder
     if (type === 'string') {
         return <Input
@@ -51,6 +48,7 @@ export const InputAsync: FC<{
             placeholder={placeholder}
             size={"small"}
             value={text}
+            readOnly={readonly}
             onChange={(v) => {
                 setText(v.target.value)
                 debounced(v.target.value)
@@ -64,6 +62,7 @@ export const InputAsync: FC<{
             id={key}
             disabled={disabled}
             placeholder={placeholder}
+            readOnly={readonly}
             value={text}
             size={"small"}
             onChange={(v) => {

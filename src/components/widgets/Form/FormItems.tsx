@@ -12,23 +12,22 @@ export function FormItems(props: {
 }) {
     return (props.fields.map((f, index) => {
         const fieldProps: I_FormFiledProps = {
-            key: index,
             f,
             disabled: props.disabled
         }
         switch (f.type) {
             case "hidden":
-                return <FieldHiddenUi {...fieldProps} />
+                return <FieldHiddenUi key={index} {...fieldProps} />
             case "string":
-                return <FieldStringUi {...fieldProps} />
+                return <FieldStringUi key={index} {...fieldProps} />
             case "email":
-                return <FieldEmailUi {...fieldProps} />
+                return <FieldEmailUi key={index} {...fieldProps} />
             case "phone":
-                return <FieldPhoneUi {...fieldProps} />
+                return <FieldPhoneUi key={index} {...fieldProps} />
             case "upload":
-                return <FieldUploadUi {...fieldProps} />
+                return <FieldUploadUi key={index} {...fieldProps} />
             case "orgSelect":
-                return <FieldOrgSelectUi {...fieldProps} />
+                return <FieldOrgSelectUi key={index} {...fieldProps}/>
             default:
                 return null
         }
