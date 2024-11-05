@@ -9,19 +9,22 @@ import { I_PayloadList } from "@/types/api.ts";
 import { SearchInputString } from "@/components/ui/SearchInput/String.tsx";
 import { I_Graphic } from "@/types/graphic.ts";
 import { tableConstruct } from "@/helpers/tableConstruct.tsx";
-import { Table } from "antd";
+import { Flex, Table } from "antd";
 import { SearchInputDate } from "@/components/ui/SearchInput/Date.tsx";
 import { Dictionary } from "@/contexts/Dictionary.ts";
 import { NoData } from "@/components/ui/NoData";
 import MobileList from "@/components/ui/MobileList/Index";
 import { columns } from "@/const";
-import {FormSubscribeNewTender} from "@/contexts/forms.ts";
+import {FormSubscribeNewTender, FormSubscribeNotification} from "@/contexts/forms.ts";
 import {FormWidget} from "@/components/widgets/Form";
+import { PopoverWidget } from "@/components/ui/Popover";
+import { ReactComponent as ReportIcon } from "@/assets/report.svg";
+import { ReactComponent as SearhIcon } from "@/assets/mobileSearch.svg";
 
 export const GraphicsTableWidget = () => {
   const dispatch = useAppDispatch();
   const { entity, status } = useAppSelector((s) => s.graphic);
-  console.log(entity)
+  console.log(entity);
   const [payload, setPayload] = useState<
     I_PayloadList<I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH>
   >({});
@@ -261,22 +264,37 @@ export const GraphicsTableWidget = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Например, для мобильных экранов
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width:1000px)');
+    const mediaQuery = window.matchMedia("(max-width:1000px)");
 
-    const handleMediaChange = (e: { matches: boolean | ((prevState: boolean) => boolean); }) => {
+    const handleMediaChange = (e: {
+      matches: boolean | ((prevState: boolean) => boolean);
+    }) => {
       setIsMobile(e.matches);
     };
 
-    mediaQuery.addEventListener('change', handleMediaChange); // Для более современных браузеров
+    mediaQuery.addEventListener("change", handleMediaChange); // Для более современных браузеров
     setIsMobile(mediaQuery.matches); // Установите начальное состояние
 
     return () => {
-      mediaQuery.removeEventListener('change', handleMediaChange);
+      mediaQuery.removeEventListener("change", handleMediaChange);
     };
   }, []);
 
   return (
     <>
+      <Flex className="mobile-filter" justify="space-between" align="center">
+        <PopoverWidget
+          label={Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru}
+          background={"accent"}
+          icon={<ReportIcon />}
+          title={Dictionary.SEND_EVENT_GRAPHIC.ru}
+          children={<FormWidget {...FormSubscribeNotification} />}
+          className="mobile-popover"
+        />
+        <div className="search-btn">
+          <SearhIcon />
+        </div>
+      </Flex>
       {isMobile ? (
         <MobileList data={entity} columns={columns} />
       ) : (

@@ -2,7 +2,6 @@ import { Tabs, TabsProps } from "antd";
 import { GraphicsTableWidget } from "@/components/widgets/GraphicsTable";
 import { GraphicsKpTableWidget } from "@/components/widgets/GraphicsKpTable";
 import { ReactComponent as ReportIcon } from "@/assets/report.svg";
-import { ReactComponent as SearchIcon } from "@/assets/search.svg";
 import { Dictionary } from "@/contexts/Dictionary.ts";
 import { PopoverWidget } from "@/components/ui/Popover";
 import {FormWidget} from "@/components/widgets/Form";
@@ -33,6 +32,7 @@ export const TableTabsWidget = () => {
             icon={<ReportIcon />}
             title={Dictionary.SEND_EVENT_GRAPHIC.ru}
             children={<FormWidget {...FormSubscribeNotification} />}
+            className="subscribe-notification-form"
           />
           <div className="btn-mobile" >
             <SearchIcon />

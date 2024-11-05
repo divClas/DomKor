@@ -18,7 +18,6 @@ export const GraphicKpListWidget: FC<{
     if (graphicKpList.length === 0 && status !== "pending") {
         return <NoData onReset={onReset} />;
     }
-
     return (
         <>
             {graphicKpList.map((item) => (
