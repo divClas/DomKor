@@ -39,6 +39,6 @@ export const themeConfig: ThemeConfig = {
         Steps: {},
         Form: {
             itemMarginBottom: 12
-        }
+        },
     },
 };

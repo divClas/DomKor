@@ -3,6 +3,7 @@ import graphic from "@/store/graphic";
 import graphicKP from "@/store/graphicKP";
 import notification from "@/store/notification";
 import city from "@/store/city";
+import app from "@/store/app";
 
 
 export const store = configureStore({
@@ -11,7 +12,8 @@ export const store = configureStore({
             graphic,
             graphicKP,
             notification,
-            city
+            city,
+            app
         }
     ),
 })

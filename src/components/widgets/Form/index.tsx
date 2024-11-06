@@ -9,11 +9,14 @@ import {FormItems} from "@/components/widgets/Form/FormItems.tsx";
 import {I_Form} from "@/types/form.ts";
 import {useForm} from "antd/es/form/Form";
 import {FormProvider} from "antd/es/form/context";
+import {setPopover} from "@/store/app";
+import {useAppDispatch} from "@/hooks/storeHooks.ts";
 
 export function FormWidget(props: I_Form) {
     const [status, setStatus] = useState<I_StatusType>()
     const [messages, setMessages] = useState<string[]>([])
     const methods = useForm()
+    const dispatch = useAppDispatch()
     return (
         <FormProvider {...methods}>
             <Form
@@ -29,18 +32,15 @@ export function FormWidget(props: I_Form) {
                     }>(props.route, valuesPayload).then((res) => {
                         setStatus(res.status)
                         if (res.status === 'error') {
-                            console.log(res)
                             setMessages(res.errors.map(e => (e.message)).filter(e => !e.startsWith('[Exception]')))
                         } else {
                             setMessages([props.successMessage])
                         }
                     }).catch(e => {
-                        console.log(e)
+                        console.error(e)
                     })
                 }}
-                style={{
-                    maxWidth: 490
-                }}
+                className={'form-widget'}
                 layout={"vertical"}
                 requiredMark={(label: ReactNode, {required}: { required: boolean }) => (
                     <Flex gap={4}>
@@ -57,9 +57,11 @@ export function FormWidget(props: I_Form) {
                            disabled={status === 'success'}
                 />
                 {status &&
-                    messages.map((m) => (
-                        <MessageFormUi status={status}
-                                       message={m}
+                    messages.map((m, index) => (
+                        <MessageFormUi
+                            key={index}
+                            status={status}
+                            message={m}
                         />
                     ))
                 }
@@ -73,7 +75,9 @@ export function FormWidget(props: I_Form) {
                         <Button
                             label={Dictionary.OK.ru}
                             background={'accent'}
-                            type={"submit"}
+                            onClick={() => {
+                                dispatch(setPopover(''))
+                            }}
                         />)}
                 </Flex>
             </Form>

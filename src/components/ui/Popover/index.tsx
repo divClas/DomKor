@@ -1,34 +1,75 @@
-import { FC, ReactElement, ReactNode } from "react";
+import {FC, ReactNode, useEffect} from "react";
 import "./style.scss";
-import { T_Background } from "@/types/app.ts";
-import { Button, Popover } from "antd";
+import {I_ButtonProps, T_PopoverId} from "@/types/app.ts";
+import {Flex, Modal, Popover} from "antd";
+import {Button} from "@/components/ui/Button";
+import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
+import {setPopover} from "@/store/app";
+import useSizeHook from "@/hooks/useSizeHook.ts";
+import {TitlePopover} from "@/components/ui/TitlePopover";
 
 export const PopoverWidget: FC<{
-  label: string;
-  title: string;
-  background: T_Background;
-  icon?: ReactElement;
-  onClick?: () => void;
-  className?: string;
-  type?: "button" | "submit" | "reset";
-  disabled?: boolean;
-  children: ReactNode;
-  onOpenChange?: (visible: boolean) => void; // Add this prop
+    id: T_PopoverId
+    btn?: I_ButtonProps
+    title?: string;
+    onClick?: () => void;
+    type?: "button" | "submit" | "reset";
+    content: ReactNode;
+    children?: ReactNode
+    onOpenChange?: (visible: boolean) => void; // Add this prop
 }> = (props) => {
-  return (
-    <Popover
-      content={props.children}
-      title={props.title}
-      trigger={"click"}
-      forceRender={true}
-      onOpenChange={props.onOpenChange} // Pass it here
+    const id = props.id.replace(/\s+/g, '')
+    const dispatch = useAppDispatch()
+    const {popoversOpen} = useAppSelector(s => s.app)
+    useEffect(() => {
+        // hideOnClickOutside(id, () => {
+        //     dispatch(setPopover(''))
+        // })
+    }, [])
+
+    const windowSize = useSizeHook()
+    const TargetButton = <div
+        onClick={() => {
+            dispatch(setPopover(id))
+        }}
+        className={windowSize.width < 1000 ? 'w-100' : ''}
+        id={'target-button-' + id}
     >
-      <Button
-        children={props.label}
-        icon={props.icon}
-        className={props.className}
-        disabled={props.disabled}
-      />
-    </Popover>
-  );
+        {props.children}
+        {props.btn && (
+            <Button
+                {...props.btn}
+            />
+        )}
+    </div>
+    if (windowSize.width > 1000) {
+        return (
+            <Popover
+                content={props.content}
+                id={id}
+                title={<TitlePopover title={props.title} />}
+                open={popoversOpen === id}
+                forceRender={true}
+                onOpenChange={props.onOpenChange}
+                children={TargetButton}
+            />
+        );
+    } else {
+        return (
+            <Flex>
+                {TargetButton}
+                <Modal
+                    title={<span className={'fs--md fw--lg'}>{props.title}</span>}
+                    open={popoversOpen === id}
+                    forceRender={true}
+                    width={'fit-content'}
+                    onCancel={() => {
+                        dispatch(setPopover(''))
+                    }}
+                    footer={null}
+                    children={<div id={id}>{props.content}</div>}
+                />
+            </Flex>
+        )
+    }
 };

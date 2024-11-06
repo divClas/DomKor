@@ -1,10 +1,11 @@
-import {Flex, Popover} from "antd";
+import {Flex} from "antd";
 import {FC} from "react";
 import {DataPickerContent} from "@/components/widgets/DataPickerContent";
 import {ReactComponent as CalendarIcon} from "@/assets/calendar.svg";
 import {I_DateFilter} from "@/types/api.ts";
 import {ReactComponent as SortIcon} from "@/assets/sortIcon.svg";
 import {SearchInputString} from "@/components/ui/SearchInput/String.tsx";
+import {PopoverWidget} from "@/components/ui/Popover";
 
 export const SearchInputDate: FC<{
     label: string
@@ -28,25 +29,25 @@ export const SearchInputDate: FC<{
         <Flex justify="space-between"
               align="center"
         >
-
             <SearchInputString
                 label={label}
                 editable={false}
                 val={value.FROM || value.TO ? `${value.FROM} ${value.TO ? '- ' + value.TO : ''}` : undefined}
             />
-            <Popover
+            <PopoverWidget
+                id={label}
                 content={(
                     <DataPickerContent
                         value={value}
                         onChange={onChange}
                     />
                 )}
-                trigger={"click"}
+                title={'Выбор даты'}
             >
                 <Flex className={isDateFilter ? 'active-icon' : ''}>
                     <CalendarIcon className="icon cursor" />
                 </Flex>
-            </Popover>
+            </PopoverWidget>
             <Flex className={isSort ? 'active-icon' : ''}>
                 <SortIcon
                     className="icon"

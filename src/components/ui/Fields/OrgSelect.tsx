@@ -19,7 +19,6 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled}) => {
             <Form.Item label={f.label}
                        required={true}
                        name={String(f.name)}
-                       className={'bg--transparent'}
             >
                 <Flex
 

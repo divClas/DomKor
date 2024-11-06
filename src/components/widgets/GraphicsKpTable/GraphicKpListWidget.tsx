@@ -8,6 +8,7 @@ import {NoData} from "@/components/ui/NoData";
 import {FC, useState} from "react";
 import {FormWidget} from "@/components/widgets/Form";
 import {FormSubscribeKP} from "@/contexts/forms.ts";
+import useSizeHook from "@/hooks/useSizeHook.ts";
 
 export const GraphicKpListWidget: FC<{
     onReset: () => void;
@@ -18,6 +19,7 @@ export const GraphicKpListWidget: FC<{
     if (graphicKpList.length === 0 && status !== "pending") {
         return <NoData onReset={onReset} />;
     }
+    const size = useSizeHook()
     return (
         <>
             {graphicKpList.map((item) => (
@@ -31,6 +33,7 @@ export const GraphicKpListWidget: FC<{
                         <a
                             target="_blank"
                             href={item.DOCUMENT}
+                            download
                             className="downloadDocument"
                         >
                             <GetDownloadDoc />
@@ -40,44 +43,48 @@ export const GraphicKpListWidget: FC<{
                     <div className="second-column">
                         <div className="kp-char">
                             <div className="kp-items">
-                                <div className="kp-item-title">Заявки принимаются до:</div>
-                                <div className="kp-item-description">
+                                <div className="fw--sm fs--sm color--gray">Заявки принимаются до:</div>
+                                <div className="fw--sm fs--md">
                                     {dayjs(item.SUBMISSION_DEADLINE)
                                         .locale("ru")
                                         .format("D MMMM YYYY")}
                                 </div>
                             </div>
                             <div className="kp-items">
-                                <div className="kp-item-title">Дата окончания тендера:</div>
-                                <div className="kp-item-description">
+                                <div className="fw--sm fs--sm color--gray">Дата окончания тендера:</div>
+                                <div className="fw--sm fs--md">
                                     {dayjs(item.TENDER_END_DATE)
                                         .locale("ru")
                                         .format("D MMMM YYYY")}
                                 </div>
                             </div>
                             <div className="kp-items">
-                                <div className="kp-item-title">Адрес:</div>
-                                <div className="kp-item-description">{item.ADDRESS}</div>
+                                <div className="fw--sm fs--sm color--gray">Адрес:</div>
+                                <div className="fw--sm fs--md">{item.ADDRESS}</div>
                             </div>
                             <div className="kp-items">
-                                <div className="kp-item-title">Ответственный:</div>
-                                <div className="kp-item-description">{item.PERSON}</div>
+                                <div className="fw--sm fs--sm color--gray">Ответственный:</div>
+                                <div className="fw--sm fs--md">{item.PERSON}</div>
                             </div>
                         </div>
                         <div className="item">
-                            <div className="organization">{item.LEGAL_ENTITY}</div>
-                            <div className="date-bottom mobile">
+                            <div className={`${size.width > 1000 ? 'fs--md' : 'fs--sm'} fw--sm color--gray`}>{item.LEGAL_ENTITY}</div>
+                            <div className="fw--sm fs--sm color--gray view--mb">
                                 {dayjs(item.DATE_CREATE).locale("ru").format("D MMMM YYYY")}
                             </div>
                         </div>
                     </div>
                     <div className="third-column">
                         <PopoverWidget
-                            label={Dictionary.SEND_EVENT.ru}
-                            background={"accent"}
+                            id={item.ID + Dictionary.SEND_EVENT.ru}
+                            btn={{
+                                label: Dictionary.SEND_EVENT.ru,
+                                background: "accent",
+                                className: 'w-100'
+                            }}
                             title={Dictionary.SEND_EVENT_TENDER.ru}
                             onOpenChange={(visible) => setActiveId(visible ? item.ID : null)}
-                            children={<FormWidget {...FormSubscribeKP(item.ID)}/>}
+                            content={<FormWidget {...FormSubscribeKP(item.ID)} />}
                         />
                         <div className="date-bottom">
                             {dayjs(item.DATE_CREATE).locale("ru").format("D MMMM YYYY")}

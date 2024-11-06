@@ -1,210 +1,159 @@
-import { Flex, Popover, Select } from "antd";
-import { ReactComponent as CheckedIcon } from "@/assets/chekedIcon.svg";
-import { ReactComponent as ArrowDown } from "@/assets/arrowDown.svg";
-import { FC, useEffect } from "react";
+import {Flex} from "antd";
+import {ReactComponent as ArrowDown} from "@/assets/arrowDown.svg";
+import {FC, useEffect} from "react";
 import {
-  graphicKPThank,
-  I_GRAPHIC_KP_FILTER,
-  I_GRAPHIC_KP_SEARCH,
+    graphicKPThank,
+    I_GRAPHIC_KP_FILTER,
+    I_GRAPHIC_KP_SEARCH,
 } from "@/store/graphicKP";
-import { useAppDispatch, useAppSelector } from "@/hooks/storeHooks.ts";
-import { DataPickerContent } from "@/components/widgets/DataPickerContent";
-import { I_PayloadList } from "@/types/api.ts";
-import { cityThank } from "@/store/city";
-import { I_City } from "@/types/city.ts";
-import { PopoverWidget } from "@/components/ui/Popover";
-import { Dictionary } from "@/contexts/Dictionary";
-import { ReactComponent as ReportIcon } from "@/assets/report.svg";
-import { ReactComponent as CalendarIcon } from "@/assets/mobileCalendar.svg";
-import { FormWidget } from "../Form";
-import { FormSubscribeNotification } from "@/contexts/forms";
+import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
+import {DataPickerContent} from "@/components/widgets/DataPickerContent";
+import {I_PayloadList} from "@/types/api.ts";
+import {cityThank} from "@/store/city";
+import {I_City} from "@/types/city.ts";
+import {PopoverWidget} from "@/components/ui/Popover";
+import {Dictionary} from "@/contexts/Dictionary";
+import {ReactComponent as ReportIcon} from "@/assets/report.svg";
+import {ReactComponent as CalendarIcon} from "@/assets/mobileCalendar.svg";
+import {FormWidget} from "../Form";
+import {FormSubscribeNotification} from "@/contexts/forms";
+import {SelectUi} from "@/components/ui/Select";
+import {DatePickerFilterMobile} from "@/components/widgets/GraphicsKpTable/Modile/DatePicker.tsx";
+import {tenderDateFilters} from "@/contexts/filters.ts";
+import useSizeHook from "@/hooks/useSizeHook.ts";
 
 export const GraphicKpFilters: FC<{
-  payload: I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>;
-  setPayload: (
-    p: I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>
-  ) => void;
-}> = ({ payload, setPayload }) => {
-  const dispatch = useAppDispatch();
-  const { entity: cityList } = useAppSelector((s) => s.city);
-  useEffect(() => {
-    dispatch(graphicKPThank.getList(payload));
-    dispatch(cityThank.getList({}));
-  }, [payload]);
-  const optionsCityList: I_City[] = [
-    {
-      VALUE: "Ничего не выбрано",
-      ID: "",
-    },
-    ...cityList,
-  ];
-  return (
-    <div>
-      <Flex className="mobile-filter" justify="space-between" align="center">
-        <PopoverWidget
-          label={Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru}
-          background={"accent"}
-          icon={<ReportIcon />}
-          title={Dictionary.SEND_EVENT_GRAPHIC.ru}
-          children={<FormWidget {...FormSubscribeNotification} />}
-          className="mobile-popover"
-        />
-        <div className="search-btn">
-          <CalendarIcon />
-        </div>{" "}
-      </Flex>
-
-      <Flex gap={"20px"} align="center">
-        <Select
-          className="custom-select"
-          style={{ minWidth: "276px", textAlign: "center" }}
-          placeholder="Выбрать город"
-          options={optionsCityList.map((c) => ({
+    payload: I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>;
+    setPayload: (
+        p: I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>
+    ) => void;
+}> = ({payload, setPayload}) => {
+    const dispatch = useAppDispatch();
+    const {entity: cityList} = useAppSelector((s) => s.city);
+    const {entity: graphicKpList} = useAppSelector((s) => s.graphicKP);
+    useEffect(() => {
+        dispatch(graphicKPThank.getList(payload));
+        dispatch(cityThank.getList({}));
+    }, [payload]);
+    const optionsCityList: I_City[] = [
+        {
+            VALUE: "Ничего не выбрано",
+            ID: "",
+        },
+        ...cityList,
+    ];
+    const size = useSizeHook()
+    const SelectCity = <SelectUi
+        value={payload.search?.CITY}
+        onChange={(value) =>
+            setPayload({
+                ...payload,
+                filter: {
+                    ...payload.filter,
+                },
+                search: {
+                    ...payload.search,
+                    CITY: value,
+                },
+            })
+        }
+        labelRenderPostfix={`(${graphicKpList.length})`}
+        className={size.width < 1000 ? 'w-100' : ''}
+        options={optionsCityList.map((c) => ({
             value: c.ID,
             label: c.VALUE,
-          }))}
-          allowClear={true}
-          value={payload.search?.CITY}
-          onChange={(value) =>
-            setPayload({
-              ...payload,
-              filter: {
-                ...payload.filter,
-              },
-              search: {
-                ...payload.search,
-                CITY: value,
-              },
-            })
-          }
-          optionRender={(option) => (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              {option.label}
-              {option.value === payload.search?.CITY && <CheckedIcon />}
-            </div>
-          )}
+        }))}
+    />
+    const DatePickerList = tenderDateFilters.map(df => (
+        <PopoverWidget
+            id={df.filterKey + df.label}
+            key={df.filterKey}
+            title={'Выбор даты'}
+            content={
+                <DataPickerContent
+                    value={payload.filter?.[df.filterKey]}
+                    onChange={(value) =>
+                        setPayload({
+                            ...payload,
+                            filter: {
+                                ...payload.filter,
+                                [df.filterKey]: value,
+                            },
+                            search: {
+                                ...payload.search,
+                            },
+                        })
+                    }
+                />
+            }
+            btn={{
+                label: df.label,
+                icon: <ArrowDown />,
+                iconPosition: 'end',
+                background: (payload.filter && (payload.filter[df.filterKey]?.TO ||
+                    payload.filter[df.filterKey]?.FROM))
+                    ? "low"
+                    : "transparent"
+            }}
         />
-        <Popover
-          content={
-            <DataPickerContent
-              value={payload.filter?.DATE_CREATE}
-              onChange={(value) =>
-                setPayload({
-                  ...payload,
-                  filter: {
-                    ...payload.filter,
-                    DATE_CREATE: value,
-                  },
-                  search: {
-                    ...payload.search,
-                  },
-                })
-              }
-            />
-          }
-          trigger="click"
-        >
-          <div className="select-item">
-            <Flex
-              justify="space-between"
-              align="center"
-              gap={8}
-              className={
-                "date-picker-trigger " +
-                (payload.filter?.DATE_CREATE?.TO ||
-                payload.filter?.DATE_CREATE?.FROM
-                  ? "active-icon"
-                  : "")
-              }
+    ))
+    return (
+        <div>
+            <Flex className="view--mb w-100"
+                  justify="space-between"
+                  align="center"
+                  vertical={true}
+                  gap={16}
             >
-              <p className="dateSelected">Дата публикации</p>
-              <ArrowDown />
+                <Flex gap={12}
+                      className={'w-100'}
+                      justify={'space-between'}
+                      align={'center'}
+                >
+                    <PopoverWidget
+                        id={Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru + "mobile"}
+                        btn={{
+                            label: Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru,
+                            background: "accent",
+                            icon: <ReportIcon />
+                        }}
+                        title={Dictionary.SEND_EVENT_GRAPHIC.ru}
+                        content={<FormWidget {...FormSubscribeNotification} />}
+                    />
+                    <PopoverWidget
+                        id={'pick-date'}
+                        title={'Выбрать дату'}
+                        content={(
+                            <DatePickerFilterMobile
+                                payloadFilter={payload.filter}
+                                onChange={(filter) =>
+                                    setPayload({
+                                        ...payload,
+                                        filter,
+                                        search: {
+                                            ...payload.search,
+                                        },
+                                    })
+                                }
+                            />
+                        )}
+                        children={(
+                            <Flex className={'bg--gray pd-wid'}>
+                                <CalendarIcon />
+                            </Flex>
+                        )}
+                    />
+                </Flex>
+                {SelectCity}
             </Flex>
-          </div>
-        </Popover>
-        <Popover
-          content={
-            <DataPickerContent
-              value={payload.filter?.TENDER_END_DATE}
-              onChange={(value) =>
-                setPayload({
-                  ...payload,
-                  filter: {
-                    ...payload.filter,
-                    TENDER_END_DATE: value,
-                  },
-                  search: {
-                    ...payload.search,
-                  },
-                })
-              }
-            />
-          }
-          trigger="click"
-        >
-          <div className="select-item">
-            <Flex
-              justify="space-between"
-              align="center"
-              gap={8}
-              className={
-                "date-picker-trigger " +
-                (payload.filter?.TENDER_END_DATE?.TO ||
-                payload.filter?.TENDER_END_DATE?.FROM
-                  ? "active-icon"
-                  : "")
-              }
+
+            <Flex gap={"20px"}
+                  align="center"
+                  className={'view--pc'}
             >
-              <p className="dateSelected">Дата окончания тендера</p>
-              <ArrowDown />
+                {SelectCity}
+                {DatePickerList}
             </Flex>
-          </div>
-        </Popover>
-        <Popover
-          content={
-            <DataPickerContent
-              value={payload.filter?.SUBMISSION_DEADLINE}
-              onChange={(value) =>
-                setPayload({
-                  ...payload,
-                  filter: {
-                    ...payload.filter,
-                    SUBMISSION_DEADLINE: value,
-                  },
-                  search: {
-                    ...payload.search,
-                  },
-                })
-              }
-            />
-          }
-          trigger="click"
-        >
-          <div className="select-item">
-            <Flex
-              justify="space-between"
-              align="center"
-              gap={8}
-              className={
-                "date-picker-trigger " +
-                (payload.filter?.SUBMISSION_DEADLINE?.TO ||
-                payload.filter?.SUBMISSION_DEADLINE?.FROM
-                  ? "active-icon"
-                  : "")
-              }
-            >
-              <p className="dateSelected">Дата окончания приема заявок</p>
-              <ArrowDown />
-            </Flex>
-          </div>
-        </Popover>
-      </Flex>
-    </div>
-  );
+        </div>
+    );
 };

@@ -5,9 +5,9 @@ import locale from 'antd/locale/ru_RU';
 import 'dayjs/locale/ru';
 import {themeConfig} from "@/contexts/theme.ts";
 import MainPage from "@/components/pages/Main";
-
 export const AppLayout = () => {
     dayjs.locale('ru');
+
     return (
         <ConfigProvider
             theme={themeConfig}

@@ -272,12 +272,15 @@ export const GraphicsTableWidget = () => {
                   align="center"
             >
                 <PopoverWidget
-                    label={Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru}
-                    background={"accent"}
-                    icon={<ReportIcon />}
+                    id={"SUBSCRIBE_TO_NOTIFICATION_MOBILE"}
+                    btn={{
+                        label: Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru,
+                        background: "accent",
+                        icon: <ReportIcon />,
+                        className: "mobile-popover"
+                    }}
                     title={Dictionary.SEND_EVENT_GRAPHIC.ru}
-                    children={<FormWidget {...FormSubscribeNotification} />}
-                    className="mobile-popover"
+                    content={<FormWidget {...FormSubscribeNotification} />}
                 />
                 <div className="search-btn">
                     <SearhIcon />

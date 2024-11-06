@@ -1,13 +1,13 @@
-import { TableProps } from "antd";
-import { I_TableColumn } from "@/types/table.ts";
-import { ColumnGroupType } from "antd/es/table";
-import { ColumnType } from "antd/es/table";
-import { Typography } from "antd";
-import { Button } from "@/components/ui/Button";
+import {TableProps} from "antd";
+import {I_TableColumn} from "@/types/table.ts";
+import {ColumnGroupType} from "antd/es/table";
+import {ColumnType} from "antd/es/table";
+import {Typography} from "antd";
+import {Button} from "@/components/ui/Button";
 import dayjs from "dayjs";
-import { PopoverWidget } from "@/components/ui/Popover";
+import {PopoverWidget} from "@/components/ui/Popover";
 
-export function tableConstruct<I_ROW = object>(
+export function tableConstruct<I_ROW extends { ID: string }>(
     columns: I_TableColumn<I_ROW>[]
 ): TableProps<I_ROW>["columns"] {
     return columns.map((col) => {
@@ -29,7 +29,7 @@ export function tableConstruct<I_ROW = object>(
             case "date": {
                 res.render = (val) => (
                     <Typography.Text children={dayjs(val).format(col.format ? col.format : "DD.MM.YYYY")}
-                        className={col.className + ' fs--md'}
+                                     className={col.className + ' fs--md'}
                     />
                 );
                 break;
@@ -42,7 +42,7 @@ export function tableConstruct<I_ROW = object>(
                         );
                 }
                 res.render = (val) => <Typography.Text children={val}
-                    className={col.className + ' fs--md'}
+                                                       className={col.className + ' fs--md'}
                 />;
                 break;
             }
@@ -63,11 +63,14 @@ export function tableConstruct<I_ROW = object>(
             case "buttonWithModal": {
                 res.render = (value, record) => (
                     <PopoverWidget
+                        id={record.ID + col.label}
+                        btn={{
+                            label: col.label ?? "Кнопка",
+                            background: "accent",
+                            className: col.className
+                        }}
                         title={col.modalTitle}
-                        label={col.label ?? "Кнопка"}
-                        children={col.modalChild(value, record)}
-                        background={"accent"}
-                        className={col.className}
+                        content={col.modalChild(value, record)}
                     />
                 );
                 break;
