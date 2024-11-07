@@ -5,9 +5,8 @@ import {I_DateFilter} from "@/types/api.ts";
 import dayjs from "dayjs";
 import {Button} from "@/components/ui/Button";
 import {Dictionary} from "@/contexts/Dictionary.ts";
-import {useAppDispatch} from "@/hooks/storeHooks.ts";
-import {setPopover} from "@/store/app";
 import useSizeHook from "@/hooks/useSizeHook.ts";
+import {usePopover} from "@/contexts/popover.tsx";
 
 export const DataPickerContent: FC<{
     value: I_DateFilter | undefined;
@@ -17,7 +16,8 @@ export const DataPickerContent: FC<{
         FROM: "",
         TO: "",
     };
-    const dispatch = useAppDispatch()
+    const {setIsOpen} = usePopover();
+
     const size = useSizeHook()
     const [date, setDate] = useState<I_DateFilter>(value ?? initDate);
     return (
@@ -85,7 +85,7 @@ export const DataPickerContent: FC<{
                         background={"accent"}
                         onClick={() => {
                             onChange(date);
-                            dispatch(setPopover(''))
+                            setIsOpen(false)
                         }}
                         label={Dictionary.APPLY.ru}
                     />
@@ -96,7 +96,7 @@ export const DataPickerContent: FC<{
                         onClick={() => {
                             onChange(initDate);
                             setDate(initDate);
-                            dispatch(setPopover(''))
+                            setIsOpen(false)
                         }}
                         label={Dictionary.CANCEL.ru}
                         background={"transparent"}

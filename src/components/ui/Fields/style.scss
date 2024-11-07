@@ -26,3 +26,13 @@
     ;
   }
 }
+
+.ant-upload-select {
+  width: 100%;
+}
+
+.ant-form-item:has(input:focus) {
+  .phone-prefix {
+    color: #0094DE;
+  }
+}

@@ -5,7 +5,6 @@ import {InputNumberProps} from "antd/es/input-number";
 import TextArea from "antd/es/input/TextArea";
 
 export const InputAsync: FC<{
-    ID: number | string,
     value: number,
     type?: 'number',
     disabled?: boolean,
@@ -14,7 +13,6 @@ export const InputAsync: FC<{
     editable?: boolean
     placeholder?: string
 } | {
-    ID: number | string,
     value: string,
     type: 'string' | 'textarea',
     placeholder?: string
@@ -23,7 +21,6 @@ export const InputAsync: FC<{
     disabled?: boolean
     editable?: boolean
 }> = ({
-          ID,
           value,
           onChange,
           config,
@@ -36,14 +33,11 @@ export const InputAsync: FC<{
     useEffect(() => {
         setText(value)
     }, [value])
-    const key = ID + placeholder
     if (type === 'string') {
         return <Input
             className={'w-100'}
             disabled={disabled}
-            key={key}
             width={500}
-            id={key}
             placeholder={placeholder}
             size={"small"}
             value={text}
@@ -56,8 +50,6 @@ export const InputAsync: FC<{
     }
     if (type === 'textarea') {
         return <TextArea
-            key={key}
-            id={key}
             disabled={disabled}
             placeholder={placeholder}
             value={text}
@@ -74,10 +66,8 @@ export const InputAsync: FC<{
                 width: '100px'
             }}
             disabled={disabled}
-            key={key}
             placeholder={placeholder}
             size={"small"}
-            id={key}
             status={debounced.isPending() ? 'warning' : ''}
             value={text}
             onChange={(v) => {

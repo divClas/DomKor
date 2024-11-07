@@ -1,14 +1,12 @@
 import {FC} from "react";
-import {setPopover} from "@/store/app";
 import {Flex} from "antd";
-import {useAppDispatch} from "@/hooks/storeHooks.ts";
 import {ReactComponent as CloseIcon} from '@/assets/close-dark.svg';
+import {usePopover} from "@/contexts/popover.tsx";
 
-export const TitlePopover:FC<{
+export const TitlePopover: FC<{
     title?: string
 }> = ({title}) => {
-    const dispatch = useAppDispatch()
-
+    const {setIsOpen} = usePopover();
     return (
         <Flex className={'w-100'}
               justify={'space-between'}
@@ -18,7 +16,7 @@ export const TitlePopover:FC<{
             <CloseIcon
                 className={'cursor'}
                 onClick={() => {
-                    dispatch(setPopover(''))
+                    setIsOpen(false)
                 }}
             />
         </Flex>

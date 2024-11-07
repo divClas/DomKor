@@ -1,21 +1,27 @@
-import { ConfigProvider, Flex, Layout } from "antd";
+import {ConfigProvider, Flex, Layout} from "antd";
 import "./style.css";
 import dayjs from "dayjs";
 import locale from "antd/locale/ru_RU";
 import "dayjs/locale/ru";
-import { themeConfig } from "@/contexts/theme.ts";
+import {themeConfig} from "@/contexts/theme.ts";
 import MainPage from "@/components/pages/Main";
-export const AppLayout = () => {
-  dayjs.locale("ru");
+import {NotificationWidget} from "@/components/widgets/Notification";
 
-  return (
-    <ConfigProvider theme={themeConfig} locale={locale}>
-      {/* <NotificationWidget /> */}
-      <Flex vertical={true} gap={20}>
-        <Layout>
-          <MainPage />
-        </Layout>
-      </Flex>
-    </ConfigProvider>
-  );
+export const AppLayout = () => {
+    dayjs.locale("ru");
+
+    return (
+        <ConfigProvider theme={themeConfig}
+                        locale={locale}
+        >
+            <NotificationWidget />
+            <Flex vertical={true}
+                  gap={20}
+            >
+                <Layout>
+                    <MainPage />
+                </Layout>
+            </Flex>
+        </ConfigProvider>
+    );
 };

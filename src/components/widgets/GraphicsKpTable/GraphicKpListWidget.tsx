@@ -75,7 +75,6 @@ export const GraphicKpListWidget: FC<{
                     </div>
                     <div className="third-column">
                         <PopoverWidget
-                            id={item.ID + Dictionary.SEND_EVENT.ru}
                             btn={{
                                 label: Dictionary.SEND_EVENT.ru,
                                 background: "accent",

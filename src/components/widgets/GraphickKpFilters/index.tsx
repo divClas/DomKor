@@ -71,7 +71,6 @@ export const GraphicKpFilters: FC<{
   );
   const DatePickerList = tenderDateFilters.map((df) => (
     <PopoverWidget
-      id={df.filterKey + df.label}
       key={df.filterKey}
       title={"Выбор даты"}
       content={
@@ -121,7 +120,6 @@ export const GraphicKpFilters: FC<{
           align={"center"}
         >
           <PopoverWidget
-            id={Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru + "kp"}
             btn={{
               label: Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru,
               background: "accent",
@@ -131,7 +129,6 @@ export const GraphicKpFilters: FC<{
             content={<FormWidget {...FormSubscribeNotification} />}
           />
           <PopoverWidget
-            id={"pick-date"}
             title={"Выбрать дату"}
             content={
               <DatePickerFilterMobile<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>
@@ -159,10 +156,20 @@ export const GraphicKpFilters: FC<{
         {SelectCity}
       </Flex>
 
-      <Flex gap={"20px"} align="center" className={"view--pc"}>
-        {SelectCity}
-        {DatePickerList}
-      </Flex>
+        <Flex
+            align={'center'}
+            justify={'space-between'}
+            className={'w-100'}
+        >
+            <Flex gap={20}
+                  align="center"
+                  className={'view--pc'}
+            >
+                {SelectCity}
+                {DatePickerList}
+            </Flex>
+            <span className={'fw--lg fs--md'}>Найдено: {graphicKpList.length}</span>
+        </Flex>
     </div>
   );
 };

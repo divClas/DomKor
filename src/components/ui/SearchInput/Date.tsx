@@ -4,8 +4,8 @@ import {DataPickerContent} from "@/components/widgets/DataPickerContent";
 import {ReactComponent as CalendarIcon} from "@/assets/calendar.svg";
 import {I_DateFilter} from "@/types/api.ts";
 import {ReactComponent as SortIcon} from "@/assets/sortIcon.svg";
-import {SearchInputString} from "@/components/ui/SearchInput/String.tsx";
 import {PopoverWidget} from "@/components/ui/Popover";
+import {InputUi} from "@/components/ui/Input";
 
 export const SearchInputDate: FC<{
     label: string
@@ -17,8 +17,8 @@ export const SearchInputDate: FC<{
 }> = ({
           label,
           value = {
-              FROM: '',
-              TO: ''
+              FROM: "",
+              TO: ""
           },
           setSort,
           onChange,
@@ -29,13 +29,15 @@ export const SearchInputDate: FC<{
         <Flex justify="space-between"
               align="center"
         >
-            <SearchInputString
+            <InputUi
                 label={label}
-                editable={false}
+                onChange={() => {
+                }}
+                disabled={true}
+                type={'default'}
                 val={value.FROM || value.TO ? `${value.FROM} ${value.TO ? '- ' + value.TO : ''}` : undefined}
             />
             <PopoverWidget
-                id={label}
                 content={(
                     <DataPickerContent
                         value={value}

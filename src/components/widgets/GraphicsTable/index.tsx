@@ -160,23 +160,24 @@ export const GraphicsTableWidget = () => {
 
   const windowSize = useSizeHook();
 
-  return (
-    <>
-      <Flex className="mobile-filter" justify="space-between" align="center">
-        <PopoverWidget
-          id={Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru + "gr"}
-          btn={{
-            label: Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru,
-            background: "accent",
-            icon: <ReportIcon />,
-            className: "mobile-popover",
-          }}
-          title={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
-          content={<FormWidget {...FormSubscribeNotification} />}
-        />
+    return (
+        <>
+            <Flex className="mobile-filter"
+                  justify="space-between"
+                  align="center"
+            >
+                <PopoverWidget
+                    btn={{
+                        label: Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru,
+                        background: "accent",
+                        icon: <ReportIcon />,
+                        className: "mobile-popover"
+                    }}
+                    title={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
+                    content={<FormWidget {...FormSubscribeNotification} />}
+                />
 
         <PopoverWidget
-          id={"pick-date-gr"}
           title={"Фильтры"}
           content={<FilterMobile payload={payload} setPayload={setPayload} />}
           children={

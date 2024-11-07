@@ -9,11 +9,13 @@ import {FieldHiddenUi} from "@/components/ui/Fields/Hidden.tsx";
 export function FormItems(props: {
     fields: I_FormFiled[]
     disabled: boolean
+    fieldsError: string[]
 }) {
     return (props.fields.map((f, index) => {
         const fieldProps: I_FormFiledProps = {
             f,
-            disabled: props.disabled
+            disabled: props.disabled,
+            error: props.fieldsError.includes(f.name)
         }
         switch (f.type) {
             case "hidden":
@@ -27,7 +29,7 @@ export function FormItems(props: {
             case "upload":
                 return <FieldUploadUi key={index} {...fieldProps} />
             case "orgSelect":
-                return <FieldOrgSelectUi key={index} {...fieldProps}/>
+                return <FieldOrgSelectUi key={index} {...fieldProps} />
             default:
                 return null
         }

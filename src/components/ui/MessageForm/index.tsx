@@ -12,7 +12,7 @@ export const MessageFormUi: FC<{
       }) => {
     if (!status) return null
     return (
-        <Flex className={`pd-sm fs--sm fw--def mb-3 status-bg--${status}`}
+        <Flex className={`pd-xxsm fs--sm fw--def mb-3 status-bg--${status} height-animate`}
               gap={13}
               align={'center'}
         >

@@ -7,9 +7,11 @@ export interface I_FormFiled {
     defaultValue?: string
     required?: boolean
 }
+
 export interface I_FormFiledProps {
     f: I_FormFiled
     disabled: boolean
+    error: boolean
 }
 
 export interface I_Form {

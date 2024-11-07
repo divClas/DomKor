@@ -29,7 +29,6 @@ export const TableTabsWidget = () => {
             tabBarExtraContent={
                 <>
                     <PopoverWidget
-                        id={"SUBSCRIBE_TO_NOTIFICATION"}
                         btn={{
                             label: Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru,
                             background: "accent",
