@@ -1,8 +1,28 @@
 .org-select {
   position: absolute;
-  right: -12px;
   top: 100%;
   min-width: 100%;
   z-index: 11;
   box-shadow: 0 4px 12.1px 0 #00000040;
+  margin-left: -11px;
+  margin-right: 12px;
+  width: calc(100% + 24px);
+
+  .label {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 300px;
+    position: relative;
+    z-index: 222;
+  }
+}
+
+.ant-form-item .bg--transparent {
+  &:hover {
+    background-color: #F6F6F180 !important;
+    color: #333333 !important;
+    ;
+  }
 }
