@@ -1,10 +1,14 @@
 import {ReactNode} from "react";
+import {ColumnGroupType, ColumnType} from "antd/es/table";
+
+export type I_COL<I_ROW> = (ColumnGroupType<I_ROW> | ColumnType<I_ROW>) & I_ColumnCustom
 
 export interface I_ColumnCommons<I_Entity> {
     common: {
         dataIndex: keyof I_Entity;
         title: ReactNode | (() => ReactNode);
     };
+    titleString: string
     className?: string
     noSort?: boolean;
     disabled?: boolean;
@@ -46,3 +50,7 @@ export type I_TableColumn<I_Entity> = I_ColumnCommons<I_Entity> &
         );
 
 
+export interface I_ColumnCustom {
+    titleString: string
+    type: I_TableColumn<object>['type']
+}

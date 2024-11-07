@@ -8,13 +8,14 @@ export const SelectUi: FC<I_SelectProps> = ({
                                                 value,
                                                 options,
                                                 className,
-                                                labelRenderPostfix
+                                                labelRenderPostfix,
+                                                placeholder
                                             }) => {
     return (
         <Select
             className={"custom-select " + className}
             style={{minWidth: "276px", textAlign: "center"}}
-            placeholder="Выбрать город"
+            placeholder={placeholder}
             options={options}
             allowClear={true}
             value={value}

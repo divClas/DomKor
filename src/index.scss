@@ -39,9 +39,6 @@ body {
   margin: 0;
 }
 
-.w-100 {
-  width: 100%;
-}
 
 .h-100 {
   height: 100%;
@@ -51,9 +48,6 @@ body {
   &--xsm {
     font-size: 12px;
     line-height: 1.2;
-    @media (max-width: 1000px) {
-      font-size: 10px;
-    }
   }
 
   &--sm {
@@ -110,8 +104,12 @@ body {
 }
 
 .pd {
+  &-xsm {
+    padding: 8px 14px !important;
+  }
+
   &-sm {
-    padding: 10px 17px;
+    padding: 10px 17px !important;
   }
 
   &-wid {
@@ -586,6 +584,24 @@ table {
   }
 }
 
+.flex {
+  &-jc {
+    &-center {
+      justify-content: center;
+    }
+  }
+}
+
+.w {
+  &-fit {
+    width: fit-content;
+  }
+
+  &-100 {
+    width: 100%;
+  }
+}
+
 .date-bottom {
   font-size: 16px;
   font-weight: 500;
@@ -715,13 +731,16 @@ td.ant-table-cell {
   opacity: 0.3;
 }
 
-.colorBlack {
-  color: (51, 51, 51, 1) !important;
+.color {
+  &--gray {
+    color: #757778;
+  }
+
+  &--black {
+    color: #000000;
+  }
 }
 
-.color--gray {
-  color: #757778;
-}
 .ant-table-cell {
   background: rgba(255, 255, 255, 1) !important;
 }
@@ -893,7 +912,7 @@ td.ant-table-cell {
   }
 }
 
-.ant-input-status-error {
+.ant-input-status-error, .ant-input-outlined:focus-within {
   border: unset !important;
   box-shadow: none !important;
 }
@@ -912,4 +931,17 @@ td.ant-table-cell {
 
 html body {
   width: auto !important;
+}
+
+@media (max-width: 600px) {
+  .ant-modal {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    bottom: 0;
+    padding-bottom: 0
+  }
+}
+
+.child-w-100 button {
+  width: 100%;
 }

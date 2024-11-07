@@ -92,7 +92,7 @@ export const DataPickerContent: FC<{
                 </Flex>
                 <Flex>
                     <Button
-                        className="colorBlack"
+                        className="color--black"
                         onClick={() => {
                             onChange(initDate);
                             setDate(initDate);

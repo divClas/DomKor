@@ -40,13 +40,12 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled}) => {
                         }}
                     />
 
-                    <Flex className={'pd-sm org-select bg--white'}
+                    <Flex className={'org-select bg--white'}
                           vertical={true}
-                          gap={4}
                     >
                         {orgListSearchDaData.map(e => (
                             <Button label={e.name + e.inn}
-                                    background={'accent'}
+                                    background={'transparent'}
                                     key={e.inn}
                                     onClick={() => {
                                         setOrgName(e.name)

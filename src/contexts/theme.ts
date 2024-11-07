@@ -20,7 +20,8 @@ export const themeConfig: ThemeConfig = {
             borderRadius: 0,
             lineType: "unset",
             paddingSM: 0,
-            colorBgContainerDisabled: 'unset'
+            colorBgContainerDisabled: 'unset',
+            colorBorder: 'unset'
         },
         InputNumber: {},
         Layout: {},
@@ -40,5 +41,8 @@ export const themeConfig: ThemeConfig = {
         Form: {
             itemMarginBottom: 12
         },
+        Modal: {
+            borderRadiusLG: 0,
+        }
     },
 };

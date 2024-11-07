@@ -36,7 +36,7 @@ export const TableTabsWidget = () => {
                             icon: <ReportIcon />,
                             className: "subscribe-notification-form"
                         }}
-                        title={Dictionary.SEND_EVENT_GRAPHIC.ru}
+                        title={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
                         content={<FormWidget {...FormSubscribeNotification} />}
                     />
                 </>

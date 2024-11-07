@@ -31,7 +31,8 @@ export interface I_SelectProps {
     value: SelectProps['value']
     options: SelectProps['options']
     className?: string
-    labelRenderPostfix?: string
+    placeholder?: string
+    labelRenderPostfix?: string | ReactElement
 }
 export type T_PopoverId = string
 export interface I_AppState {

@@ -1,4 +1,3 @@
-import {ReactComponent as GetDownloadDoc} from "@/assets/getDownloadDoc.svg";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import {useAppSelector} from "@/hooks/storeHooks.ts";
@@ -9,6 +8,7 @@ import {FC, useState} from "react";
 import {FormWidget} from "@/components/widgets/Form";
 import {FormSubscribeKP} from "@/contexts/forms.ts";
 import useSizeHook from "@/hooks/useSizeHook.ts";
+import {LinkDownloadUi} from "@/components/ui/LinkDownload";
 
 export const GraphicKpListWidget: FC<{
     onReset: () => void;
@@ -16,12 +16,14 @@ export const GraphicKpListWidget: FC<{
     const {entity: graphicKpList, status} = useAppSelector((s) => s.graphicKP);
 
     const [activeId, setActiveId] = useState<string | null>(null);
+    const size = useSizeHook()
+
+
     if (graphicKpList.length === 0 && status !== "pending") {
         return <NoData onReset={onReset} />;
     }
-    const size = useSizeHook()
     return (
-        <>
+        <div>
             {graphicKpList.map((item) => (
                 <div
                     key={item.ID}
@@ -30,15 +32,12 @@ export const GraphicKpListWidget: FC<{
                 >
                     <div className="first-column">
                         <div className="kp-name">{item.NAME}</div>
-                        <a
-                            target="_blank"
-                            href={item.DOCUMENT}
-                            download
-                            className="downloadDocument"
-                        >
-                            <GetDownloadDoc />
-                            <span>Скачать тендерную документацию</span>
-                        </a>
+                        <LinkDownloadUi label={Dictionary.DOWNLOAD_TENDER_DOC.ru}
+                                        href={item.DOCUMENT}
+                                        className={{
+                                            a: 'view--pc'
+                                        }}
+                        />
                     </div>
                     <div className="second-column">
                         <div className="kp-char">
@@ -86,12 +85,20 @@ export const GraphicKpListWidget: FC<{
                             onOpenChange={(visible) => setActiveId(visible ? item.ID : null)}
                             content={<FormWidget {...FormSubscribeKP(item.ID)} />}
                         />
+
+                        <LinkDownloadUi label={Dictionary.DOWNLOAD_TENDER_DOC.ru}
+                                        href={item.DOCUMENT}
+                                        className={{
+                                            a: 'view--mb w-100 mt-1',
+                                            Flex: 'w-100 flex-jc-center'
+                                        }}
+                        />
                         <div className="date-bottom">
                             {dayjs(item.DATE_CREATE).locale("ru").format("D MMMM YYYY")}
                         </div>
                     </div>
                 </div>
             ))}
-        </>
+        </div>
     );
 };

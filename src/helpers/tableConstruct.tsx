@@ -1,7 +1,4 @@
-import {TableProps} from "antd";
-import {I_TableColumn} from "@/types/table.ts";
-import {ColumnGroupType} from "antd/es/table";
-import {ColumnType} from "antd/es/table";
+import {I_COL, I_TableColumn} from "@/types/table.ts";
 import {Typography} from "antd";
 import {Button} from "@/components/ui/Button";
 import dayjs from "dayjs";
@@ -9,9 +6,9 @@ import {PopoverWidget} from "@/components/ui/Popover";
 
 export function tableConstruct<I_ROW extends { ID: string }>(
     columns: I_TableColumn<I_ROW>[]
-): TableProps<I_ROW>["columns"] {
+): I_COL<I_ROW>[] {
     return columns.map((col) => {
-        const res: ColumnGroupType<I_ROW> | ColumnType<I_ROW> = {
+        const res: I_COL<I_ROW> = {
             key: String(col.common.dataIndex),
             dataIndex: String(col.common.dataIndex),
             title:
@@ -21,9 +18,10 @@ export function tableConstruct<I_ROW extends { ID: string }>(
                             ? col.common.title()
                             : col.common.title
                     : col.common.title ?? "",
+            titleString: col.titleString,
+            width: col.width,
+            type: col.type
         };
-
-        res.width = col.width;
 
         switch (col.type) {
             case "date": {

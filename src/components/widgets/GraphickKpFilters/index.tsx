@@ -21,6 +21,8 @@ import {SelectUi} from "@/components/ui/Select";
 import {DatePickerFilterMobile} from "@/components/widgets/GraphicsKpTable/Modile/DatePicker.tsx";
 import {tenderDateFilters} from "@/contexts/filters.ts";
 import useSizeHook from "@/hooks/useSizeHook.ts";
+import {CountUi} from "@/components/ui/Count";
+import {ButtonFilter} from "@/components/ui/ButtonFilter";
 
 export const GraphicKpFilters: FC<{
     payload: I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>;
@@ -57,7 +59,8 @@ export const GraphicKpFilters: FC<{
                 },
             })
         }
-        labelRenderPostfix={`(${graphicKpList.length})`}
+        placeholder={"Выбрать город"}
+        labelRenderPostfix={<CountUi value={graphicKpList.length} />}
         className={size.width < 1000 ? 'w-100' : ''}
         options={optionsCityList.map((c) => ({
             value: c.ID,
@@ -111,20 +114,20 @@ export const GraphicKpFilters: FC<{
                       align={'center'}
                 >
                     <PopoverWidget
-                        id={Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru + "mobile"}
+                        id={Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru + "kp"}
                         btn={{
                             label: Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru,
                             background: "accent",
                             icon: <ReportIcon />
                         }}
-                        title={Dictionary.SEND_EVENT_GRAPHIC.ru}
+                        title={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
                         content={<FormWidget {...FormSubscribeNotification} />}
                     />
                     <PopoverWidget
                         id={'pick-date'}
                         title={'Выбрать дату'}
                         content={(
-                            <DatePickerFilterMobile
+                            <DatePickerFilterMobile<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>
                                 payloadFilter={payload.filter}
                                 onChange={(filter) =>
                                     setPayload({
@@ -135,13 +138,13 @@ export const GraphicKpFilters: FC<{
                                         },
                                     })
                                 }
+                                dateFilters={tenderDateFilters}
                             />
                         )}
-                        children={(
-                            <Flex className={'bg--gray pd-wid'}>
-                                <CalendarIcon />
-                            </Flex>
-                        )}
+
+                        children={(<ButtonFilter value={graphicKpList.length}
+                                                 icon={<CalendarIcon />}
+                        />)}
                     />
                 </Flex>
                 {SelectCity}

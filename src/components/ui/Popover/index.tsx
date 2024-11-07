@@ -1,4 +1,4 @@
-import {FC, ReactNode, useEffect} from "react";
+import {FC, ReactNode} from "react";
 import "./style.scss";
 import {I_ButtonProps, T_PopoverId} from "@/types/app.ts";
 import {Flex, Modal, Popover} from "antd";
@@ -7,6 +7,7 @@ import {useAppDispatch, useAppSelector} from "@/hooks/storeHooks.ts";
 import {setPopover} from "@/store/app";
 import useSizeHook from "@/hooks/useSizeHook.ts";
 import {TitlePopover} from "@/components/ui/TitlePopover";
+import {textFormat} from "@/helpers/textFormat.ts";
 
 export const PopoverWidget: FC<{
     id: T_PopoverId
@@ -18,14 +19,14 @@ export const PopoverWidget: FC<{
     children?: ReactNode
     onOpenChange?: (visible: boolean) => void; // Add this prop
 }> = (props) => {
-    const id = props.id.replace(/\s+/g, '')
+    const id = textFormat.slugify(props.id)
     const dispatch = useAppDispatch()
     const {popoversOpen} = useAppSelector(s => s.app)
-    useEffect(() => {
-        // hideOnClickOutside(id, () => {
-        //     dispatch(setPopover(''))
-        // })
-    }, [])
+    // useEffect(() => {
+    //     hideOnClickOutside(id, () => {
+    //         dispatch(setPopover(''))
+    //     })
+    // }, [])
 
     const windowSize = useSizeHook()
     const TargetButton = <div
