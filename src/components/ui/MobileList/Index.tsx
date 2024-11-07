@@ -10,9 +10,9 @@ const MobileList: FC<{
 
     return (
         <div>
-            {data.map((row, index) => (
+            {data.map((row) => (
                 <div
-                    key={index}
+                    key={row.ID}
                     style={{
                         marginBottom: "16px",
                         padding: "12px",
@@ -31,7 +31,10 @@ const MobileList: FC<{
                         const value = row[key];
                         const render = col.render ? (col.render(value, row, index) as ReactNode) : String(value)
                         if (col.type === 'buttonWithModal' || col.type === 'button') {
-                            return <div className={'child-w-100'}>{render}</div>
+                            return <div
+                                key={key}
+                                className={'child-w-100'}
+                            >{render}</div>
                         }
                         return (
                             <div

@@ -16,4 +16,5 @@ export interface I_Form {
     successMessage: string
     route: string
     fields: I_FormFiled[]
+    btnLabel: string
 }

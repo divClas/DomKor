@@ -31,6 +31,10 @@ export const Dictionary = {
         ru: "Подписаться на уведомления о новых тендерах",
         en: "subscribe to notifications",
     },
+    SUBSCRIBE: {
+        ru: "Подписаться",
+        en: "subscribe",
+    },
     SUBSCRIBE_TO_NOTIFICATION_MOBILE: {
         ru: "Уведомлять о новых тендерах",
         en: "subscribe to notifications",

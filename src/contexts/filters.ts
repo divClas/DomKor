@@ -3,7 +3,8 @@ import {I_GRAPHIC_FILTER} from "@/store/graphic";
 
 export interface I_DateFilters<I_Filter> {
     filterKey: keyof I_Filter
-    label: string
+    label: string,
+    mask?: string
 }
 
 export const tenderDateFilters: I_DateFilters<I_GRAPHIC_KP_FILTER>[] = [
@@ -23,7 +24,8 @@ export const tenderDateFilters: I_DateFilters<I_GRAPHIC_KP_FILTER>[] = [
 export const graphicDateFilters: I_DateFilters<I_GRAPHIC_FILTER>[] = [
     {
         filterKey: 'SMR_START',
-        label: 'Старт СМР по оперативному плану'
+        label: 'Старт СМР по оперативному плану',
+        mask: 'MMMM YYYY'
     },
     {
         filterKey: 'TENDER_PLANNED',

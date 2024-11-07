@@ -1,5 +1,6 @@
 import {I_Form} from "@/types/form.ts";
 import {A_SEND_EVENT, R_GRAPHIC, R_GRAPHIC_KP} from "@/store/constants.ts";
+import {Dictionary} from "@/contexts/Dictionary.ts";
 
 export const FormSubscribeKP = (tender_id: string): I_Form => ({
     route: R_GRAPHIC_KP + A_SEND_EVENT,
@@ -36,6 +37,7 @@ export const FormSubscribeKP = (tender_id: string): I_Form => ({
             required: true
         },
     ],
+    btnLabel: Dictionary.SEND_EVENT.ru,
     successMessage: 'Вам придет уведомление о статусе субподряда'
 })
 export const FormSubscribeNewTender = (graphic_id: string): I_Form => ({
@@ -74,10 +76,12 @@ export const FormSubscribeNewTender = (graphic_id: string): I_Form => ({
             required: true
         }
     ],
+    btnLabel: Dictionary.SEND_EVENT.ru,
     successMessage: 'Теперь вам будут приходить уведомления о новых тендерах'
 })
 export const FormSubscribeNotification: I_Form = {
     route: R_GRAPHIC + A_SEND_EVENT,
+    btnLabel: Dictionary.SUBSCRIBE.ru,
     fields: [
         {
             label: '',

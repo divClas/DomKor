@@ -9,7 +9,7 @@ export const FieldUploadUi: FC<I_FormFiledProps> = ({f, disabled}) => {
     return (
         <Form.Item
             name={String(f.name)}
-            className={'form-item-def mb-1'}
+            className={'form-item-def pd-0 mb-1'}
             required={f.required}
             getValueFromEvent={(e) => {
                 if (Array.isArray(e)) {

@@ -67,7 +67,7 @@ export function FormWidget(props: I_Form) {
                 }
                 <Flex style={{width: 'fit-content'}}>
                     {status !== 'success' && (
-                        <Button label={Dictionary.SEND_EVENT.ru}
+                        <Button label={props.btnLabel ?? Dictionary.SEND_EVENT.ru}
                                 background={'accent'}
                                 type={"submit"}
                         />)}

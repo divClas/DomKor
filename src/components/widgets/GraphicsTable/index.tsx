@@ -72,6 +72,7 @@ export const GraphicsTableWidget = () => {
             },
             dataIndex: date.filterKey,
         },
+        format: date.mask ?? '',
         type: "date",
         titleString: date.label,
     }))

@@ -26,7 +26,7 @@ export function tableConstruct<I_ROW extends { ID: string }>(
         switch (col.type) {
             case "date": {
                 res.render = (val) => (
-                    <Typography.Text children={dayjs(val).format(col.format ? col.format : "DD.MM.YYYY")}
+                    <Typography.Text children={dayjs(val).format(col.format ? col.format : "MM.DD.YYYY")}
                                      className={col.className + ' fs--md'}
                     />
                 );
