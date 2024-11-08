@@ -1,0 +1,6 @@
+.tender-page{
+  gap: 40px;
+  @media (max-width: 1000px) {
+    gap: 16px;
+  }
+}

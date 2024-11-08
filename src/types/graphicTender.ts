@@ -1,6 +1,6 @@
 import {T_Date} from "@/types/app.ts";
 
-export interface I_Graphic {
+export interface I_GraphicTender {
     "ID": string,
     "NAME": string,
     "WORK_TYPE": string,
@@ -12,7 +12,7 @@ export interface I_Graphic {
 }
 
 export interface I_GraphicEventForm {
-    graphic_id: I_Graphic['ID']
+    graphic_id: I_GraphicTender['ID']
     phone: string
     email: string
     inn: string

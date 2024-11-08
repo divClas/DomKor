@@ -1,7 +1,7 @@
 import {Dictionary} from "@/contexts/Dictionary.ts";
 import {createReducer} from "@/store/mainThank.ts";
 import {R_GRAPHIC_KP} from "@/store/constants.ts";
-import {I_GraphicKP} from "@/types/graphicKP.ts";
+import {I_Tender} from "@/types/tender.ts";
 import {I_PayloadList} from "@/types/api.ts";
 import {FileBinary, T_Date} from "@/types/app.ts";
 
@@ -27,7 +27,7 @@ export interface I_GRAPHIC_KP_SEARCH {
 }
 
 export const {thank: graphicKPThank, slice} = createReducer<
-    I_GraphicKP,
+    I_Tender,
     I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>,
     I_TenderEventForm>({
     URL: R_GRAPHIC_KP,

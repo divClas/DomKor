@@ -1,6 +1,6 @@
 import {T_Date} from "@/types/app.ts";
 
-export interface I_GraphicKP {
+export interface I_Tender {
     ID: string;
     NAME: string;
     DATE_CREATE: T_Date;

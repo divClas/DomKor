@@ -3,19 +3,21 @@ import {Flex} from "antd";
 import {CountUi} from "@/components/ui/Count";
 
 export const ButtonFilter: FC<{
-    icon: ReactNode
-    value?: number
+  icon: ReactNode
+  value: number
+  showCount?: boolean
 }> = ({
-          icon,
-          value
+        icon,
+        value,
+        showCount
       }) => {
-    return (
-        <Flex gap={8}
-              className={'bg bg--gray pd-wid height-35'}
-              align={'center'}
-        >
-            {icon}
-            <CountUi value={value ?? 0} />
-        </Flex>
-    )
+  return (
+    <Flex gap={8}
+          className={'bg bg--gray pd-wid height-35'}
+          align={'center'}
+    >
+      {icon}
+      {showCount && <CountUi value={value ?? 0} />}
+    </Flex>
+  )
 }

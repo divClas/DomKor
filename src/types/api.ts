@@ -28,6 +28,6 @@ export interface I_Sort {
 export interface I_PayloadList<FilterFilter extends object, SearchFilter extends object> extends I_Sort {
     filter?: Partial<AllFieldsIs<FilterFilter, I_DateFilter>>
     search?: Partial<AllFieldsIs<SearchFilter, string>>
-    search_type?: "OR"
+    search_type?: "OR" | "AND"
 }
 

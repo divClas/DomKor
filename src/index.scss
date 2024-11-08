@@ -2,28 +2,28 @@
   font-family: Berthold_Akzidenz_Grotesk-700;
   font-weight: 700;
   src: local(Inter),
-    url(./assets/fonts/Berthold_Akzidenz_Grotesk-700.ttf) format("truetype");
+  url(./assets/fonts/Berthold_Akzidenz_Grotesk-700.ttf) format("truetype");
 }
 
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-600;
   font-weight: 600;
   src: local(Inter),
-    url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format("truetype");
+  url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format("truetype");
 }
 
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-500;
   font-weight: 500;
   src: local(Inter),
-    url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format("truetype");
+  url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format("truetype");
 }
 
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-400;
   font-weight: 400;
   src: local(Inter),
-    url(./assets/fonts/Berthold_Akzidenz_Grotesk-400.ttf) format("truetype");
+  url(./assets/fonts/Berthold_Akzidenz_Grotesk-400.ttf) format("truetype");
 }
 
 @font-face {
@@ -276,17 +276,21 @@ body {
 
     &:hover {
       path[fill] {
-        fill: #ffffff;
+        fill: #333333;
       }
 
       path[stroke] {
-        stroke: #ffffff;
+        stroke: #333333;
       }
     }
 
     &:active {
       background-color: rgba(0, 104, 156, 1) !important;
       color: #ffffff !important;
+
+      * {
+        color: #ffffff !important;
+      }
 
       path[fill] {
         fill: #ffffff;
@@ -373,7 +377,7 @@ h2 {
   margin-bottom: 16px;
 }
 
-.ant-form-item-label>label::after {
+.ant-form-item-label > label::after {
   display: none;
 }
 
@@ -404,7 +408,7 @@ h2 {
   background-color: white;
 }
 
-:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   height: 100% !important;
   width: 4px;
   background-color: rgba(207, 207, 207, 1);
@@ -492,8 +496,8 @@ input {
       pointer-events: none;
     }
 
-    input:focus~label,
-    input:not(:placeholder-shown)~label {
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
       top: 0;
       font-size: 12px !important;
       color: rgba(0, 148, 222, 1);
@@ -754,27 +758,6 @@ table {
   }
 }
 
-.date-bottom {
-  font-size: 15.5px;
-  font-weight: 500;
-  line-height: 19.66px;
-  text-align: right;
-  color: #757778;
-
-  @media (max-width: 1000px) {
-    display: none;
-  }
-
-  &.mobile {
-    display: none;
-
-    @media (max-width: 1000px) {
-      display: block;
-      text-align: left;
-    }
-  }
-}
-
 .graphics-container {
   margin-bottom: 20px;
 }
@@ -812,7 +795,7 @@ p {
   background: unset !important;
 }
 
-:where(.css-dev-only-do-not-override-1mcm4dg).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+:where(.css-dev-only-do-not-override-1mcm4dg).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   width: 4px;
   height: 100%;
 }
@@ -909,13 +892,12 @@ td.ant-table-cell {
 
   &:hover {
     .ant-table-cell {
-      background-color: #F4F4F4 !important;
-      ;
+      background-color: #F4F4F4 !important;;
     }
   }
 }
 
-:where(.css-dev-only-do-not-override-1gbj51f).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+:where(.css-dev-only-do-not-override-1gbj51f).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   width: 4px !important;
   height: 100% !important;
 }

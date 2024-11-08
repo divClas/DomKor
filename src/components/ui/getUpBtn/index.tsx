@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ReactComponent as ArrowTop } from "@/assets/arrowTop.svg";
 
-export const GetUPBtn = () => {
+export const ScrollUpButtonUi = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

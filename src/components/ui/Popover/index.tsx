@@ -14,7 +14,6 @@ export interface I_PopoverProps {
     type?: "button" | "submit" | "reset";
     content: ReactNode;
     children?: ReactNode
-    onOpenChange?: (visible: boolean) => void; // Add this prop
 }
 
 export const PopoverComponent: FC<I_PopoverProps> = (props) => {
@@ -78,7 +77,6 @@ export const PopoverComponent: FC<I_PopoverProps> = (props) => {
                     />}
                 open={isOpen}
                 forceRender={true}
-                onOpenChange={props.onOpenChange}
                 children={<TargetButton/>}
             />
         );

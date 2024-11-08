@@ -1,19 +1,13 @@
-import {FC} from "react";
 import {Tabs} from "antd";
 import {Dictionary} from "@/contexts/Dictionary.ts";
-import {I_PayloadList} from "@/types/api.ts";
 import {I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH} from "@/store/graphic";
 import {SearchForm} from "@/components/widgets/GraphicsTable/SearchForm.tsx";
 import {DatePickerFilterMobile} from "@/components/widgets/GraphicsKpTable/Modile/DatePicker.tsx";
 import {graphicDateFilters} from "@/contexts/filters.ts";
+import {useGraphicTenderPage} from "@/components/pages/GraphicTenders/model/context.ts";
 
-export const FilterMobile: FC<{
-    payload: I_PayloadList<I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH>,
-    setPayload: (payload: I_PayloadList<I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH>) => void
-}> = ({
-          payload,
-          setPayload
-      }) => {
+export const FilterMobile = () => {
+  const {payload, setPayload} = useGraphicTenderPage()
     return (
         <Tabs
             defaultActiveKey={Dictionary.SEARCH.en}

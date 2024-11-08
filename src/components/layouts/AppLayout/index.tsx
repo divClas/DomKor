@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import locale from "antd/locale/ru_RU";
 import "dayjs/locale/ru";
 import {themeConfig} from "@/contexts/theme.ts";
-import MainPage from "@/components/pages/Main";
+import {TableTabsWidget} from "@/components/widgets/TableTabs";
 
 export const AppLayout = () => {
     dayjs.locale("ru");
@@ -18,7 +18,7 @@ export const AppLayout = () => {
                   gap={20}
             >
                 <Layout>
-                    <MainPage />
+                  <TableTabsWidget />
                 </Layout>
             </Flex>
         </ConfigProvider>

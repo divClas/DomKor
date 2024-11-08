@@ -7,7 +7,6 @@ export const NoData: FC<{
   onReset?: () => void;
 }> = ({ onReset }) => {
   return (
-    <>
       <Flex
         vertical={true}
         align="center"
@@ -25,6 +24,5 @@ export const NoData: FC<{
           />
         </Flex>
       </Flex>
-    </>
   );
 };

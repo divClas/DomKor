@@ -1,21 +1,17 @@
 import { Flex } from "antd";
 import { ReactComponent as ArrowDown } from "@/assets/black-arrow-down.svg";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import {
-  graphicKPThank,
   I_GRAPHIC_KP_FILTER,
   I_GRAPHIC_KP_SEARCH,
 } from "@/store/graphicKP";
-import { useAppDispatch, useAppSelector } from "@/hooks/storeHooks.ts";
+import {  useAppSelector } from "@/hooks/storeHooks.ts";
 import { DataPickerContent } from "@/components/widgets/DataPickerContent";
-import { I_PayloadList } from "@/types/api.ts";
-import { cityThank } from "@/store/city";
 import { I_City } from "@/types/city.ts";
 import { PopoverWidget } from "@/components/ui/Popover";
 import { Dictionary } from "@/contexts/Dictionary";
 import { ReactComponent as ReportIcon } from "@/assets/report.svg";
 import { ReactComponent as CalendarIcon } from "@/assets/mobileCalendar.svg";
-import { FormWidget } from "../Form";
 import { FormSubscribeNotification } from "@/contexts/forms";
 import { SelectUi } from "@/components/ui/Select";
 import { DatePickerFilterMobile } from "@/components/widgets/GraphicsKpTable/Modile/DatePicker.tsx";
@@ -23,20 +19,13 @@ import { tenderDateFilters } from "@/contexts/filters.ts";
 import useSizeHook from "@/hooks/useSizeHook.ts";
 import { CountUi } from "@/components/ui/Count";
 import { ButtonFilter } from "@/components/ui/ButtonFilter";
+import {useTenderPage} from "@/components/pages/Tenders/model/context.ts";
+import {FormWidget} from "@/components/widgets/Form";
 
-export const GraphicKpFilters: FC<{
-  payload: I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>;
-  setPayload: (
-    p: I_PayloadList<I_GRAPHIC_KP_FILTER, I_GRAPHIC_KP_SEARCH>
-  ) => void;
-}> = ({ payload, setPayload }) => {
-  const dispatch = useAppDispatch();
+export const TenderBL_Filter: FC= () => {
+  const {setPayload, payload} = useTenderPage()
   const { entity: cityList } = useAppSelector((s) => s.city);
   const { entity: graphicKpList } = useAppSelector((s) => s.graphicKP);
-  useEffect(() => {
-    dispatch(graphicKPThank.getList(payload));
-    dispatch(cityThank.getList({}));
-  }, [payload]);
   const optionsCityList: I_City[] = [
     {
       VALUE: "Ничего не выбрано",
