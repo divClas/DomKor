@@ -1061,6 +1061,7 @@ td.ant-table-cell {
   @media (max-width: 1000px) {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 15.5px;
   }
 }

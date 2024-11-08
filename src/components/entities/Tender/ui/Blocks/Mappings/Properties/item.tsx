@@ -7,5 +7,6 @@ export const TenderPropertyRow: FC<I_Value> = (props) => {
     <div className="kp-items">
       <div className="fw--sm fs--sm color--gray ff-apercy">{props.label}</div>
       <div className="fw--def fs--md ff-apercy"><ValueTextUi {...props} /></div>
-    </div>)
+    </div>
+  )
 }

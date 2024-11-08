@@ -23,7 +23,6 @@ export function tableConstruct<I_ROW extends { ID: string }>(
             width: col.width,
             type: col.type
         };
-
         switch (col.type) {
             case "date": {
                 res.render = (val) => (

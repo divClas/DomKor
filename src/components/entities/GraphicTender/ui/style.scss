@@ -1,9 +1,14 @@
 .graphic-tender-mobile {
+  display: flex;
   flex-direction: column;
   margin-bottom: 16px;
   padding: 12px;
   border-bottom: 1px solid #e0e0e0;
   border-top: 1px solid #e0e0e0;
+  gap: 12px;
+}
+.graphic-tender-props-mobile {
   display: flex;
+  flex-direction: column;
   gap: 12px;
 }

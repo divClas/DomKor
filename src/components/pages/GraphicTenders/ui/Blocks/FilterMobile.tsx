@@ -1,10 +1,10 @@
 import {Tabs} from "antd";
 import {Dictionary} from "@/contexts/Dictionary.ts";
 import {I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH} from "@/store/graphic";
-import {SearchForm} from "@/components/widgets/GraphicsTable/SearchForm.tsx";
 import {DatePickerFilterMobile} from "@/components/widgets/GraphicsKpTable/Modile/DatePicker.tsx";
 import {graphicDateFilters} from "@/contexts/filters.ts";
 import {useGraphicTenderPage} from "@/components/pages/GraphicTenders/model/context.ts";
+import { MobileSearchForm } from "./MobileSearchForm";
 
 export const FilterMobile = () => {
   const {payload, setPayload} = useGraphicTenderPage()
@@ -15,12 +15,7 @@ export const FilterMobile = () => {
                 {
                     key: Dictionary.SEARCH.en,
                     label: Dictionary.SEARCH.ru,
-                    children: <SearchForm
-                        setPayload={(payload) => {
-                            setPayload(payload)
-                        }}
-                        payload={payload}
-                    />
+                    children: <MobileSearchForm/>
                 },
                 {
                     key: Dictionary.DATE_SELECT.en,

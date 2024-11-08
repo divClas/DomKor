@@ -4,9 +4,9 @@ import {FormSubscribeNotification} from "@/contexts/forms.ts";
 import {PopoverWidget} from "@/components/ui/Popover";
 import {ReactComponent as ReportIcon} from "@/assets/report.svg";
 import {ReactComponent as SearchIcon} from "@/assets/mobileSearch.svg";
-import {FilterMobile} from "@/components/widgets/GraphicsTable/FilterMobile.tsx";
 import {ButtonFilter} from "@/components/ui/ButtonFilter";
 import {useGraphicTenderPage} from "@/components/pages/GraphicTenders/model/context.ts";
+import { FilterMobile } from "@/components/pages/GraphicTenders/ui/Blocks/FilterMobile";
 
 export const C_Popovers = {
   SubscribeNotification: () => {

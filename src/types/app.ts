@@ -51,14 +51,13 @@ export interface I_AppState {
 interface I__RowCommon {
   label: string
   postfix?: string
-  formatter?: (value: string) => string
+  formatter?: (value: string | number) => string
 }
 
 
 export type I_Value = I__RowCommon & ({
-  value: string
+  value: string | number
 })
-
 export interface I_Row<I_Entity> extends I__RowCommon {
   propertyKey: keyof I_Entity
 }
