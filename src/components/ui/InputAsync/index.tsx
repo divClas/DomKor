@@ -12,6 +12,8 @@ export const InputAsync: FC<{
     config?: InputNumberProps,
     editable?: boolean
     placeholder?: string
+    className?: string
+    wait?: number
 } | {
     value: string,
     type: 'string' | 'textarea',
@@ -20,22 +22,26 @@ export const InputAsync: FC<{
     config?: InputProps,
     disabled?: boolean
     editable?: boolean
+    className?: string
+    wait?: number
 }> = ({
           value,
           onChange,
           config,
           disabled,
           type = 'number',
-          placeholder = ''
+          placeholder = '',
+          className = '',
+          wait = 500
       }) => {
     const [text, setText] = useState<number | string>(value)
-    const debounced = useDebouncedCallback(onChange, 500);
+    const debounced = useDebouncedCallback(onChange, wait);
     useEffect(() => {
         setText(value)
     }, [value])
     if (type === 'string') {
         return <Input
-            className={'w-100'}
+            className={'w-100 ' + className}
             disabled={disabled}
             width={500}
             placeholder={placeholder}
@@ -52,6 +58,7 @@ export const InputAsync: FC<{
         return <TextArea
             disabled={disabled}
             placeholder={placeholder}
+            className={'w-100 ' + className}
             value={text}
             size={"small"}
             onChange={(v) => {
@@ -66,6 +73,7 @@ export const InputAsync: FC<{
                 width: '100px'
             }}
             disabled={disabled}
+            className={'w-100 ' + className}
             placeholder={placeholder}
             size={"small"}
             status={debounced.isPending() ? 'warning' : ''}

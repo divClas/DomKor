@@ -15,7 +15,7 @@ export const ModalWidget: FC<{
     return (
         <Flex vertical={true}
               gap={10}
-              className={'modal-common bg--white'}
+              className={'modal-common bg bg--white'}
         >
             <Flex className={'modal-common-head w-100'}
                   justify={'space-between'}

@@ -10,7 +10,7 @@ export const Button: FC<I_ButtonProps> = (props) => {
                   disabled={props.disabled}
                   icon={props.icon}
                   iconPosition={props.iconPosition}
-                  className={`${props.className} bg--${props.background}`}
+                  className={`${props.className} bg bg--${props.background}`}
                   onClick={props.onClick}
         >
             {!!props.label && <span className="label">{props.label}</span>}

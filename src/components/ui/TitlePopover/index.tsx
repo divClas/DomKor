@@ -12,7 +12,9 @@ export const TitlePopover: FC<{
               justify={'space-between'}
               align={'center'}
         >
-            <span className={'fs--md fw--lg'}>{title}</span>
+            <span className={'fs--md fw--lg'} style={{
+                paddingTop: 4
+            }}>{title}</span>
             <CloseIcon
                 className={'cursor'}
                 onClick={() => {

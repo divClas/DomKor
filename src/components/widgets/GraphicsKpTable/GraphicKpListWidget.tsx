@@ -43,7 +43,7 @@ export const GraphicKpListWidget: FC<{
                         <div className="kp-char">
                             <div className="kp-items">
                                 <div className="fw--sm fs--sm color--gray ff-apercy">Заявки принимаются до:</div>
-                                <div className="fw--sm fs--md ff-apercy">
+                                <div className="fw--def fs--md ff-apercy">
                                     {dayjs(item.SUBMISSION_DEADLINE)
                                         .locale("ru")
                                         .format("D MMMM YYYY")}
@@ -51,7 +51,7 @@ export const GraphicKpListWidget: FC<{
                             </div>
                             <div className="kp-items">
                                 <div className="fw--sm fs--sm color--gray ff-apercy ">Дата окончания тендера:</div>
-                                <div className="fw--sm fs--md ff-apercy">
+                                <div className="fw--def fs--md ff-apercy">
                                     {dayjs(item.TENDER_END_DATE)
                                         .locale("ru")
                                         .format("D MMMM YYYY")}
@@ -59,11 +59,11 @@ export const GraphicKpListWidget: FC<{
                             </div>
                             <div className="kp-items">
                                 <div className="fw--sm fs--sm color--gray ff-apercy">Адрес:</div>
-                                <div className="fw--sm fs--md ff-apercy">{item.ADDRESS}</div>
+                                <div className="fw--def fs--md ff-apercy">{item.ADDRESS}</div>
                             </div>
                             <div className="kp-items">
                                 <div className="fw--sm fs--sm color--gray ff-apercy">Ответственный:</div>
-                                <div className="fw--sm fs--md ff-apercy">{item.PERSON}</div>
+                                <div className="fw--def fs--md ff-apercy">{item.PERSON}</div>
                             </div>
                         </div>
                         <div className="item">

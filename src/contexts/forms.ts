@@ -79,7 +79,7 @@ export const FormSubscribeNewTender = (graphic_id: string): I_Form => ({
     btnLabel: Dictionary.SEND_EVENT.ru,
     successMessage: 'Вам придет уведомление о статусе субподряда'
 });
-export const FormSubscribeNotification: I_Form = {
+export const FormSubscribeNotification = (): I_Form => ({
     route: R_GRAPHIC + A_SEND_EVENT,
     btnLabel: Dictionary.SUBSCRIBE.ru,
     fields: [
@@ -110,4 +110,4 @@ export const FormSubscribeNotification: I_Form = {
         }
     ],
     successMessage: 'Вам придет уведомление о статусе субподряда',
-};
+});

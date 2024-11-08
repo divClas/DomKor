@@ -1,12 +1,14 @@
 import {FC, useEffect, useState} from "react";
 import {InputAsync} from "@/components/ui/InputAsync";
 import {Flex, Input} from "antd";
-import {MaskedInput} from "antd-mask-input";
 import {ReactComponent as CloseIcon} from '@/assets/close-dark.svg';
+import {MaskedInputUI} from "@/components/ui/MaskedInput";
+import dayjs from "dayjs";
+import {MaskedInput} from "antd-mask-input";
 
 export const InputUi: FC<{
-    type: 'async' | 'masked' | 'default'
-    disabled: boolean
+    type: 'async' | 'masked' | 'default' | 'date'
+    disabled?: boolean
     htmlType?: 'mail' | 'phone'
     mask?: string
     label: string
@@ -16,34 +18,35 @@ export const InputUi: FC<{
     required?: boolean
     className?: string
     allowClear?: boolean
-    onClose?: () => void
+    placeholder?: string
+    maskChar?: string
+    asyncWait?: number
+    onClear?: () => void
 }> = ({
           type,
           label,
           htmlType,
-          disabled, required,
+          disabled,
+          required,
           val,
           onChange,
           noEditable,
           className = '',
           mask = '',
           allowClear,
-          onClose
+          onClear,
+          placeholder,
+          asyncWait,
+          maskChar
       }) => {
     const [value, setValue] = useState<string>(val ?? '')
     useEffect(() => {
         setValue(val ?? '')
     }, [val])
-    const CloseComponent = () => (allowClear && value) ? (
-        <CloseIcon className={'cursor'}
-                   onClick={() => {
-                       setValue('')
-                       if (onClose) {
-                           onClose()
-                       }
-                   }}
-        />
-    ) : null
+    const setValueHandler = (val: string) => {
+        setValue(val)
+        onChange(val)
+    }
     return (
         <Flex justify="space-between"
               align="center"
@@ -52,24 +55,23 @@ export const InputUi: FC<{
             <div className="input-wrapper">
                 {type === 'async' && (
                     <InputAsync
-                        onChange={(v) => {
-                            setValue(v)
-                            onChange(v)
-                        }}
+                        onChange={setValueHandler}
                         value={value}
                         type="string"
+                        className={className}
                         disabled={noEditable ?? disabled}
-                        placeholder={'Введите текст'}
+                        placeholder={placeholder}
+                        wait={asyncWait}
                     />
                 )}
                 {type === 'masked' && (
-                    <MaskedInput
+                    <MaskedInputUI
                         mask={mask}
                         onChange={(v) => {
-                            setValue(v.target.value)
-                            onChange(v.target.value)
+                            setValueHandler(v)
                         }}
-                        value={value.replace(/\_/g, '')}
+                        maskChar={maskChar}
+                        value={value}
                         disabled={noEditable ?? disabled}
                         className={className}
                     />
@@ -77,19 +79,38 @@ export const InputUi: FC<{
                 {type === 'default' && (
                     <Input
                         onChange={(v) => {
-                            setValue(v.target.value)
-                            onChange(v.target.value)
+                            setValueHandler(v.target.value)
                         }}
                         value={value}
                         type={htmlType}
                         disabled={noEditable ?? disabled}
                         className={className}
-                        placeholder={'Введите текст'}
+                        placeholder={placeholder ?? ''}
                     />
                 )}
-                <CloseComponent />
+                {type === 'date' && (
+                    <MaskedInput
+                        mask={Date}
+                        placeholder="ДД.ММ.ГГГГ"
+                        value={!!value ? dayjs(value, 'YYYY-MM-DD').format('DD.MM.YYYY') : ''}
+                        onChange={(v) => {
+                            setValueHandler(v.target.value)
+                        }}
+                        style={{width: "100%"}}
+                    />
+                )}
+                {(allowClear && value) && (
+                    <CloseIcon className={'cursor'}
+                               onClick={() => {
+                                   setValueHandler('')
+                                   if (onClear) {
+                                       onClear()
+                                   }
+                               }}
+                    />
+                )}
                 <label color="#757778"
-                       className={'fs--sm fw--lg'}
+                       className={'fs--sm fw--def'}
                        htmlFor="work-type"
                 >
                     {label}

@@ -19,7 +19,7 @@ export const FieldStringUi: FC<I_FormFiledProps> = ({f, disabled, error}) => {
                 type={'default'}
                 allowClear={true}
                 label={f.label}
-                onClose={()=>{
+                onClear={()=>{
                     formInstance.setFieldValue(f.name, undefined)
                 }}
                 onChange={() => {

@@ -1,4 +1,4 @@
-import {FC, ReactNode} from "react";
+import {FC, ReactNode, useEffect, useRef} from "react";
 import "./style.scss";
 import {I_ButtonProps} from "@/types/app.ts";
 import {Flex, Modal, Popover} from "antd";
@@ -20,10 +20,34 @@ export interface I_PopoverProps {
 export const PopoverComponent: FC<I_PopoverProps> = (props) => {
     const {isOpen, setIsOpen} = usePopover();
 
-    const windowSize = useSizeHook()
-    const TargetButton = <div
+    const popoverRef = useRef<HTMLDivElement>(null);
+    const popoverRefTitle = useRef<HTMLDivElement>(null);
+    const windowSize = useSizeHook();
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (popoverRef.current
+                &&
+                !popoverRef.current.contains(event.target as Node)
+                &&
+                popoverRefTitle.current
+                &&
+                !popoverRefTitle.current.contains(event.target as Node)
+            ) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [setIsOpen]);
+    const TargetButton = () => <div
+        ref={popoverRef}
+
         onClick={() => {
-            setIsOpen(true)
+            setIsOpen(!isOpen)
         }}
         className={windowSize.width < 1000 ? 'w-100' : ''}
     >
@@ -37,26 +61,31 @@ export const PopoverComponent: FC<I_PopoverProps> = (props) => {
             />
         )}
     </div>
-    const Content =  () => (
+    const Content = () => (
         <div
+            ref={popoverRef}
             children={props.content}
         />
     )
     if (windowSize.width > 1000) {
         return (
-                <Popover
-                    content={<Content/>}
-                    title={<TitlePopover title={props.title} />}
-                    open={isOpen}
-                    forceRender={true}
-                    onOpenChange={props.onOpenChange}
-                    children={TargetButton}
-                />
+            <Popover
+                content={<Content />}
+                title={
+                    <div
+                        ref={popoverRefTitle}
+                        children={<TitlePopover title={props.title} />}
+                    />}
+                open={isOpen}
+                forceRender={true}
+                onOpenChange={props.onOpenChange}
+                children={<TargetButton/>}
+            />
         );
     } else {
         return (
             <Flex>
-                {TargetButton}
+                <TargetButton/>
                 <Modal
                     title={<span className={'fs--md fw--lg'}>{props.title}</span>}
                     open={isOpen}
@@ -66,7 +95,7 @@ export const PopoverComponent: FC<I_PopoverProps> = (props) => {
                         setIsOpen(false)
                     }}
                     footer={null}
-                    children={<Content/>}
+                    children={<Content />}
                 />
             </Flex>
         )

@@ -3,6 +3,7 @@ import {Typography} from "antd";
 import {Button} from "@/components/ui/Button";
 import dayjs from "dayjs";
 import {PopoverWidget} from "@/components/ui/Popover";
+import {textFormat} from "@/helpers/textFormat.ts";
 
 export function tableConstruct<I_ROW extends { ID: string }>(
     columns: I_TableColumn<I_ROW>[]
@@ -27,7 +28,7 @@ export function tableConstruct<I_ROW extends { ID: string }>(
             case "date": {
                 res.render = (val) => (
                     <Typography.Text 
-                        children={dayjs(val).format(col.format ? col.format : "MM.DD.YYYY")}
+                        children={textFormat.capitalize(dayjs(val).format(col.format ? col.format : "DD.MM.YYYY"))}
                         className={col.className + ' fs--md'}
                     />
                 );

@@ -1,8 +1,8 @@
-import { Flex, theme, Typography } from "antd";
+import {Flex, theme, Typography} from "antd";
 import Calendar from "../Calendar";
-import { MaskedInput } from "antd-mask-input";
-import React, { FC, useMemo, useState } from "react";
+import React, {FC, useMemo, useState} from "react";
 import dayjs from "dayjs";
+import {InputUi} from "@/components/ui/Input";
 
 export const DatePickerWidget: FC<{
     label: string
@@ -18,16 +18,16 @@ export const DatePickerWidget: FC<{
     const {token} = theme.useToken();
     const [date, setDate] = useState<string | undefined>(value)
 
-  const wrapperStyle: React.CSSProperties = {
-    width: 307,
-    border: `1px solid ${token.colorBorderSecondary}`,
-  };
+    const wrapperStyle: React.CSSProperties = {
+        width: 307,
+        border: `1px solid ${token.colorBorderSecondary}`,
+    };
 
-  const handleCalendarChange = (selectedDate: Date) => {
-    const formattedDate = dayjs(selectedDate).format("YYYY-MM-DD");
-    setDate(formattedDate);
-    onChange(formattedDate);
-  };
+    const handleCalendarChange = (selectedDate: Date) => {
+        const formattedDate = dayjs(selectedDate).format("YYYY-MM-DD");
+        setDate(formattedDate);
+        onChange(formattedDate);
+    };
 
     return (
         <Flex vertical={true}>
@@ -38,27 +38,32 @@ export const DatePickerWidget: FC<{
                     margin: "12px 0px"
                 }}
             >
-                {useMemo(() => <MaskedInput
-                    mask={Date}
-                    placeholder="ДД.ММ.ГГГГ"
-                    value={dayjs(date, 'YYYY-MM-DD').format('DD.MM.YYYY')}
-                    onChange={e => {
-                        const clearDate = e.target.value.replace(/\_/g, '')
-                        if (clearDate.length === 10) {
-                            const newDate = dayjs(clearDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
-                            onChange(newDate);
-                            setDate(newDate);
-                        }
-                    }}
-                    style={{width: "100%"}}
-                />, [date])}
+                {useMemo(() => (
+
+                    <InputUi
+                        type={'date'}
+                        placeholder="ДД.ММ.ГГГГ"
+                        val={date}
+                        label={label}
+                        onChange={value => {
+                            const clearDate = value.replace(/\_/g, '')
+                            if (clearDate.length === 10) {
+                                const newDate = dayjs(clearDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
+                                onChange(newDate);
+                                setDate(newDate);
+                            }
+                        }}
+                        className={'w-100'}
+                    />
+                ), [date])}
+
             </div>
 
             <div style={wrapperStyle}>
                 <Calendar
                     navSide={navSide}
                     onChange={handleCalendarChange}
-                    initialDate={date ? dayjs(date).toDate() : undefined}
+                    date={date ? dayjs(date).toDate() : undefined}
                 />
             </div>
         </Flex>

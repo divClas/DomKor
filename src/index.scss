@@ -2,28 +2,28 @@
   font-family: Berthold_Akzidenz_Grotesk-700;
   font-weight: 700;
   src: local(Inter),
-    url(./assets/fonts/Berthold_Akzidenz_Grotesk-700.ttf) format("truetype");
+  url(./assets/fonts/Berthold_Akzidenz_Grotesk-700.ttf) format("truetype");
 }
 
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-600;
   font-weight: 600;
   src: local(Inter),
-    url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format("truetype");
+  url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format("truetype");
 }
 
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-500;
   font-weight: 500;
   src: local(Inter),
-    url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format("truetype");
+  url(./assets/fonts/Berthold_Akzidenz_Grotesk-600.ttf) format("truetype");
 }
 
 @font-face {
   font-family: Berthold_Akzidenz_Grotesk-400;
   font-weight: 400;
   src: local(Inter),
-    url(./assets/fonts/Berthold_Akzidenz_Grotesk-400.ttf) format("truetype");
+  url(./assets/fonts/Berthold_Akzidenz_Grotesk-400.ttf) format("truetype");
 }
 
 @font-face {
@@ -31,8 +31,19 @@
   src: url(./assets/fonts/ApercuPro-Medium.ttf);
 }
 
+@font-face {
+  font-family: Apercu;
+  src: url(./assets/fonts/ApercuPro-Regular.otf);
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(./assets/fonts/Montserrat.ttf);
+  font-weight: 500;
+}
+
 * {
-  font-family: Berthold_Akzidenz_Grotesk-400, Arial, sans-serif !important;
+  font-family: Berthold_Akzidenz_Grotesk-400, Montserrat, Arial, sans-serif !important;
 }
 
 body {
@@ -60,7 +71,7 @@ body {
   }
 
   &--md {
-    font-size: 16px;
+    font-size: 15.5px !important;
     line-height: 1.2;
 
     @media (max-width: 1000px) {
@@ -183,12 +194,27 @@ body {
 }
 
 .bg {
+  border: none;
+  box-shadow: unset;
+
+  path {
+    transition: .2s;
+  }
+
   &--accent {
     background: #0094de;
     color: #ffffff;
-    border: none;
+
+    path[fill] {
+      fill: #ffffff;
+    }
+
+    path[stroke] {
+      stroke: #ffffff;
+    }
 
     &:active {
+      background-color: rgba(0, 104, 156, 1) !important;
       color: #ffffff !important;
     }
 
@@ -196,27 +222,78 @@ body {
 
   &--active {
     background-color: rgba(0, 104, 156, 1) !important;
-  }
 
+    path[fill] {
+      fill: #ffffff;
+    }
+
+    path[stroke] {
+      stroke: #ffffff;
+    }
+  }
 
 
   &--low {
     background: #0094de33;
-    color: #333333;
-    border: none;
+    color: #0094DE;
+
+    path[fill] {
+      fill: #0094DE;
+    }
+
+    path[stroke] {
+      stroke: #0094DE;
+    }
+
+    &:hover {
+      path[fill] {
+        fill: #ffffff;
+      }
+
+      path[stroke] {
+        stroke: #ffffff;
+      }
+    }
 
     &:active {
-      color: #333333 !important;
+      background-color: rgba(0, 104, 156, 1) !important;
+      color: #ffffff !important;
+
+      path[fill] {
+        fill: #ffffff;
+      }
+
+      path[stroke] {
+        stroke: #ffffff;
+      }
     }
   }
 
   &--gray {
     background: #f6f6f180;
     color: #333333;
-    border: none;
+
+    &:hover {
+      path[fill] {
+        fill: #ffffff;
+      }
+
+      path[stroke] {
+        stroke: #ffffff;
+      }
+    }
 
     &:active {
-      color: #333333 !important;
+      background-color: rgba(0, 104, 156, 1) !important;
+      color: #ffffff !important;
+
+      path[fill] {
+        fill: #ffffff;
+      }
+
+      path[stroke] {
+        stroke: #ffffff;
+      }
     }
   }
 
@@ -227,24 +304,24 @@ body {
 
   &--black {
     background: #000;
-    color: #dadada;
+    color: #ffffff;
     border-radius: 1px;
-    border: none;
   }
 
   &--transparent {
     background: rgba(218, 218, 218, 0) !important;
     color: rgba(51, 51, 51, 1);
 
-    border: none;
-    box-shadow: unset;
-
-    // path {
-    //   fill: #dadada;
-    // }
-
     &:is(button):hover {
       background: #0094de !important;
+
+      path[fill] {
+        fill: #ffffff;
+      }
+
+      path[stroke] {
+        stroke: #ffffff;
+      }
     }
 
     &:active {
@@ -268,29 +345,34 @@ h2 {
 .ant-form-item {
   border: 1px solid rgba(0, 148, 222, 0);
   border-radius: unset;
-  padding: 8.5px 12px 8px 12px;
+}
+
+.ant-form-item:not(.form-item-def) {
+  background: #e4f0f7;
+  padding: 10px 12px 10px 12px;
 }
 
 .ant-form-item:has(input:focus) {
   border: 1px solid #0094DE;
   background: rgba(218, 218, 218, 0);
+  padding: 14px 12px 6px 12px;
 }
 
-.ant-form-item:not(.form-item-def) {
-  background: #e4f0f7;
-  padding: 8.5px 12px 8px 12px;
-}
-
-.ant-form-item:not(.form-item-def):has(input) {
-  padding: 8.5px 12px 2px 12px;
-}
 
 .ant-form-item:has([disabled]),
 .ant-form-item:has(.disabled) {
   opacity: 0.6;
 }
 
-.ant-form-item-label>label::after {
+.line-el {
+  display: flex;
+  background: #757778;
+  height: 2px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.ant-form-item-label > label::after {
   display: none;
 }
 
@@ -321,7 +403,7 @@ h2 {
   background-color: white;
 }
 
-:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   height: 100% !important;
   width: 4px;
   background-color: rgba(207, 207, 207, 1);
@@ -364,6 +446,15 @@ tr td {
   padding: 32.5px 20px;
 }
 
+input {
+  &::placeholder {
+    color: #757778;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
+
 .input-group {
   position: relative;
   width: 100%;
@@ -374,13 +465,15 @@ tr td {
     align-items: center;
     width: 100%;
 
+
     input {
-      padding: 8px 0;
+      padding-top: 8px;
       font-size: 14px;
       width: 100%;
       border: none;
       outline: none;
       background: transparent;
+      padding-bottom: 0;
 
       &:disabled {
         cursor: unset;
@@ -398,8 +491,8 @@ tr td {
       pointer-events: none;
     }
 
-    input:focus~label,
-    input:not(:placeholder-shown)~label {
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
       top: 0;
       font-size: 12px !important;
       color: rgba(0, 148, 222, 1);
@@ -409,11 +502,6 @@ tr td {
       width: 100%;
     }
 
-    input {
-      &::placeholder {
-        color: #333333;
-      }
-    }
 
     input:not(:focus) {
       &::placeholder {
@@ -486,7 +574,7 @@ table {
 }
 
 .custom-select .ant-select-selection-placeholder {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 400;
   line-height: 1.19;
   letter-spacing: -0.03em;
@@ -499,7 +587,7 @@ table {
 }
 
 .dateSelected {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 400;
   line-height: 19.1px;
   letter-spacing: -0.03em;
@@ -565,13 +653,13 @@ table {
   height: 100%;
 
   @media (max-width: 1000px) {
-    font-size: 16px;
+    font-size: 15.5px;
     line-height: 18.83px;
   }
 }
 
 .organization {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 500;
   line-height: 19.66px;
   text-align: left;
@@ -596,7 +684,7 @@ table {
   }
 
   .ff-apercy {
-    font-family: Apercu !important;
+    font-family: Apercu, serif !important;
 
   }
 
@@ -619,7 +707,7 @@ table {
     }
 
     .kp-item-description {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 500;
       line-height: 19.66px;
       text-align: left;
@@ -638,7 +726,7 @@ table {
   }
 
   span {
-    font-size: 16px;
+    font-size: 15.5px;
     font-weight: 400;
     line-height: 19.1px;
     letter-spacing: -0.03em;
@@ -666,7 +754,7 @@ table {
 }
 
 .date-bottom {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 500;
   line-height: 19.66px;
   text-align: right;
@@ -695,7 +783,7 @@ p {
 }
 
 .date-picker-trigger {
-  padding: 6px 16px;
+  padding: 6px 15.5px;
   cursor: pointer;
 }
 
@@ -723,7 +811,7 @@ p {
   background: unset !important;
 }
 
-:where(.css-dev-only-do-not-override-1mcm4dg).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+:where(.css-dev-only-do-not-override-1mcm4dg).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   width: 4px;
   height: 100%;
 }
@@ -757,7 +845,7 @@ td.ant-table-cell {
   @media (max-width: 1000px) {
     // flex-direction: column;
     // align-items: start !important;
-    // gap: 16px;
+    // gap: 15.5px;
   }
 }
 
@@ -775,7 +863,7 @@ td.ant-table-cell {
 .no-data-text {
   padding-top: 24px;
   padding-bottom: 24px;
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 700;
   line-height: 18.83px;
   text-align: center;
@@ -786,7 +874,7 @@ td.ant-table-cell {
   padding: 14.5px 24px;
   border-color: transparent;
   background: rgba(246, 246, 241, 0.5);
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 400;
   line-height: 19.1px;
   letter-spacing: -0.03em;
@@ -820,13 +908,12 @@ td.ant-table-cell {
 
   &:hover {
     .ant-table-cell {
-      background-color: #F4F4F4 !important;
-      ;
+      background-color: #F4F4F4 !important;;
     }
   }
 }
 
-:where(.css-dev-only-do-not-override-1gbj51f).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+:where(.css-dev-only-do-not-override-1gbj51f).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   width: 4px !important;
   height: 100% !important;
 }
@@ -871,14 +958,22 @@ td.ant-table-cell {
   }
 }
 
+.ant-form-item:has(input:not(:placeholder-shown)) {
+  padding: 14px 12px 6px 12px;
+
+}
+
 .input-wrapper:has(.phone-input) {
   display: flex;
 
   &:before {
     content: "+7 9";
+    font-size: 15.5px;
+    line-height: 1.2;
     display: block;
     white-space: nowrap;
     color: rgba(255, 255, 255, 0);
+    padding-top: 8px;
   }
 }
 
@@ -908,7 +1003,7 @@ td.ant-table-cell {
 }
 
 .title {
-  font-family: Apercu !important;
+  font-family: Apercu, Montserrat, Arial, sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 14.75px;
@@ -917,7 +1012,7 @@ td.ant-table-cell {
 }
 
 .sub-title {
-  font-family: Berthold Akzidenz Grotesk;
+  font-family: Berthold Akzidenz Grotesk, Montserrat, Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 16.72px;
@@ -940,8 +1035,8 @@ td.ant-table-cell {
   }
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: 15.5px;
+    height: 15.5px;
     display: flex;
     align-items: center;
   }
@@ -980,7 +1075,7 @@ td.ant-table-cell {
   @media (max-width: 1000px) {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 15.5px;
   }
 }
 
@@ -1026,7 +1121,7 @@ td.ant-table-cell {
 }
 
 .ant-popover-inner {
-  padding: 16px 20px !important;
+  padding: 15.5px 20px !important;
 }
 
 .ant-popover .ant-popover-title {
@@ -1094,4 +1189,21 @@ select {
 
 .h-36 {
   height: 36px !important;
+}
+
+.ant-tabs-tab {
+  padding: 7px 0 !important;
+}
+
+.ant-tabs-tab-btn {
+  font-weight: 400;
+  color: #333333 !important;
+  font-size: 15.5px;
+}
+
+.ant-tabs-tab-active {
+
+  .ant-tabs-tab-btn {
+    color: #0073B5 !important;
+  }
 }

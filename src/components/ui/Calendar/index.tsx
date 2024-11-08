@@ -5,21 +5,21 @@ import {DAYS_OF_WEEK, MONTHS} from "@/contexts/Calendar.ts";
 
 interface CalendarProps {
     onChange: (date: Date) => void;
-    initialDate?: Date;
+    date?: Date;
     navSide?: 'left' | 'right'
 }
 
-const Calendar: FC<CalendarProps> = ({ onChange, initialDate, navSide }) => {
+const Calendar: FC<CalendarProps> = ({ onChange, date, navSide }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDay, setSelectedDay] = useState<number | null>(
-        initialDate ? initialDate.getDate() : null
+        date ? date.getDate() : null
     );
     useEffect(() => {
-        if (initialDate) {
-            setCurrentDate(initialDate);
-            setSelectedDay(initialDate.getDate());
+        if (date) {
+            setCurrentDate(date);
+            setSelectedDay(date.getDate());
         }
-    }, [initialDate]);
+    }, [date]);
     const getDaysInMonth = (year: number, month: number) => {
         return new Date(year, month + 1, 0).getDate();
     };

@@ -9,12 +9,13 @@ export const SearchInputString: FC<{
     val?: string
     onChange: (val: string) => void
     noEditable?: boolean
+    placeholder?: string
 }> = (props) => {
     return (
         <Flex>
-            <InputUi {...props} type={'async'} disabled={!!props.noEditable}  />
+            <InputUi {...props} type={'async'} disabled={!!props.noEditable} placeholder={props.placeholder} />
             <Flex>
-                {!props.noEditable && <SearchIcon className={"icon " + (props.val ? 'bg--gray' : '')} />}
+                {!props.noEditable && <SearchIcon className={"icon bg" + (props.val ? 'bg--gray' : '')} />}
                 {!props.noEditable && !!props.val && (
                     <CloseIcon className="icon cursor"
                                onClick={() => {

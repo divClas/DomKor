@@ -18,17 +18,18 @@ export const FieldPhoneUi: FC<I_FormFiledProps> = ({f, disabled, error}) => {
                 htmlType={'phone'}
                 type={'masked'}
                 allowClear={true}
-                label={f.label }
-                onClose={()=>{
+                label={f.label}
+                onClear={()=>{
                     formInstance.setFieldValue(f.name, undefined)
                 }}
                 onChange={() => {
                 }}
                 mask={
-                    '00 000 00 00'
+                    '99 999 99 99'
                 }
+                maskChar={'0'}
                 disabled={disabled}
-                className={'phone-input'}
+                className={'phone-input fs--md'}
             />
         </Form.Item>
     )

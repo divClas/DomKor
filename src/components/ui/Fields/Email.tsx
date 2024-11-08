@@ -17,9 +17,10 @@ export const FieldEmailUi: FC<I_FormFiledProps> = ({f, disabled, error}) => {
                 htmlType={'mail'}
                 type={'default'}
                 allowClear={true}
-                onClose={()=>{
+                onClear={()=>{
                     formInstance.setFieldValue(f.name, undefined)
                 }}
+                className={'fs--md'}
                 label={f.label }
                 onChange={() => {
                 }}

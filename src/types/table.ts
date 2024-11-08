@@ -12,7 +12,7 @@ export interface I_ColumnCommons<I_Entity> {
     className?: string
     noSort?: boolean;
     disabled?: boolean;
-    width?: number | "auto";
+    width?: number | "auto" | string;
     readonly?: boolean;
     placeholder?: string;
     afterChange?: (newVel: number, record: I_Entity) => void;

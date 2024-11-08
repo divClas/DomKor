@@ -5,7 +5,6 @@ import locale from "antd/locale/ru_RU";
 import "dayjs/locale/ru";
 import {themeConfig} from "@/contexts/theme.ts";
 import MainPage from "@/components/pages/Main";
-import {NotificationWidget} from "@/components/widgets/Notification";
 
 export const AppLayout = () => {
     dayjs.locale("ru");
@@ -14,7 +13,7 @@ export const AppLayout = () => {
         <ConfigProvider theme={themeConfig}
                         locale={locale}
         >
-            <NotificationWidget />
+            {/*<NotificationWidget />*/}
             <Flex vertical={true}
                   gap={20}
             >

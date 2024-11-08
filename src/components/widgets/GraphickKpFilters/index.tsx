@@ -126,7 +126,7 @@ export const GraphicKpFilters: FC<{
               icon: <ReportIcon />,
             }}
             title={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
-            content={<FormWidget {...FormSubscribeNotification} />}
+            content={<FormWidget {...FormSubscribeNotification()} />}
           />
           <PopoverWidget
             title={"Выбрать дату"}

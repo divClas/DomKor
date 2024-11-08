@@ -11,7 +11,7 @@ export const ButtonFilter: FC<{
       }) => {
     return (
         <Flex gap={8}
-              className={'bg--gray pd-wid'}
+              className={'bg bg--gray pd-wid'}
               align={'center'}
         >
             {icon}

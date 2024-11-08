@@ -9,6 +9,7 @@ import {InputUi} from "@/components/ui/Input";
 
 export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled, error}) => {
     const orgNameInit = 'Не выбрано'
+
     const [orgName, setOrgName] = useState<string>(orgNameInit)
     const [orgInn, setOrgInn] = useState<string>('')
     const useFormI = useFormInstance()
@@ -35,7 +36,7 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled, error}) => 
                         type={'default'}
                         required={f.required}
                         label={f.label}
-                        onClose={() => {
+                        onClear={() => {
                             setOrgInn('')
                             setOrgName(orgNameInit)
                             useFormI.setFieldValue('org_name', undefined)
@@ -45,16 +46,19 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled, error}) => 
                         disabled={disabled}
                         onChange={(value) => {
                             setOrgInn(value)
-                            daDataFetch(value).then(res => {
-                                setOrgListSearchDaData(res.data.suggestions.map(s => ({
-                                    inn: s.data.inn,
-                                    name: s.value
-                                })))
-                            })
+                            if(!!value) {
+                                daDataFetch(value).then(res => {
+                                    setOrgListSearchDaData(res.data.suggestions.map(s => ({
+                                        inn: s.data.inn,
+                                        name: s.value
+                                    })))
+                                })
+                            }
                         }}
+                        className={'fs--md'}
                     />
 
-                    <Flex className={'org-select bg--white'}
+                    <Flex className={'org-select bg bg--white'}
                           vertical={true}
                           justify="flex-start"
                     >
@@ -81,7 +85,7 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled, error}) => 
             </Form.Item>
             <Flex vertical={true}
                   gap={4}
-                  className={'ant-form-item bg--transparent pd--0'}
+                  className={'ant-form-item bg bg--transparent pd--0'}
             >
                 <Typography.Text className={"fs--xsm fw--xsm color--gray"}>
                     Наименование ООО подставится автоматически:

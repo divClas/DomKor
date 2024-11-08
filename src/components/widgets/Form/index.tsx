@@ -13,6 +13,7 @@ import {usePopover} from "@/contexts/popover.tsx";
 
 export function FormWidget(props: I_Form) {
     const [status, setStatus] = useState<I_StatusType>()
+    const [loading, setLoading] = useState<boolean>(false)
     const [messages, setMessages] = useState<string[]>([])
     const [fieldsError, setFieldsError] = useState<string[]>([])
     const {setIsOpen} = usePopover();
@@ -27,7 +28,7 @@ export function FormWidget(props: I_Form) {
                         file: (values.file[0] ?? values.file.file).originFileObj,
                     } : values
                     setMessages([])
-
+                    setLoading(true)
                     await uploadFormData<{
                         message?: string
                     }>(props.route, valuesPayload).then((res) => {
@@ -45,6 +46,8 @@ export function FormWidget(props: I_Form) {
                         } else {
                             setMessages([props.successMessage])
                         }
+
+                        setLoading(false)
                     }).catch(e => {
                         console.error(e)
                     })
@@ -63,7 +66,7 @@ export function FormWidget(props: I_Form) {
                 )}
             >
                 <FormItems fields={props.fields}
-                           disabled={status === 'success'}
+                           disabled={status === 'success' || loading}
                            fieldsError={fieldsError}
                 />
                 {status &&
@@ -82,6 +85,7 @@ export function FormWidget(props: I_Form) {
                         <Button label={props.btnLabel ?? Dictionary.SEND_EVENT.ru}
                                 background={'accent'}
                                 type={"submit"}
+                                disabled={loading}
                                 className={'pd-8 fs--md'}
                         />)}
                     {status === 'success' && (
