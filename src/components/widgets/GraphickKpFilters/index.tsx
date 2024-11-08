@@ -124,6 +124,7 @@ export const GraphicKpFilters: FC<{
               label: Dictionary.SUBSCRIBE_TO_NOTIFICATION_MOBILE.ru,
               background: "accent",
               icon: <ReportIcon />,
+              className: "mobile-popover",
             }}
             title={Dictionary.SUBSCRIBE_TO_NOTIFICATION.ru}
             content={<FormWidget {...FormSubscribeNotification()} />}
@@ -156,20 +157,13 @@ export const GraphicKpFilters: FC<{
         {SelectCity}
       </Flex>
 
-        <Flex
-            align={'center'}
-            justify={'space-between'}
-            className={'w-100'}
-        >
-            <Flex gap={20}
-                  align="center"
-                  className={'view--pc'}
-            >
-                {SelectCity}
-                {DatePickerList}
-            </Flex>
-            <span className={'fw--lg fs--md'}>Найдено: {graphicKpList.length}</span>
+      <Flex align={"center"} justify={"space-between"} className={"w-100"}>
+        <Flex gap={20} align="center" className={"view--pc"}>
+          {SelectCity}
+          {DatePickerList}
         </Flex>
+        <span className={"fw--lg fs--md"}>Найдено: {graphicKpList.length}</span>
+      </Flex>
     </div>
   );
 };

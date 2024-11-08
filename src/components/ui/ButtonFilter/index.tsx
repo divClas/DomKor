@@ -4,18 +4,18 @@ import {CountUi} from "@/components/ui/Count";
 
 export const ButtonFilter: FC<{
     icon: ReactNode
-    value: number
+    value?: number
 }> = ({
           icon,
           value
       }) => {
     return (
         <Flex gap={8}
-              className={'bg bg--gray pd-wid'}
+              className={'bg bg--gray pd-wid height-35'}
               align={'center'}
         >
             {icon}
-            <CountUi value={value} />
+            <CountUi value={value ?? 0} />
         </Flex>
     )
 }

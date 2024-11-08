@@ -87,7 +87,7 @@ export const PopoverComponent: FC<I_PopoverProps> = (props) => {
             <Flex>
                 <TargetButton/>
                 <Modal
-                    title={<span className={'fs--md fw--lg'}>{props.title}</span>}
+                    title={<span className={'fs--md fw--lg max-width-315'}>{props.title}</span>}
                     open={isOpen}
                     forceRender={true}
                     width={'fit-content'}
