@@ -1,6 +1,6 @@
-import {I_Form} from "@/types/form.ts";
-import {A_SEND_EVENT, R_GRAPHIC, R_GRAPHIC_KP} from "@/store/constants.ts";
-import {Dictionary} from "@/contexts/Dictionary.ts";
+import { I_Form } from "@/types/form.ts";
+import { A_SEND_EVENT, R_GRAPHIC, R_GRAPHIC_KP } from "@/store/constants.ts";
+import { Dictionary } from "@/contexts/Dictionary.ts";
 
 export const FormSubscribeKP = (tender_id: string): I_Form => ({
     route: R_GRAPHIC_KP + A_SEND_EVENT,
@@ -109,5 +109,5 @@ export const FormSubscribeNotification = (): I_Form => ({
             required: true
         }
     ],
-    successMessage: 'Вам придет уведомление о статусе субподряда',
+    successMessage: 'Теперь вам будут приходить уведомления о новых тендерах',
 });

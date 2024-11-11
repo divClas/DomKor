@@ -4,7 +4,7 @@ import {I_DateFilter} from "@/types/api.ts";
 import {Button} from "@/components/ui/Button";
 import {Dictionary} from "@/contexts/Dictionary.ts";
 import {usePopover} from "@/components/ui/Popover/model/popover.tsx";
-import {DataPickerContentTabs} from "@/components/widgets/DataPickerContent/Tabs.tsx";
+import {DataPickerContentBL_Tabs} from "@/components/widgets/DataPickerContent/Blocks/Tabs.tsx";
 
 export const DataPickerContent: FC<{
   value: I_DateFilter | undefined;
@@ -19,7 +19,7 @@ export const DataPickerContent: FC<{
   const [date, setDate] = useState<I_DateFilter>(value ?? initDate);
   return (
     <div>
-      <DataPickerContentTabs date={date} setDate={setDate}/>
+      <DataPickerContentBL_Tabs date={date} setDate={setDate}/>
       <Flex align="center"
             gap={12}
             style={{paddingTop: "24px"}}

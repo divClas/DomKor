@@ -458,7 +458,7 @@ h2 {
   background-color: white;
 }
 
-:where(.css-dev-only-do-not-override-144alug).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+.ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
   height: 100% !important;
   width: 4px;
   background-color: rgba(207, 207, 207, 1);
@@ -845,11 +845,6 @@ p {
   background: unset !important;
 }
 
-:where(.css-dev-only-do-not-override-1mcm4dg).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
-  width: 4px;
-  height: 100%;
-}
-
 td.ant-table-cell {
   border-bottom: transparent !important;
 }
@@ -945,11 +940,6 @@ td.ant-table-cell {
       background-color: #F4F4F4 !important;;
     }
   }
-}
-
-:where(.css-dev-only-do-not-override-1gbj51f).ant-table-wrapper .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
-  width: 4px !important;
-  height: 100% !important;
 }
 
 .calendar-wrapper {

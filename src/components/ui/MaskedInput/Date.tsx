@@ -1,71 +1,69 @@
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 
 export const MaskedInputDateUI: FC<{
     value: string
+    mask: string // e.g. "99.99.9999" or "99/99/9999"
     onChange: (value: string) => void
     disabled?: boolean
     className?: string
-    placeholder?: string
-    mask?: string
 }> = ({
           value,
+          mask,
           onChange,
           disabled,
-          className = '',
-          mask = 'DD.MM.YYYY'
+          className = ''
       }) => {
-    const formatValue = (inputValue: string): string => {
-        const digits = inputValue.replace(/\D/g, '');
-        let formatted = '';
-        let digitIndex = 0;
-
-        for (let i = 0; i < mask.length && digitIndex < digits.length; i++) {
-            if (mask[i] === '9') {
-                if (digitIndex === 0 && parseInt(digits[digitIndex]) > 3) {
-                    formatted += '0' + digits[digitIndex];
-                } else if (digitIndex === 2 && parseInt(digits[digitIndex]) > 1) {
-                    formatted += '0' + digits[digitIndex];
-                } else {
-                    formatted += digits[digitIndex];
-                }
-                digitIndex++;
-            } else {
-                formatted += '.';
-            }
+    const [strVal, setStrVal] = useState<string>(value)
+    useEffect(() => {
+        setStrVal(value)
+    }, [value])
+    const maskArr = mask.split('')
+    const replaceValToMaskChars = (newVal: string | null): string => {
+        const arStr = strVal.split('')
+        const newIndex = arStr.findIndex((v, i) => {
+            return (maskArr[i] === v && v !== '.')
+        })
+        if (newVal == null) {
+            arStr[newIndex + 1] = maskArr[newIndex + 1]
+        } else {
+            arStr[newIndex] = newVal
         }
-
-        return formatted;
+        return arStr.join('')
     }
-
-    const validateDate = (dateStr: string): boolean => {
-        if (dateStr.length !== 10) return false;
-
-        const [day, month, year] = dateStr.split('.');
-        const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-
-        return date.getDate() === parseInt(day) &&
-            date.getMonth() === parseInt(month) - 1 &&
-            date.getFullYear() === parseInt(year);
+    const validateForNumbers = (str: string): boolean => {
+        return /^[\d._]+$/.test(str);
     }
+    const validateForEmpty = (str: string): boolean => {
+        return !!str.replace(/[_.\s]/g, '');
+    }
+    const validateLength = (str: string): boolean => {
+        return (str.length > mask.length);
+    }
+    const onChangeHandler = (str: string, newVal: string | null) => {
 
-    const onChangeHandler = (str: string) => {
-        const cleaned = formatValue(str);
-        onChange(cleaned);
+        if (validateLength(str)) {
+            setStrVal(replaceValToMaskChars(newVal))
+            return false
+        }
+        if (!validateForEmpty(str)) {
+            setStrVal(mask)
+            return false
+        }
+        if (!validateForNumbers(str)) {
+            setStrVal(mask)
+            return false
+        }
+        setStrVal(str);
+        onChange(str);
     }
 
     return (
         <input
             disabled={disabled}
-            value={value}
+            value={strVal}
             placeholder={mask}
             className={className}
-            onChange={({target: {value}}) => onChangeHandler(value)}
-            onBlur={() => {
-                if (!validateDate(value)) {
-                    onChange('');
-                }
-            }}
-            maxLength={10}
+            onChange={(e) => onChangeHandler(e.target.value, (e.nativeEvent as InputEvent).data)}
         />
     )
 }

@@ -28,6 +28,7 @@ export const FieldUploadUi: FC<I_FormFiledProps> = ({f, disabled, error}) => {
                     }}
                     fileList={[]}
                     multiple={false}
+                    accept={'.doc,.docx,.xls,.xlsx,.rar,.zip,.jpeg,.png,.jpg,application/pdf'}
                 >
                     <Button label={(files.slice(-1).length > 0 && files.slice(-1)[0] ? files.slice(-1)[0].name : f.label)}
                             background={files.length > 0 ? 'low' : 'gray'}
