@@ -1352,3 +1352,13 @@ select {
   align-items: center;
   justify-content: center;
 }
+body:has(.c-modal-opened){
+  overflow: hidden !important;
+}
+
+@media (max-width: 600px) {
+  .ant-modal .ant-modal-content{
+      overflow: auto;
+      max-height: 80vh;
+  }
+}
