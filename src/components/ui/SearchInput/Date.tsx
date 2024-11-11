@@ -7,6 +7,7 @@ import {ReactComponent as SortIcon} from "@/assets/sortIcon.svg";
 import {PopoverWidget} from "@/components/ui/Popover";
 import {InputUi} from "@/components/ui/Input";
 import dayjs from "dayjs";
+import useSizeHook from "@/hooks/useSizeHook.ts";
 
 export const SearchInputDate: FC<{
     label: string
@@ -26,10 +27,12 @@ export const SearchInputDate: FC<{
           isDateFilter,
           isSort
       }) => {
+  const size = useSizeHook()
     return (
         <Flex justify="space-between"
               align="center"
-              gap={5}
+              gap={size.width < 1150 ? 15 : 5}
+              vertical={size.width < 1150}
         >
             <InputUi
                 label={label}
@@ -40,7 +43,7 @@ export const SearchInputDate: FC<{
                 className={'fw--def'}
                 val={value.FROM || value.TO ? `${value.FROM ? dayjs(value.FROM, 'YYYY-MM-DD').format('DD.MM.YYYY') : '...'} ${value.TO ? '- ' + dayjs(value.TO, 'YYYY-MM-DD').format('DD.MM.YYYY') : ''}` : undefined}
             />
-            <Flex>
+            <Flex vertical={size.width < 1400 && size.width >= 1150}>
                 <PopoverWidget
                     content={(
                         <DataPickerContent

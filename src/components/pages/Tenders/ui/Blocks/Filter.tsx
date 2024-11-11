@@ -49,6 +49,7 @@ export const TenderBL_Filter: FC= () => {
           },
         })
       }
+      center={true}
       placeholder={"Выбрать город"}
       labelRenderPostfix={<CountUi value={graphicKpList.length} />}
       className={size.width < 1000 ? "w-100" : ""}

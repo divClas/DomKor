@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import { ReactComponent as NextDate } from "@/assets/nextDate.svg";
 import { ReactComponent as PrevDate } from "@/assets/prevDate.svg";
 import { DAYS_OF_WEEK, MONTHS } from "@/contexts/Calendar.ts";
+import {Flex} from "antd";
 
 interface CalendarProps {
   onChange: (date: Date) => void;
@@ -126,8 +127,8 @@ const Calendar: FC<CalendarProps> = ({ onChange, date, navSide }) => {
 
   return (
     <div className="calendar-wrapper">
-      <div className="header">
-        {navSide === "left" && (
+      <Flex align={'center'}>
+        {(!navSide || navSide === "left" )&& (
           <button
             className="nav-button"
             onClick={() =>
@@ -165,7 +166,7 @@ const Calendar: FC<CalendarProps> = ({ onChange, date, navSide }) => {
             </option>
           ))}
         </select>
-        {navSide === "right" && (
+        {(!navSide || (navSide === "right")) && (
           <button
             className="nav-button"
             onClick={() =>
@@ -177,7 +178,7 @@ const Calendar: FC<CalendarProps> = ({ onChange, date, navSide }) => {
             <NextDate />
           </button>
         )}
-      </div>
+      </Flex>
       <div className="week-days">
         {DAYS_OF_WEEK.map((day) => (
           <div

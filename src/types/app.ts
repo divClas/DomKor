@@ -41,6 +41,8 @@ export interface I_SelectProps {
   className?: string
   placeholder?: string
   labelRenderPostfix?: string | ReactElement
+  icon?: boolean
+  center?: boolean
 }
 
 

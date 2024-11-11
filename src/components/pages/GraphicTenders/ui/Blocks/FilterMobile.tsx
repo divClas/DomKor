@@ -25,11 +25,7 @@ export const FilterMobile = () => {
                             payloadFilter={payload.filter}
                             onChange={(filter) =>
                                 setPayload({
-                                    ...payload,
                                     filter,
-                                    search: {
-                                        ...payload.search,
-                                    },
                                 })
                             }
                             dateFilters={graphicDateFilters}

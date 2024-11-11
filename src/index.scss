@@ -88,6 +88,15 @@ body {
       font-size: 18px;
     }
   }
+
+  &--lgg {
+    font-size: 18px;
+    line-height: 1.2;
+
+    @media (max-width: 1000px) {
+      font-size: 16px;
+    }
+  }
 }
 
 .fw {
@@ -157,6 +166,16 @@ body {
 
   &-wid {
     padding: 8px 32px;
+
+    @media (max-width: 390px) {
+      padding: 8px 24px;
+    }
+    @media (max-width: 360px) {
+      padding: 8px 18px;
+    }
+    @media (max-width: 340px) {
+      padding: 8px 8px;
+    }
   }
 
   &-xmd {
@@ -197,6 +216,7 @@ body {
 .bg {
   border: none;
   box-shadow: unset;
+  transition: .2s;
 
   path {
     transition: .2s;
@@ -270,17 +290,29 @@ body {
     }
   }
 
+  &--gr {
+    background: #f6f6f180;
+    color: #333333;
+  }
+
   &--gray {
     background: #f6f6f180;
     color: #333333;
 
     &:hover {
+      background-color: rgba(0, 104, 156, 1) !important;
+      cursor: pointer;
+
+      * {
+        color: #ffffff !important;
+      }
+
       path[fill] {
-        fill: #333333;
+        fill: #ffffff;
       }
 
       path[stroke] {
-        stroke: #333333;
+        stroke: #ffffff;
       }
     }
 
@@ -333,6 +365,30 @@ body {
       color: #ffffff !important;
     }
   }
+}
+
+.ant-radio-wrapper .ant-radio-inner {
+  width: 24px;
+  height: 24px;
+}
+
+.ant-radio-wrapper .ant-radio-checked .ant-radio-inner::after {
+  transform: scale(.6) !important;
+  width: 24px;
+  height: 24px;
+  margin-block-start: -12px;
+  margin-inline-start: -12px;
+}
+
+.ant-radio-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 16px;
+}
+
+.ant-radio-wrapper-checked > span {
+  font-weight: 700;
 }
 
 h1,
@@ -903,7 +959,7 @@ td.ant-table-cell {
 }
 
 .calendar-wrapper {
-  max-width: 300px;
+  width: auto;
   background: rgba(246, 246, 246, 1);
   padding: 12px;
   border-radius: 0 !important;
@@ -913,6 +969,8 @@ td.ant-table-cell {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .select {
@@ -962,6 +1020,10 @@ td.ant-table-cell {
   }
 }
 
+.nowrap {
+  white-space: nowrap
+}
+
 .days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -972,6 +1034,9 @@ td.ant-table-cell {
   padding: 12.5px 10.7px;
   text-align: center;
   cursor: pointer;
+  @media (max-width: 1000px) {
+    padding: 7px;
+  }
 }
 
 .day-cell:hover {

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Select } from "antd";
+import {Flex, Select} from "antd";
 import { I_SelectProps } from "@/types/app.ts";
 import { ReactComponent as CheckedIcon } from "@/assets/chekedIcon.svg";
 import { ReactComponent as ArrowDown } from "@/assets/arrowDown.svg";
@@ -11,6 +11,8 @@ export const SelectUi: FC<I_SelectProps> = ({
   className,
   labelRenderPostfix,
   placeholder,
+  icon,
+  center
 }) => {
   return (
     <Select
@@ -23,9 +25,9 @@ export const SelectUi: FC<I_SelectProps> = ({
       onChange={onChange}
       labelRender={(label) => {
         return (
-          <div>
-            {label.label} {labelRenderPostfix}
-          </div>
+          <Flex align={'center'} gap={8} justify={center ? 'center' : 'flex-start'}>
+            {icon && <ArrowDown width={16} />} {label.label} {labelRenderPostfix}
+          </Flex>
         );
       }}
       optionRender={(option) => (

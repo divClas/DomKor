@@ -15,9 +15,10 @@ export const SearchInputString: FC<{
         <Flex>
             <InputUi {...props} type={'async'} disabled={!!props.noEditable} placeholder={props.placeholder} />
             <Flex>
-                {!props.noEditable && <SearchIcon className={"icon bg" + (props.val ? 'bg--gray' : '')} />}
+                {!props.noEditable && <SearchIcon className={"icon bg " + (props.val ? 'bg--gr' : '')} />}
                 {!props.noEditable && !!props.val && (
-                    <CloseIcon className="icon cursor"
+                    <CloseIcon
+                               className={"icon cursor bg " + (props.val ? 'bg--gray' : '')}
                                onClick={() => {
                                    props.onChange('');
                                }}
