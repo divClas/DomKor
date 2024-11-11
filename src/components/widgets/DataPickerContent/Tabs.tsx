@@ -13,7 +13,7 @@ export const DataPickerContentTabs: FC<{
         setDate
       }) => {
   const size = useSizeHook()
-  const options = TabOptions(date, setDate, size.width < 1000)
+  const options = TabOptions(date, setDate, size.width < 600)
   const [selectedDateKey, setSelectedDateKey] = useState<I_DateTabsOption['key']>('Период')
   if (size.width < 1000) return (
     <Flex vertical={true}
