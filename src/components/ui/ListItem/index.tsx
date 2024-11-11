@@ -1,6 +1,4 @@
-import { I_Value } from "@/types/app";
 import './style.scss'
-import { ValueTextUi } from "../Value";
 import { ReactNode } from "react";
 export const ListItem = {
     WithLeftBorder: (props: {

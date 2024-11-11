@@ -12,7 +12,7 @@ export const textFormat = {
     return `${text.slice(0, 20)}...${exp}`
   },
   date: {
-    YMD_dMY: (value: string) => (dayjs(value, 'YYYY-MM-DD').format("D MMMM YYYY"))
+    YMD_dMY: (value: string | number) => (dayjs(value, 'YYYY-MM-DD').format("D MMMM YYYY"))
   }
 }
 
