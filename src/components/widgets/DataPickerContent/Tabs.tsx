@@ -26,7 +26,7 @@ export const DataPickerContentTabs: FC<{
                   label: o.label,
                   value: o.label,
                 }))} />
-      {options.map(o => (selectedDateKey === o.key && o.children))}
+      {options.map(o => (selectedDateKey === o.key && <div key={o.key}>{o.children}</div>))}
     </Flex>
   )
   return (

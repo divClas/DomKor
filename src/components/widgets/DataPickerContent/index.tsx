@@ -3,7 +3,7 @@ import {FC, useState} from "react";
 import {I_DateFilter} from "@/types/api.ts";
 import {Button} from "@/components/ui/Button";
 import {Dictionary} from "@/contexts/Dictionary.ts";
-import {usePopover} from "@/contexts/popover.tsx";
+import {usePopover} from "@/components/ui/Popover/model/popover.tsx";
 import {DataPickerContentTabs} from "@/components/widgets/DataPickerContent/Tabs.tsx";
 
 export const DataPickerContent: FC<{

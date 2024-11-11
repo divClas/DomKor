@@ -1182,8 +1182,15 @@ html body {
   .ant-modal {
     max-width: 100vw !important;
     width: 100vw !important;
-    bottom: 0;
-    padding-bottom: 0
+    position: absolute;
+    top: auto;
+    padding: 0;
+    bottom: -7px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    max-height: 90vh;
+    overflow: auto;
   }
 }
 
@@ -1320,6 +1327,7 @@ select {
     width: 16px;
     position: relative;
     top: -4px;
+    left: -4px;
     transition: transform 0.3s ease;
   }
 
@@ -1348,19 +1356,6 @@ select {
 
 #root * {
   font-family: Berthold_Akzidenz_Grotesk-400, Arial, sans-serif !important
-}
-.ant-modal{ 
-  position: absolute;
-  top: auto;
-  padding: 0;
-  bottom: -7px;
-  left: 30%;
-  margin: 0 auto;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  max-height: 90vh;
-  overflow: auto;
 }
 .ant-modal-wrap{ 
   display: flex;

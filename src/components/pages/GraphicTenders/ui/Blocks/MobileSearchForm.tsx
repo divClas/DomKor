@@ -7,7 +7,7 @@ import {Dictionary} from "@/contexts/Dictionary.ts";
 import {graphicDateSearch} from "@/contexts/search.ts";
 import {Button} from "@/components/ui/Button";
 import {ReactComponent as ClearInputIcon} from "@/assets/clearInputIcon.svg";
-import {usePopover} from "@/contexts/popover.tsx";
+import {usePopover} from "@/components/ui/Popover/model/popover.tsx";
 
 export const MobileSearchForm = () => {
   const {payload, setPayload} = useGraphicTenderPage()

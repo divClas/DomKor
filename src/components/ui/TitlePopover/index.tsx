@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {Flex} from "antd";
 import {ReactComponent as CloseIcon} from '@/assets/close-dark.svg';
-import {usePopover} from "@/contexts/popover.tsx";
+import {usePopover} from "@/components/ui/Popover/model/popover.tsx";
 
 export const TitlePopover: FC<{
     title?: string

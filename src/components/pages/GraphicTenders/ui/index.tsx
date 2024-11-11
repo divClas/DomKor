@@ -4,7 +4,7 @@ import { GraphicTenderBL_Table } from "@/components/pages/GraphicTenders/ui/Bloc
 import { GraphicTenderBL_MobileList } from "@/components/pages/GraphicTenders/ui/Blocks/MobileList.tsx";
 import { GraphicTenderBL_ScrollUpButton } from "@/components/pages/GraphicTenders/ui/Blocks/ScrollUpButton.tsx";
 import { Flex } from "antd";
-import { C_Popovers } from "@/contexts/popovers";
+import { C_Popovers } from "@/components/ui/Popover/templates/popovers.tsx";
 
 export const GraphicTendersPage = () => {
   const windowSize = useSizeHook();

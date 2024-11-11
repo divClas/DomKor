@@ -9,7 +9,7 @@ import {FormItems} from "@/components/widgets/Form/FormItems.tsx";
 import {I_Form} from "@/types/form.ts";
 import {useForm} from "antd/es/form/Form";
 import {FormProvider} from "antd/es/form/context";
-import {usePopover} from "@/contexts/popover.tsx";
+import {usePopover} from "@/components/ui/Popover/model/popover.tsx";
 
 export function FormWidget(props: I_Form) {
     const [status, setStatus] = useState<I_StatusType>()

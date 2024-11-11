@@ -1,5 +1,5 @@
 import {Flex} from "antd";
-import {C_Popovers} from "@/contexts/popovers.tsx";
+import {C_Popovers} from "@/components/ui/Popover/templates/popovers.tsx";
 
 export const GraphicTenderBL_MobileFilter = () => {
   return (

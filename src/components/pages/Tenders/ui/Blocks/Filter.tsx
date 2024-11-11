@@ -83,7 +83,6 @@ export const TenderBL_Filter: FC= () => {
       btn={{
         label: df.label,
         icon: <ArrowDown />,
-
         iconPosition: "end",
         background:
           payload.filter &&
@@ -94,6 +93,7 @@ export const TenderBL_Filter: FC= () => {
       }}
     />
   ));
+
   return (
     <div>
       <Flex
@@ -147,12 +147,12 @@ export const TenderBL_Filter: FC= () => {
         <SelectCity/>
       </Flex>
 
-      <Flex align={"center"} justify={"space-between"} className={"w-100"}>
-        <Flex gap={20} align="center" className={"view--pc"}>
+      <Flex align={"center"} justify={"space-between"} className={"view--pc w-100"}>
+        <Flex gap={20} align="center">
           <SelectCity/>
           <DatePickerList/>
         </Flex>
-        <span className={"fw--lg fs--md view--pc"}>Найдено: {graphicKpList.length}</span>
+        <span className={"fw--lg fs--md"}>Найдено: {graphicKpList.length}</span>
       </Flex>
     </div>
   );

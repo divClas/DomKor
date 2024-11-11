@@ -6,7 +6,7 @@ import {ReactComponent as ReportIcon} from "@/assets/report.svg";
 import {ReactComponent as SearchIcon} from "@/assets/mobileSearch.svg";
 import {ButtonFilter} from "@/components/ui/ButtonFilter";
 import {useGraphicTenderPage} from "@/components/pages/GraphicTenders/model/context.ts";
-import { FilterMobile } from "@/components/pages/GraphicTenders/ui/Blocks/FilterMobile";
+import { FilterMobile } from "@/components/pages/GraphicTenders/ui/Blocks/FilterMobile.tsx";
 
 export const C_Popovers = {
   SubscribeNotification: () => {
@@ -38,7 +38,8 @@ export const C_Popovers = {
     )
   },
   GraphicTenderFilter: () => {
-    const {graphicsTenderList} = useGraphicTenderPage()
+    const {graphicsTenderList, payload} = useGraphicTenderPage()
+      const showCount = !!(payload.filter || payload.search)
     return (
       <PopoverWidget
         title={"Фильтры"}
@@ -46,7 +47,7 @@ export const C_Popovers = {
         children={
           <ButtonFilter value={graphicsTenderList.length}
                         icon={<SearchIcon />}
-                        showCount={true}
+                        showCount={showCount}
           />
         }
       />
