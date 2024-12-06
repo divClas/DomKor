@@ -16,7 +16,8 @@ export const TenderInitial: I_Tender = {
   PERSON: "",
   LEGAL_ENTITY: "",
   SUBMISSION_DEADLINE: "",
-  TENDER_END_DATE: ""
+  TENDER_END_DATE: "",
+  START_WORK_DATE: ""
 }
 export const TenderContext = createContext<I_TenderContext>({
   tender: TenderInitial,

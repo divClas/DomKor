@@ -51,6 +51,7 @@ export const PopoverComponent: FC<I_PopoverProps> = (props) => {
     if (windowSize.width > 1000) {
         return (
             <Popover
+                className={isOpen ? 'c-modal-opened' : 'c-modal-closed'}
                 content={<div
                     ref={popoverRef}
                     children={props.content}
@@ -104,6 +105,7 @@ export const PopoverComponent: FC<I_PopoverProps> = (props) => {
                     )}
                 </div>
                 <Modal
+                    className={isOpen ? 'c-modal-opened' : 'c-modal-closed'}
                     title={<span className={'fs--md fw--lg max-width-315'}>{props.title}</span>}
                     open={isOpen}
                     forceRender={true}

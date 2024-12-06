@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {InputAsync} from "@/components/ui/InputAsync";
 import {Flex, Input} from "antd";
 import {ReactComponent as CloseIcon} from '@/assets/close-dark.svg';
@@ -40,6 +40,9 @@ export const InputUi: FC<{
           maskChar
       }) => {
     const [value, setValue] = useState<string>(val ?? '')
+    useEffect(() => {
+        setValue(val ?? '')
+    }, [val])
     const setValueHandler = (newVal: string) => {
         setValue(newVal)
         onChange(newVal)

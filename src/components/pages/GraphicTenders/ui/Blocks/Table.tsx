@@ -5,24 +5,25 @@ import {useGraphicTenderPage} from "@/components/pages/GraphicTenders/model/cont
 import {getGraphicTenderColumns} from "@/components/pages/GraphicTenders/config/graphicList.tsx";
 
 export const GraphicTenderBL_Table = () => {
-  const {graphicsTenderList, status, setPayload} = useGraphicTenderPage()
-  const cols = getGraphicTenderColumns()
-  return (
-    <Table<I_GraphicTender>
-      locale={{
-        emptyText: status !== "pending" && (
-          <NoData
-            onReset={() => {
-              setPayload({});
+    const {graphicsTenderList, status, setPayload} = useGraphicTenderPage()
+    const cols = getGraphicTenderColumns()
+    return (
+        <Table<I_GraphicTender>
+            scroll={{x: 'max-content'}}
+            locale={{
+                emptyText: status !== "pending" && (
+                    <NoData
+                        onReset={() => {
+                            setPayload({});
+                        }}
+                    />
+                ),
             }}
-          />
-        ),
-      }}
-      loading={status === "pending"}
-      columns={cols}
-      rowKey={"ID"}
-      dataSource={graphicsTenderList}
-      pagination={false}
-    />
-  )
+            loading={status === "pending"}
+            columns={cols}
+            rowKey={"ID"}
+            pagination={false}
+            dataSource={graphicsTenderList}
+        />
+    )
 }

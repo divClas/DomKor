@@ -4,6 +4,7 @@ import {Button} from "@/components/ui/Button";
 import dayjs from "dayjs";
 import {PopoverWidget} from "@/components/ui/Popover";
 import {textFormat} from "@/helpers/textFormat.ts";
+import {SelectUi} from "@/components/ui/Select";
 
 export function tableConstruct<I_ROW extends { ID: string }>(
     columns: I_TableColumn<I_ROW>[]
@@ -21,13 +22,14 @@ export function tableConstruct<I_ROW extends { ID: string }>(
                     : col.common.title ?? "",
             titleString: col.titleString,
             width: col.width,
-            type: col.type
+            type: col.type,
+            fixed: col.fixed
         };
         switch (col.type) {
             case "date": {
                 res.render = (val) => (
-                    <Typography.Text 
-                        children={textFormat.capitalize(dayjs(val).format(col.format ? col.format : "DD.MM.YYYY"))}
+                    <Typography.Text
+                        children={textFormat.capitalize(val ? dayjs(val).format(col.format ? col.format : "DD.MM.YYYY") : '__.__.____')}
                         className={col.className + ' fs--md'}
                     />
                 );
@@ -40,10 +42,30 @@ export function tableConstruct<I_ROW extends { ID: string }>(
                             String(b[col.common.dataIndex]) || ""
                         );
                 }
-                res.render = (val) => <Typography.Text 
-                    children={val}
-                    className={col.className + ' fs--md'}
-                />;
+                res.render = (val) => (
+                    <Typography.Text
+                        children={val ?? '-'}
+                        className={col.className + ' fs--md'}
+                    />
+                );
+                break;
+            }
+            case "select": {
+                if (!col.noSort) {
+                    res.sorter = (a, b) =>
+                        String(a[col.common.dataIndex] || "").localeCompare(
+                            String(b[col.common.dataIndex]) || ""
+                        );
+                }
+                res.render = (val) => (
+                    <SelectUi
+                        value={val}
+                        onChange={col.onChange}
+                        center={true}
+                        placeholder={"Выбрать город"}
+                        className={ "w-100"}
+                        options={col.options}
+                    />);
                 break;
             }
             case "button": {
@@ -52,7 +74,8 @@ export function tableConstruct<I_ROW extends { ID: string }>(
                         label={col.label ?? "Кнопка"}
                         background={"accent"}
                         onClick={() =>
-                            col.onClick ? col.onClick(value, record) : () => {}
+                            col.onClick ? col.onClick(value, record) : () => {
+                            }
                         }
                         className={col.className}
                     />

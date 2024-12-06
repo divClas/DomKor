@@ -1,6 +1,6 @@
 import {I_Error, T_PromiseStatus} from "@/types/api.ts";
 import {RcFile} from "antd/es/upload";
-import {ReactElement} from "react";
+import {CSSProperties, ReactElement} from "react";
 import {BaseButtonProps} from "antd/es/button/button";
 import {SelectProps} from "antd";
 
@@ -42,6 +42,7 @@ export interface I_SelectProps {
   placeholder?: string
   labelRenderPostfix?: string | ReactElement
   icon?: boolean
+  style?: CSSProperties
   center?: boolean
 }
 

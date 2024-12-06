@@ -1,5 +1,6 @@
 import {ReactNode} from "react";
 import {ColumnGroupType, ColumnType} from "antd/es/table";
+import {SelectProps} from "antd";
 
 export interface I_ColumnCustom {
     titleString: string
@@ -18,6 +19,7 @@ export interface I_ColumnCommons<I_Entity> {
     noSort?: boolean;
     disabled?: boolean;
     width?: number | "auto" | string;
+    fixed?: ColumnType<I_Entity>['fixed'];
     readonly?: boolean;
     placeholder?: string;
     afterChange?: (newVel: number, record: I_Entity) => void;
@@ -31,6 +33,11 @@ export interface I_TableColumn__string {
 export interface I_TableColumn__date {
     type: "date";
     format?: string
+}
+export interface I_TableColumn__select {
+    type: "select"
+    options: SelectProps['options']
+    onChange?: (newVal: string) => void;
 }
 
 export interface I_TableColumn__button<I_Entity> {
@@ -49,6 +56,7 @@ export interface I_TableColumn__buttonWithModal<I_Entity> {
 export type I_TableColumn<I_Entity> = I_ColumnCommons<I_Entity> &
     (
         | I_TableColumn__date
+        | I_TableColumn__select
         | I_TableColumn__string
         | I_TableColumn__button<I_Entity>
         | I_TableColumn__buttonWithModal<I_Entity>

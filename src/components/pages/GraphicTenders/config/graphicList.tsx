@@ -8,6 +8,9 @@ import {FormWidget} from "@/components/widgets/Form";
 import {FormSubscribeNewTender} from "@/contexts/forms.ts";
 import {Dictionary} from "@/contexts/Dictionary.ts";
 import {useGraphicTenderPage} from "@/components/pages/GraphicTenders/model/context.ts";
+import {SelectUi} from "@/components/ui/Select";
+import {useAppSelector} from "@/hooks/storeHooks.ts";
+import {I_City} from "@/types/city.ts";
 
 export function getGraphicTenderColumns() {
   const {
@@ -58,7 +61,14 @@ export function getGraphicTenderColumns() {
       titleString: date.label,
     })
   );
-
+  const { entity: cityList } = useAppSelector((s) => s.cityTender);
+  const optionsCityList: I_City[] = [
+    {
+      VALUE: "Ничего не выбрано",
+      ID: "",
+    },
+    ...cityList,
+  ];
   return tableConstruct<I_GraphicTender>([
     {
       width: "20%",
@@ -121,6 +131,39 @@ export function getGraphicTenderColumns() {
       type: "string",
       titleString: "Объекты",
     },
+    {
+      common: {
+        title: () => {
+          return (
+              <SelectUi
+                  value={payload.search?.CITY}
+                  onChange={(value) =>
+                      setPayload({
+                        ...payload,
+                        filter: {
+                          ...payload.filter,
+                        },
+                        search: {
+                          ...payload.search,
+                          CITY: value,
+                        },
+                      })
+                  }
+                  center={true}
+                  placeholder={"Выбрать город"}
+                  options={optionsCityList.map((c) => ({
+                    value: c.ID,
+                    label: c.VALUE,
+                  }))}
+              />
+          );
+        },
+        dataIndex: "CITY",
+      },
+      noSort: true,
+      type: "string",
+      titleString: "Город",
+    },
     ...dateColumns,
     {
       common: {
@@ -134,6 +177,8 @@ export function getGraphicTenderColumns() {
       modalTitle: Dictionary.SEND_EVENT_GRAPHIC.ru,
       label: Dictionary.SEND_EVENT.ru,
       width: 180,
+      fixed: 'right',
+
       titleString: "Действие",
     },
   ]);

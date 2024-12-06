@@ -28,6 +28,10 @@ export const graphicDateFilters: I_DateFilters<I_GRAPHIC_FILTER>[] = [
         mask: 'MMMM YYYY'
     },
     {
+        filterKey: 'COMPLETION_DATE',
+        label: 'Срок окончания работ'
+    },
+    {
         filterKey: 'TENDER_PLANNED',
         label: 'Плановая дата проведения тендера'
     },

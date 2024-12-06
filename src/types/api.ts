@@ -16,8 +16,8 @@ export type I_Response<T> = {
 }
 
 export interface I_DateFilter {
-    "FROM": T_Date,
-    "TO": T_Date
+    FROM: T_Date,
+    TO: T_Date
 }
 
 export interface I_Sort {

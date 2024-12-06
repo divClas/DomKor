@@ -19,4 +19,5 @@ export interface I_Form {
     route: string
     fields: I_FormFiled[]
     btnLabel: string
+    name: string
 }

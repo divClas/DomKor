@@ -11,11 +11,13 @@ export interface I_GRAPHIC_FILTER {
   "SMR_START": T_Date,
   "TENDER_PLANNED": T_Date,
   "WINNER_APPROVAL": T_Date,
-  "CONTRACT_SIGNING": T_Date
+  "CONTRACT_SIGNING": T_Date,
+  COMPLETION_DATE: T_Date
 }
 
 export interface I_GRAPHIC_SEARCH {
   "NAME": string,
+  "CITY": string,
   "WORK_TYPE": string,
   "OBJECTS": string,
 }

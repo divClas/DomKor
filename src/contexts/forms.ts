@@ -1,9 +1,10 @@
-import { I_Form } from "@/types/form.ts";
-import { A_SEND_EVENT, R_GRAPHIC, R_GRAPHIC_KP } from "@/store/constants.ts";
-import { Dictionary } from "@/contexts/Dictionary.ts";
+import {I_Form} from "@/types/form.ts";
+import {A_SEND_EVENT, R_GRAPHIC, R_GRAPHIC_KP} from "@/store/constants.ts";
+import {Dictionary} from "@/contexts/Dictionary.ts";
 
 export const FormSubscribeKP = (tender_id: string): I_Form => ({
     route: R_GRAPHIC_KP + A_SEND_EVENT,
+    name: 'SubscribeKP',
     fields: [
         {
             label: '',
@@ -42,6 +43,7 @@ export const FormSubscribeKP = (tender_id: string): I_Form => ({
 })
 export const FormSubscribeNewTender = (graphic_id: string): I_Form => ({
     route: R_GRAPHIC + A_SEND_EVENT,
+    name: 'SubscribeNewTender',
     fields: [
         {
             label: '',
@@ -81,6 +83,7 @@ export const FormSubscribeNewTender = (graphic_id: string): I_Form => ({
 });
 export const FormSubscribeNotification = (): I_Form => ({
     route: R_GRAPHIC + A_SEND_EVENT,
+    name: 'SubscribeNotification',
     btnLabel: Dictionary.SUBSCRIBE.ru,
     fields: [
         {
