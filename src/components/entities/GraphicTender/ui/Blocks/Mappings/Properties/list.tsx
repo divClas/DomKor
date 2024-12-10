@@ -7,7 +7,6 @@ import { GraphicTenderPropertyItem } from "./item";
 export const GraphicTenderPropertiesList = () => {
   const rows = getGraphicTenderColumns()
   const { graphicTender } = useGraphicTender()
-  console.log(rows)
   return (
     <div className={'graphic-tender-props-mobile'}>
       {rows.map((col, index) => {

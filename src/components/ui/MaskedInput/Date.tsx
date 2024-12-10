@@ -42,7 +42,11 @@ export const MaskedInputDateUI: FC<{
     const onChangeHandler = (str: string, newVal: string | null) => {
 
         if (validateLength(str)) {
-            setStrVal(replaceValToMaskChars(newVal))
+            const s = replaceValToMaskChars(newVal)
+            setStrVal(s)
+            if(s.slice(-1) != mask.slice(-1)){
+                onChange(s)
+            }
             return false
         }
         if (!validateForEmpty(str)) {
@@ -53,6 +57,7 @@ export const MaskedInputDateUI: FC<{
             setStrVal(mask)
             return false
         }
+        console.log(str)
         setStrVal(str);
         onChange(str);
     }
@@ -61,6 +66,11 @@ export const MaskedInputDateUI: FC<{
         <input
             disabled={disabled}
             value={strVal}
+            onClick={()=>{
+                if(value.length == 0){
+                    setStrVal(mask)
+                }
+            }}
             placeholder={mask}
             className={className}
             onChange={(e) => onChangeHandler(e.target.value, (e.nativeEvent as InputEvent).data)}
