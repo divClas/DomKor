@@ -1,4 +1,5 @@
 import {FC, useEffect, useState} from "react";
+import isNumeric from "antd/es/_util/isNumeric";
 
 export const MaskedInputDateUI: FC<{
     value: string
@@ -40,11 +41,17 @@ export const MaskedInputDateUI: FC<{
         return (str.length > mask.length);
     }
     const onChangeHandler = (str: string, newVal: string | null) => {
-
+        if (newVal == null) {
+            setStrVal(mask)
+            return false
+        }
+        if (!isNumeric(newVal)) {
+            return false
+        }
         if (validateLength(str)) {
             const s = replaceValToMaskChars(newVal)
             setStrVal(s)
-            if(s.slice(-1) != mask.slice(-1)){
+            if (s.slice(-1) != mask.slice(-1)) {
                 onChange(s)
             }
             return false
@@ -65,8 +72,8 @@ export const MaskedInputDateUI: FC<{
         <input
             disabled={disabled}
             value={strVal}
-            onClick={()=>{
-                if(value.length == 0){
+            onClick={() => {
+                if (value.length == 0) {
                     setStrVal(mask)
                 }
             }}

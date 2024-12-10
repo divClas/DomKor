@@ -71,7 +71,6 @@ export function getGraphicTenderColumns() {
     ];
     return tableConstruct<I_GraphicTender>([
         {
-            width: "20%",
             common: {
                 title: () => {
                     return (
@@ -96,13 +95,13 @@ export function getGraphicTenderColumns() {
                 },
                 dataIndex: "WORK_TYPE",
             },
+
             noSort: true,
             className: "fw--lg fs--md",
             type: "string",
             titleString: "Вид работ",
         },
         {
-            width: "13%",
             common: {
                 title: () => {
                     return (

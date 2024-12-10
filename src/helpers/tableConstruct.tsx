@@ -13,13 +13,15 @@ export function tableConstruct<I_ROW extends { ID: string }>(
         const res: I_COL<I_ROW> = {
             key: String(col.common.dataIndex),
             dataIndex: String(col.common.dataIndex),
-            title:
+            title: (
                 typeof col.common.title === "function"
-                    ? () =>
+                    ? () => (
                         typeof col.common.title === "function"
                             ? col.common.title()
                             : col.common.title
-                    : col.common.title ?? "",
+                    )
+                    : col.common.title ?? ""
+            ),
             titleString: col.titleString,
             width: col.width,
             type: col.type,
