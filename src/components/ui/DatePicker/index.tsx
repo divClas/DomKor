@@ -13,7 +13,7 @@ export const DatePickerWidget: FC<{
 }> = ({
           label,
           value,
-          onChange,
+          onChange, 
           navSide
       }) => {
     const {token} = theme.useToken();
@@ -45,7 +45,6 @@ export const DatePickerWidget: FC<{
                     label={label}
                     onChange={value => {
                         const clearDate = value.replace(/\_/g, '')
-                        console.log(clearDate, clearDate.length)
                         if (clearDate.length === 10) {
                             const newDate = dayjs(clearDate, 'DD.MM.YYYY').format('YYYY-MM-DD');
                             onChange(newDate);

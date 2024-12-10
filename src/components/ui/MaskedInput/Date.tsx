@@ -57,7 +57,6 @@ export const MaskedInputDateUI: FC<{
             setStrVal(mask)
             return false
         }
-        console.log(str)
         setStrVal(str);
         onChange(str);
     }
