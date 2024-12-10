@@ -5,6 +5,7 @@ import {FieldPhoneUi} from "@/components/ui/Fields/Phone.tsx";
 import {FieldEmailUi} from "@/components/ui/Fields/Email.tsx";
 import {FieldStringUi} from "@/components/ui/Fields/String.tsx";
 import {FieldHiddenUi} from "@/components/ui/Fields/Hidden.tsx";
+import {FieldCheckboxUi} from "@/components/ui/Fields/Checkbox.tsx";
 
 export function FormItems(props: {
     fields: I_FormFiled[]
@@ -30,6 +31,8 @@ export function FormItems(props: {
                 return <FieldUploadUi key={index} {...fieldProps} />
             case "orgSelect":
                 return <FieldOrgSelectUi key={index} {...fieldProps} />
+            case "checkbox":
+                return <FieldCheckboxUi key={index} {...fieldProps} />
             default:
                 return null
         }

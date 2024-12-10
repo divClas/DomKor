@@ -13,173 +13,178 @@ import {useAppSelector} from "@/hooks/storeHooks.ts";
 import {I_City} from "@/types/city.ts";
 
 export function getGraphicTenderColumns() {
-  const {
-    setPayload,
-    payload
-  } = useGraphicTenderPage()
-  const dateColumns: I_TableColumn<I_GraphicTender>[] = graphicDateFilters.map(
-    (date) => ({
-      common: {
-        title: () => {
-          return (
-            <SearchInputDate
-              label={date.label}
-              value={payload.filter?.[date.filterKey]}
-              isDateFilter={
-                !!(
-                  payload.filter?.[date.filterKey]?.FROM ||
-                  payload.filter?.[date.filterKey]?.TO
-                )
-              }
-              isSort={payload.sortby === date.filterKey}
-              setSort={() => {
-                setPayload({
-                  ...payload,
-                  sortby: date.filterKey,
-                  sort_type: payload.sort_type === "ASC" ? "DESC" : "ASC",
-                });
-              }}
-              onChange={(val) => {
-                setPayload({
-                  ...payload,
-                  search: {
-                    ...payload.search,
-                  },
-                  filter: {
-                    ...payload.filter,
-                    [date.filterKey]: val,
-                  },
-                });
-              }}
-            />
-          );
+    const {
+        setPayload,
+        payload
+    } = useGraphicTenderPage()
+    const dateColumns: I_TableColumn<I_GraphicTender>[] = graphicDateFilters.map(
+        (date) => ({
+            common: {
+                title: () => {
+                    return (
+                        <SearchInputDate
+                            label={date.label}
+                            value={payload.filter?.[date.filterKey]}
+                            isDateFilter={
+                                !!(
+                                    payload.filter?.[date.filterKey]?.FROM ||
+                                    payload.filter?.[date.filterKey]?.TO
+                                )
+                            }
+                            isSort={payload.sortby === date.filterKey}
+                            setSort={() => {
+                                setPayload({
+                                    ...payload,
+                                    sortby: date.filterKey,
+                                    sort_type: payload.sort_type === "ASC" ? "DESC" : "ASC",
+                                });
+                            }}
+                            onChange={(val) => {
+                                setPayload({
+                                    ...payload,
+                                    search: {
+                                        ...payload.search,
+                                    },
+                                    filter: {
+                                        ...payload.filter,
+                                        [date.filterKey]: val,
+                                    },
+                                });
+                            }}
+                        />
+                    );
+                },
+                dataIndex: date.filterKey,
+            },
+            format: date.mask ?? "",
+            type: "date",
+            titleString: date.label,
+        })
+    );
+    const {entity: cityList} = useAppSelector((s) => s.cityTender);
+    const optionsCityList: I_City[] = [
+        {
+            VALUE: "Ничего не выбрано",
+            ID: "",
         },
-        dataIndex: date.filterKey,
-      },
-      format: date.mask ?? "",
-      type: "date",
-      titleString: date.label,
-    })
-  );
-  const { entity: cityList } = useAppSelector((s) => s.cityTender);
-  const optionsCityList: I_City[] = [
-    {
-      VALUE: "Ничего не выбрано",
-      ID: "",
-    },
-    ...cityList,
-  ];
-  return tableConstruct<I_GraphicTender>([
-    {
-      width: "20%",
-      common: {
-        title: () => {
-          return (
-            <SearchInputString
-              label={"Вид работ"}
-              val={payload.search?.WORK_TYPE ?? ""}
-              placeholder={"Введите текст"}
-              onChange={(val) => {
-                setPayload({
-                  ...payload,
-                  search: {
-                    ...payload.search,
-                    WORK_TYPE: val,
-                  },
-                  filter: {
-                    ...payload.filter,
-                  },
-                });
-              }}
-            />
-          );
+        ...cityList,
+    ];
+    return tableConstruct<I_GraphicTender>([
+        {
+            width: "20%",
+            common: {
+                title: () => {
+                    return (
+                        <SearchInputString
+                            label={"Вид работ"}
+                            val={payload.search?.WORK_TYPE ?? ""}
+                            placeholder={"Введите текст"}
+                            onChange={(val) => {
+                                setPayload({
+                                    ...payload,
+                                    search: {
+                                        ...payload.search,
+                                        WORK_TYPE: val,
+                                    },
+                                    filter: {
+                                        ...payload.filter,
+                                    },
+                                });
+                            }}
+                        />
+                    );
+                },
+                dataIndex: "WORK_TYPE",
+            },
+            noSort: true,
+            className: "fw--lg fs--md",
+            type: "string",
+            titleString: "Вид работ",
         },
-        dataIndex: "WORK_TYPE",
-      },
-      noSort: true,
-      className: "fw--lg fs--md",
-      type: "string",
-      titleString: "Вид работ",
-    },
-    {
-      width: "13%",
-      common: {
-        title: () => {
-          return (
-            <SearchInputString
-              label={"Объекты"}
-              placeholder={"Введите текст"}
-              val={payload.search?.OBJECTS ?? ""}
-              onChange={(val) => {
-                setPayload({
-                  ...payload,
-                  search: {
-                    ...payload.search,
-                    OBJECTS: val,
-                  },
-                  filter: {
-                    ...payload.filter,
-                  },
-                });
-              }}
-            />
-          );
+        {
+            width: "13%",
+            common: {
+                title: () => {
+                    return (
+                        <SearchInputString
+                            label={"Объекты"}
+                            placeholder={"Введите текст"}
+                            val={payload.search?.OBJECTS ?? ""}
+                            onChange={(val) => {
+                                setPayload({
+                                    ...payload,
+                                    search: {
+                                        ...payload.search,
+                                        OBJECTS: val,
+                                    },
+                                    filter: {
+                                        ...payload.filter,
+                                    },
+                                });
+                            }}
+                        />
+                    );
+                },
+                dataIndex: "OBJECTS",
+            },
+            noSort: true,
+            type: "string",
+            titleString: "Объекты",
         },
-        dataIndex: "OBJECTS",
-      },
-      noSort: true,
-      type: "string",
-      titleString: "Объекты",
-    },
-    {
-      common: {
-        title: () => {
-          return (
-              <SelectUi
-                  value={payload.search?.CITY}
-                  onChange={(value) =>
-                      setPayload({
-                        ...payload,
-                        filter: {
-                          ...payload.filter,
-                        },
-                        search: {
-                          ...payload.search,
-                          CITY: value,
-                        },
-                      })
-                  }
-                  center={true}
-                  placeholder={"Выбрать город"}
-                  options={optionsCityList.map((c) => ({
-                    value: c.ID,
-                    label: c.VALUE,
-                  }))}
-              />
-          );
+        {
+            common: {
+                title: () => {
+                    return (
+                        <SelectUi
+                            value={payload.search?.CITY}
+                            onChange={(value) =>
+                                setPayload({
+                                    ...payload,
+                                    filter: {
+                                        ...payload.filter,
+                                    },
+                                    search: {
+                                        ...payload.search,
+                                        CITY: value,
+                                    },
+                                })
+                            }
+                            center={true}
+                            placeholder={"Выбрать город"}
+                            options={optionsCityList.map((c) => ({
+                                value: c.ID,
+                                label: c.VALUE,
+                            }))}
+                        />
+                    );
+                },
+                dataIndex: "CITY",
+            },
+            options: optionsCityList.map((c) => ({
+                value: c.ID,
+                label: c.VALUE,
+            })),
+            noSort: true,
+            type: "select",
+            readonly: true,
+            titleString: "Город",
         },
-        dataIndex: "CITY",
-      },
-      noSort: true,
-      type: "string",
-      titleString: "Город",
-    },
-    ...dateColumns,
-    {
-      common: {
-        title: "Действие",
-        dataIndex: "ID",
-      },
-      className: "btn-table",
-      noSort: true,
-      type: "buttonWithModal",
-      modalChild: (val) => <FormWidget {...FormSubscribeNewTender(val)} />,
-      modalTitle: Dictionary.SEND_EVENT_GRAPHIC.ru,
-      label: Dictionary.SEND_EVENT.ru,
-      width: 180,
-      fixed: 'right',
+        ...dateColumns,
+        {
+            common: {
+                title: "Действие",
+                dataIndex: "ID",
+            },
+            className: "btn-table",
+            noSort: true,
+            type: "buttonWithModal",
+            modalChild: (val) => <FormWidget {...FormSubscribeNewTender(val)} />,
+            modalTitle: Dictionary.SEND_EVENT_GRAPHIC.ru,
+            label: Dictionary.SEND_EVENT.ru,
+            width: 180,
+            fixed: 'right',
 
-      titleString: "Действие",
-    },
-  ]);
+            titleString: "Действие",
+        },
+    ]);
 }

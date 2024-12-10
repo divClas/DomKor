@@ -29,7 +29,7 @@ export function tableConstruct<I_ROW extends { ID: string }>(
             case "date": {
                 res.render = (val) => (
                     <Typography.Text
-                        children={textFormat.capitalize(val ? dayjs(val).format(col.format ? col.format : "DD.MM.YYYY") : '__.__.____')}
+                        children={textFormat.capitalize(val ? dayjs(val).format(col.format ? col.format : "DD.MM.YYYY") : '')}
                         className={col.className + ' fs--md'}
                     />
                 );
@@ -57,13 +57,21 @@ export function tableConstruct<I_ROW extends { ID: string }>(
                             String(b[col.common.dataIndex]) || ""
                         );
                 }
+                if (col.readonly) {
+                    res.render = (value) => (
+                        <Typography.Text>
+                            {col.options?.find(o => o.value == value)?.label ?? ''}
+                        </Typography.Text>
+                    )
+                    break;
+                }
                 res.render = (val) => (
                     <SelectUi
                         value={val}
                         onChange={col.onChange}
                         center={true}
                         placeholder={"Выбрать город"}
-                        className={ "w-100"}
+                        className={"w-100"}
                         options={col.options}
                     />);
                 break;

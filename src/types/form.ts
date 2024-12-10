@@ -1,4 +1,4 @@
-export type T_FormItemType = 'string' | 'upload' | 'phone' | 'email' | 'hidden' | 'orgSelect'
+export type T_FormItemType = 'string' | 'upload' | 'phone' | 'email' | 'hidden' | 'orgSelect'| 'checkbox'
 
 export interface I_FormFiled {
     type: T_FormItemType
@@ -6,6 +6,7 @@ export interface I_FormFiled {
     label: string
     defaultValue?: string
     required?: boolean
+    link?: string
 }
 
 export interface I_FormFiledProps {

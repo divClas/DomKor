@@ -50,6 +50,10 @@
   height: 100%;
 }
 
+.ui-link {
+  color: rgba(0, 104, 156, 1);
+}
+
 .fs {
   &--xsm {
     font-size: 12px;
@@ -206,6 +210,19 @@
 
 .flex-jc--start {
   justify-content: start;
+}
+
+.ant-form-item a {
+  text-decoration: underline;
+}
+
+.ant-form-item input[type="checkbox"] {
+  margin: 0;
+}
+
+.ant-form-item:has(input[type="checkbox"]) label {
+  margin-bottom: 0;
+  margin: 0;
 }
 
 .bg {
@@ -416,6 +433,10 @@ h2 {
   border: 1px solid #0094DE;
   background: rgba(218, 218, 218, 0);
   padding: 14px 12px 6px 12px;
+}
+
+.ant-form-item:has(input[type="checkbox"]) {
+  border: unset !important;
 }
 
 
@@ -1359,13 +1380,14 @@ select {
   align-items: center;
   justify-content: center;
 }
-body:has(.c-modal-opened){
+
+body:has(.c-modal-opened) {
   overflow: hidden !important;
 }
 
 @media (max-width: 600px) {
-  .ant-modal .ant-modal-content{
-      overflow: auto;
-      max-height: 80vh;
+  .ant-modal .ant-modal-content {
+    overflow: auto;
+    max-height: 80vh;
   }
 }
