@@ -21,6 +21,9 @@ export const GraphicTenderPropertyItem: FC<{
             case "date": return (
                 <ListItem.WithLeftBorder children={render} label={label} />
             )
+            case "select": return (
+                <ListItem.WithLeftBorder children={render} label={label} />
+            )
             case "string": return (
                 <ListItem.WithLeftBorder children={render} label={label} />
             )

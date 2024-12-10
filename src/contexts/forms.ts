@@ -51,20 +51,6 @@ export const FormSubscribeKP = (tender_id: string): I_Form => ({
             type: 'upload',
             required: true
         },
-        {
-            label: 'Согласие на обработку персональных данных',
-            name: 'confirm-personal',
-            type: 'checkbox',
-            link: '/personal-data',
-            required: true
-        },
-        {
-            label: 'Согласие с положениями о проведении торгов',
-            name: 'confirm-provisions',
-            type: 'checkbox',
-            link: '/provisions-tender',
-            required: true
-        },
         ..._ConfirmFields
     ],
     btnLabel: Dictionary.SEND_EVENT.ru,
