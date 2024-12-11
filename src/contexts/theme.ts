@@ -1,5 +1,7 @@
 import {ThemeConfig} from "antd";
 
+export const C_PAD = 1380
+export const C_MB = 700
 export const themeConfig: ThemeConfig = {
     token: {},
     components: {
@@ -29,7 +31,8 @@ export const themeConfig: ThemeConfig = {
         Select: {
             controlHeight: 36
         },
-        Table: {},
+        Table: {
+        },
         Typography: {
             titleMarginBottom: 0,
             titleMarginTop: 0,

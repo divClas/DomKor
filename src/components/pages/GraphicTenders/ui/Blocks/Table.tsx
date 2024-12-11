@@ -7,9 +7,9 @@ import {getGraphicTenderColumns} from "@/components/pages/GraphicTenders/config/
 export const GraphicTenderBL_Table = () => {
     const {graphicsTenderList, status, setPayload} = useGraphicTenderPage()
     const cols = getGraphicTenderColumns()
+    console.log(status === "pending")
     return (
         <Table<I_GraphicTender>
-            scroll={{x: 'max-content'}}
             locale={{
                 emptyText: status !== "pending" && (
                     <NoData

@@ -13,7 +13,6 @@ export const GraphicTenderPageProvider: FC<{
     const [payload, setPayload] = useState<
         I_PayloadList<I_GRAPHIC_FILTER, I_GRAPHIC_SEARCH>
     >({});
-
     useEffect(() => {
         dispatch(graphicThank.getList(payload));
         dispatch(cityTenderThank.getList({}));

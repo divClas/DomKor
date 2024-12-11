@@ -21,6 +21,7 @@ import {CountUi} from "@/components/ui/Count";
 import {ButtonFilter} from "@/components/ui/ButtonFilter";
 import {useTenderPage} from "@/components/pages/Tenders/model/context.ts";
 import {FormWidget} from "@/components/widgets/Form";
+import {C_PAD} from "@/contexts/theme.ts";
 
 export const TenderBL_Filter: FC = () => {
     const {setPayload, payload} = useTenderPage()
@@ -55,7 +56,7 @@ export const TenderBL_Filter: FC = () => {
             center={true}
             placeholder={"Выбрать город"}
             labelRenderPostfix={<CountUi value={graphicKpList.length} />}
-            className={size.width < 1000 ? "w-100" : ""}
+            className={size.width < C_PAD ? "w-100" : ""}
             options={optionsCityList.map((c) => ({
                 value: c.ID,
                 label: c.VALUE,

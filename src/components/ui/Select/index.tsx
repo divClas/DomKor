@@ -18,8 +18,8 @@ export const SelectUi: FC<I_SelectProps> = (
     }) => {
     return (
         <Select
-            className={"custom-select " + className}
             style={style}
+            className={"custom-select " + className}
             placeholder={placeholder}
             options={options}
             allowClear={true}

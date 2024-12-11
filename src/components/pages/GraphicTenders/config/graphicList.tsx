@@ -59,12 +59,13 @@ export function getGraphicTenderColumns() {
             format: date.mask ?? "",
             type: "date",
             titleString: date.label,
+            width: '12%',
         })
     );
     const {entity: cityList} = useAppSelector((s) => s.cityTender);
     const optionsCityList: I_City[] = [
         {
-            VALUE: "Ничего не выбрано",
+            VALUE: "Все",
             ID: "",
         },
         ...cityList,
@@ -95,9 +96,9 @@ export function getGraphicTenderColumns() {
                 },
                 dataIndex: "WORK_TYPE",
             },
-
             noSort: true,
             className: "fw--lg fs--md",
+            width: '15%',
             type: "string",
             titleString: "Вид работ",
         },
@@ -126,6 +127,7 @@ export function getGraphicTenderColumns() {
                 },
                 dataIndex: "OBJECTS",
             },
+            width: '11%',
             noSort: true,
             type: "string",
             titleString: "Объекты",
@@ -163,6 +165,7 @@ export function getGraphicTenderColumns() {
                 value: c.ID,
                 label: c.VALUE,
             })),
+            width: '9%',
             noSort: true,
             type: "select",
             readonly: true,
@@ -176,13 +179,12 @@ export function getGraphicTenderColumns() {
             },
             className: "btn-table",
             noSort: true,
+            width: 130,
             type: "buttonWithModal",
             modalChild: (val) => <FormWidget {...FormSubscribeNewTender(val)} />,
             modalTitle: Dictionary.SEND_EVENT_GRAPHIC.ru,
             label: Dictionary.SEND_EVENT.ru,
-            width: 180,
             fixed: 'right',
-
             titleString: "Действие",
         },
     ]);

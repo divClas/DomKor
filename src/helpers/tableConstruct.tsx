@@ -25,7 +25,8 @@ export function tableConstruct<I_ROW extends { ID: string }>(
             titleString: col.titleString,
             width: col.width,
             type: col.type,
-            fixed: col.fixed
+            fixed: col.fixed,
+            className: col.classNameCell
         };
         switch (col.type) {
             case "date": {

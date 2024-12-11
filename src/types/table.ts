@@ -16,6 +16,7 @@ export interface I_ColumnCommons<I_Entity> {
     };
     titleString: string
     className?: string
+    classNameCell?: string
     noSort?: boolean;
     disabled?: boolean;
     width?: number | "auto" | string;

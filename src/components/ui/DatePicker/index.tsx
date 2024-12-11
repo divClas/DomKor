@@ -4,6 +4,7 @@ import React, {FC, useState} from "react";
 import dayjs from "dayjs";
 import {InputUi} from "@/components/ui/Input";
 import useSizeHook from "@/hooks/useSizeHook.ts";
+import {C_PAD} from "@/contexts/theme.ts";
 
 export const DatePickerWidget: FC<{
     label: string
@@ -20,7 +21,7 @@ export const DatePickerWidget: FC<{
     const [date, setDate] = useState<string | undefined>(value)
     const {width} = useSizeHook()
     const wrapperStyle: React.CSSProperties = {
-        width: width > 1000 ? 307 : '100%',
+        width: width > C_PAD ? 307 : '100%',
         border: `1px solid ${token.colorBorderSecondary}`,
     };
 
@@ -31,7 +32,7 @@ export const DatePickerWidget: FC<{
     };
     return (
         <Flex vertical={true}>
-            {width > 1000 && <Typography.Text strong>{label}</Typography.Text>}
+            {width > C_PAD && <Typography.Text strong>{label}</Typography.Text>}
             <div
                 className={'ant-form-item'}
                 style={{

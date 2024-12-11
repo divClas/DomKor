@@ -6,6 +6,7 @@ import {Button} from "@/components/ui/Button";
 import useSizeHook from "@/hooks/useSizeHook.ts";
 import {TitlePopover} from "@/components/ui/TitlePopover";
 import {PopoverProvider, usePopover} from "@/components/ui/Popover/model/popover.tsx";
+import {C_PAD} from "@/contexts/theme.ts";
 
 export interface I_PopoverProps {
     btn?: I_ButtonProps
@@ -48,7 +49,7 @@ export const PopoverComponent: FC<I_PopoverProps> = (props) => {
         };
     }, [setIsOpen]);
 
-    if (windowSize.width > 1000) {
+    if (windowSize.width > C_PAD) {
         return (
             <Popover
                 className={isOpen ? 'c-modal-opened' : 'c-modal-closed'}
@@ -70,7 +71,7 @@ export const PopoverComponent: FC<I_PopoverProps> = (props) => {
                     onClick={() => {
                         setIsOpen(!isOpen)
                     }}
-                    className={windowSize.width < 1000 ? 'w-100' : ''}
+                    className={windowSize.width < C_PAD ? 'w-100' : ''}
                 >
                     {props.children}
                     {props.btn && (
