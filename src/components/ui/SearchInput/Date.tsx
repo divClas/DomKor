@@ -31,6 +31,7 @@ export const SearchInputDate: FC<{
               align="center"
               gap={15}
               vertical={true}
+              className={'date-picker-input-wrap'}
         >
             <InputUi
                 label={label}

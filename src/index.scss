@@ -449,7 +449,7 @@ h2 {
 }
 
 .ant-table-thead > tr > th {
-  padding: 4px !important;
+  padding: 4px 8px 4px 4px !important;
   height: 130px !important;
 }
 
@@ -1346,69 +1346,77 @@ select {
     display: flex;
   }
 }
-
+.date-picker-input-wrap{
+  .input-group .input-wrapper label{
+    top: 0;
+    transform: translateY(0);
+}
+  .input-group .input-wrapper input{
+    padding-top: 12px;
+  }
+}
 @media (max-width: 1380px) {
-  .ant-select-selection-placeholder {
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.ant-select-selection-placeholder {
+text-align: left;
+display: flex;
+align-items: center;
+gap: 8px;
 
-    svg {
-      margin: 0 auto;
-    }
-  }
+svg {
+  margin: 0 auto;
+}
+}
 
-  .ant-select-selection-placeholder::before {
-    content: url("./assets/arrowDown.svg");
-    height: 16px;
-    width: 16px;
-    position: relative;
-    top: -4px;
-    left: -4px;
-    transition: transform 0.3s ease;
-  }
+.ant-select-selection-placeholder::before {
+content: url("./assets/arrowDown.svg");
+height: 16px;
+width: 16px;
+position: relative;
+top: -4px;
+left: -4px;
+transition: transform 0.3s ease;
+}
 
-  .ant-select-open {
-    .ant-select-selection-placeholder::before {
-      transform: scaleY(-1);
-      top: 2px;
-    }
-  }
+.ant-select-open {
+.ant-select-selection-placeholder::before {
+  transform: scaleY(-1);
+  top: 2px;
+}
+}
 }
 
 .ant-select-selector {
-  &:focus {
-    .ant-select-selection-placeholder::before {
-      transform: rotate(90deg);
-    }
-  }
+&:focus {
+.ant-select-selection-placeholder::before {
+  transform: rotate(90deg);
+}
+}
 }
 
 #root .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px
 }
 
 #root * {
-  font-family: Berthold_Akzidenz_Grotesk-400, Arial, sans-serif !important
+font-family: Berthold_Akzidenz_Grotesk-400, Arial, sans-serif !important
 }
 
 .ant-modal-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 body:has(.c-modal-opened) {
-  overflow: hidden !important;
+overflow: hidden !important;
 }
 
 @media (max-width: 600px) {
-  .ant-modal .ant-modal-content {
-    overflow: auto;
-    max-height: 80vh;
-  }
+.ant-modal .ant-modal-content {
+overflow: auto;
+max-height: 80vh;
+}
 }

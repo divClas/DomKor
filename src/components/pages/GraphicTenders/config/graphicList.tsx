@@ -150,6 +150,7 @@ export function getGraphicTenderColumns() {
                                     },
                                 })
                             }
+                            className={'w-100'}
                             center={true}
                             placeholder={"Выбрать город"}
                             options={optionsCityList.map((c) => ({
