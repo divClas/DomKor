@@ -70,6 +70,7 @@ export const FieldOrgSelectUi: FC<I_FormFiledProps> = ({f, disabled, error}) => 
                                     onClick={() => {
                                         setOrgName(e.name)
                                         useFormI.setFieldValue('org_name', e.name)
+                                        useFormI.setFieldValue(f.name, e.inn)
                                         setOrgInn(e.inn)
                                         setOrgListSearchDaData([])
                                     }}

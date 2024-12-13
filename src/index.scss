@@ -1415,8 +1415,8 @@ overflow: hidden !important;
 }
 
 @media (max-width: 600px) {
-.ant-modal .ant-modal-content {
-overflow: auto;
-max-height: 80vh;
-}
+  .ant-modal .ant-modal-content {
+    overflow: auto;
+    max-height: 80vh;
+  }
 }
